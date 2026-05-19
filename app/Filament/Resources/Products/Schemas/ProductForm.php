@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use App\Models\Category;
-use App\Models\SubCategory;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -44,14 +43,26 @@ class ProductForm
                     ->schema([
                         Select::make('category_id')
                             ->label(__('Category'))
-                            ->options(Category::active()->get()->pluck('name', 'id')->map(fn ($v) => is_array($v) ? ($v['ar'] ?? '') : $v))
+                            ->options(function () {
+                                $locale = app()->getLocale();
+                                $options = [];
+                                $parents = Category::parents()->active()->with('children')->get();
+                                foreach ($parents as $parent) {
+                                    $parentName = $parent->getTranslation('name', $locale);
+                                    if ($parent->children->isEmpty()) {
+                                        $options[$parent->id] = $parentName;
+                                    } else {
+                                        $options[$parent->id] = $parentName;
+                                        foreach ($parent->children as $child) {
+                                            $options[$child->id] = '— '.$child->getTranslation('name', $locale);
+                                        }
+                                    }
+                                }
+
+                                return $options;
+                            })
                             ->required()
-                            ->live()
-                            ->afterStateUpdated(fn (callable $set) => $set('subcategory_id', null)),
-                        Select::make('subcategory_id')
-                            ->label(__('Subcategory'))
-                            ->options(fn (callable $get) => SubCategory::where('category_id', $get('category_id'))->active()->get()->pluck('name', 'id')->map(fn ($v) => is_array($v) ? ($v['ar'] ?? '') : $v))
-                            ->nullable(),
+                            ->searchable(),
                         TextInput::make('name.ar')
                             ->label(__('Name (Arabic)'))
                             ->required()

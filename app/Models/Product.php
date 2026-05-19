@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
+use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
+    /** @use HasFactory<ProductFactory> */
     use HasFactory;
+
     use HasTranslations;
     use InteractsWithMedia;
+    use SoftDeletes;
 
     protected $fillable = [
         'category_id',
-        'subcategory_id',
         'name',
         'slug',
         'short_description',
@@ -54,11 +57,6 @@ class Product extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function subCategory(): BelongsTo
-    {
-        return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
 
     public function scopeActive($query)

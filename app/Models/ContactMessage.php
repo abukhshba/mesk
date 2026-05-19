@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Database\Factories\ContactMessageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ContactMessage extends Model
 {
-    /** @use HasFactory<\Database\Factories\ContactMessageFactory> */
+    /** @use HasFactory<ContactMessageFactory> */
     use HasFactory;
+
+    use SoftDeletes;
 
     protected $fillable = [
         'name',

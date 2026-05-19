@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\WebsiteSettingFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class WebsiteSetting extends Model
 {
-    /** @use HasFactory<\Database\Factories\WebsiteSettingFactory> */
+    /** @use HasFactory<WebsiteSettingFactory> */
     use HasFactory;
 
     protected $fillable = [

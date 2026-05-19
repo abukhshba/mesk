@@ -2,21 +2,27 @@
 
 namespace App\Models;
 
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
+    /** @use HasFactory<CategoryFactory> */
     use HasFactory;
+
     use HasTranslations;
     use InteractsWithMedia;
+    use SoftDeletes;
 
     protected $fillable = [
+        'parent_id',
         'name',
         'slug',
         'description',
@@ -40,9 +46,14 @@ class Category extends Model implements HasMedia
         $this->addMediaCollection('image')->singleFile();
     }
 
-    public function subCategories(): HasMany
+    public function parent(): BelongsTo
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function products(): HasMany
@@ -53,5 +64,15 @@ class Category extends Model implements HasMedia
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function scopeParents($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    public function isParent(): bool
+    {
+        return is_null($this->parent_id);
     }
 }
