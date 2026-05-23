@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
-            $table->json('description')->nullable();
-            $table->json('mission')->nullable();
-            $table->json('vision')->nullable();
+            $table->string('title_ar');
+            $table->string('title_en');
+            $table->text('description_ar')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('mission_ar')->nullable();
+            $table->text('mission_en')->nullable();
+            $table->text('vision_ar')->nullable();
+            $table->text('vision_en')->nullable();
             $table->timestamps();
         });
     }

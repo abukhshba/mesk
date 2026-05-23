@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Category>
@@ -25,15 +26,14 @@ class CategoryFactory extends Factory
             ['ar' => 'منظمات النمو', 'en' => 'Growth Regulators'],
         ];
         $name = fake()->randomElement($names);
-        $slug = \Illuminate\Support\Str::slug($name['en']) . '-' . fake()->unique()->numberBetween(1, 9999);
+        $slug = Str::slug($name['en']).'-'.fake()->unique()->numberBetween(1, 9999);
 
         return [
-            'name' => $name,
+            'name_ar' => $name['ar'],
+            'name_en' => $name['en'],
             'slug' => $slug,
-            'description' => [
-                'ar' => fake()->paragraph(2),
-                'en' => fake()->paragraph(2),
-            ],
+            'description_ar' => fake()->paragraph(2),
+            'description_en' => fake()->paragraph(2),
             'is_active' => true,
             'sort_order' => fake()->numberBetween(0, 10),
         ];

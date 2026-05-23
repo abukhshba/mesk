@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\SubCategory;
 use App\Models\WebsiteSetting;
 use App\Services\ProductService;
 
@@ -30,7 +29,7 @@ class CategoryController extends Controller
     public function subCategory(string $categorySlug, string $subSlug)
     {
         $category = Category::where('slug', $categorySlug)->active()->firstOrFail();
-        $subCategory = SubCategory::where('slug', $subSlug)->where('category_id', $category->id)->active()->with('media')->firstOrFail();
+        $subCategory = Category::where('slug', $subSlug)->where('parent_id', $category->id)->active()->with('media')->firstOrFail();
         $products = $this->productService->getProductsByCategory($category, $subCategory->id);
         $settings = WebsiteSetting::getSettings();
 

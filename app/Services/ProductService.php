@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\SubCategory;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,7 +12,7 @@ class ProductService
     public function getFeaturedProducts(int $limit = 8): Collection
     {
         return Product::active()->featured()
-            ->with(['category', 'media'])
+            ->with(['category.parent', 'media'])
             ->orderBy('sort_order')
             ->limit($limit)
             ->get();
@@ -22,17 +21,27 @@ class ProductService
     public function getAllProducts(?string $search = null, ?int $categoryId = null): LengthAwarePaginator
     {
         $query = Product::active()
-            ->with(['category', 'subCategory', 'media'])
+            ->with(['category.parent', 'media'])
             ->orderBy('sort_order');
 
         if ($categoryId) {
-            $query->where('category_id', $categoryId);
+            $category = Category::find($categoryId);
+            if ($category) {
+                if ($category->isParent()) {
+                    $categoryIds = Category::where('parent_id', $category->id)->pluck('id')->push($category->id);
+                    $query->whereIn('category_id', $categoryIds);
+                } else {
+                    $query->where('category_id', $categoryId);
+                }
+            } else {
+                $query->where('category_id', $categoryId);
+            }
         }
 
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->whereRaw("JSON_EXTRACT(name, '$.ar') LIKE ?", ["%{$search}%"])
-                    ->orWhereRaw("JSON_EXTRACT(name, '$.en') LIKE ?", ["%{$search}%"])
+                $q->where('name_ar', 'like', "%{$search}%")
+                    ->orWhere('name_en', 'like', "%{$search}%")
                     ->orWhere('active_ingredient', 'like', "%{$search}%");
             });
         }
@@ -43,18 +52,24 @@ class ProductService
     public function getProductsByCategory(Category $category, ?int $subcategoryId = null, ?string $search = null): LengthAwarePaginator
     {
         $query = Product::active()
-            ->where('category_id', $category->id)
-            ->with(['category', 'subCategory', 'media'])
+            ->with(['category.parent', 'media'])
             ->orderBy('sort_order');
 
         if ($subcategoryId) {
-            $query->where('subcategory_id', $subcategoryId);
+            $query->where('category_id', $subcategoryId);
+        } else {
+            if ($category->isParent()) {
+                $categoryIds = Category::where('parent_id', $category->id)->pluck('id')->push($category->id);
+                $query->whereIn('category_id', $categoryIds);
+            } else {
+                $query->where('category_id', $category->id);
+            }
         }
 
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->whereRaw("JSON_EXTRACT(name, '$.ar') LIKE ?", ["%{$search}%"])
-                    ->orWhereRaw("JSON_EXTRACT(name, '$.en') LIKE ?", ["%{$search}%"])
+                $q->where('name_ar', 'like', "%{$search}%")
+                    ->orWhere('name_en', 'like', "%{$search}%")
                     ->orWhere('active_ingredient', 'like', "%{$search}%");
             });
         }

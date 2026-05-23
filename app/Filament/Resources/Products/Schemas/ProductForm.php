@@ -23,6 +23,7 @@ class ProductForm
                 Section::make(__('Product Images'))
                     ->icon(Heroicon::OutlinedPhoto)
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('main_image')
                             ->label(__('Main Image'))
@@ -40,7 +41,26 @@ class ProductForm
                 Section::make(__('Product Info'))
                     ->icon(Heroicon::OutlinedLanguage)
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
+                        TextInput::make('name_ar')
+                            ->label(__('Name (Arabic)'))
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                        TextInput::make('name_en')
+                            ->label(__('Name (English)'))
+                            ->required(),
+                        TextInput::make('slug')
+                            ->label(__('Slug'))
+                            ->required()
+                            ->unique(
+                                table: 'products',
+                                column: 'slug',
+                                ignoreRecord: true,
+                                modifyRuleUsing: fn ($rule) => $rule->whereNull('deleted_at')
+                            )
+                            ->columnSpanFull(),
                         Select::make('category_id')
                             ->label(__('Category'))
                             ->options(function () {
@@ -63,34 +83,25 @@ class ProductForm
                             })
                             ->required()
                             ->searchable(),
-                        TextInput::make('name.ar')
-                            ->label(__('Name (Arabic)'))
-                            ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
-                        TextInput::make('name.en')
-                            ->label(__('Name (English)'))
-                            ->required(),
-                        TextInput::make('slug')
-                            ->label(__('Slug'))
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->columnSpanFull(),
-                        Textarea::make('short_description.ar')->label(__('Short Description (AR)'))->rows(2),
-                        Textarea::make('short_description.en')->label(__('Short Description (EN)'))->rows(2),
+                        Textarea::make('short_description_ar')
+                            ->label(__('Short Description (AR)'))->rows(2),
+                        Textarea::make('short_description_en')
+                            ->label(__('Short Description (EN)'))->rows(2),
                     ]),
 
                 Section::make(__('Full Description'))
                     ->icon(Heroicon::OutlinedDocumentText)
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
-                        RichEditor::make('description.ar')->label(__('Description (Arabic)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
-                        RichEditor::make('description.en')->label(__('Description (English)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
+                        RichEditor::make('description_ar')->label(__('Description (Arabic)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
+                        RichEditor::make('description_en')->label(__('Description (English)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
                     ]),
 
                 Section::make(__('Specifications'))
                     ->icon(Heroicon::OutlinedBeaker)
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
                         TextInput::make('active_ingredient')->label(__('Active Ingredient')),
                         TextInput::make('application_rate')->label(__('Application Rate')),
@@ -102,6 +113,7 @@ class ProductForm
                 Section::make(__('Settings'))
                     ->icon(Heroicon::OutlinedCog6Tooth)
                     ->columns(3)
+                    ->columnSpanFull()
                     ->schema([
                         Toggle::make('is_featured')->label(__('Featured'))->default(false),
                         Toggle::make('is_active')->label(__('Active'))->default(true),

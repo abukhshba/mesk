@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
-            $table->string('slug')->unique();
-            $table->json('description')->nullable();
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->foreignId('parent_id')->nullable();
+            $table->string('slug')->index();
+            $table->text('description_ar')->nullable();
+            $table->text('description_en')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

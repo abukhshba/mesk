@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id');
-            $table->json('name');
-            $table->string('slug')->unique();
-            $table->json('short_description')->nullable();
-            $table->json('description')->nullable();
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->string('slug')->index();
+            $table->text('short_description_ar')->nullable();
+            $table->text('short_description_en')->nullable();
+            $table->text('description_ar')->nullable();
+            $table->text('description_en')->nullable();
             $table->string('active_ingredient')->nullable();
             $table->text('usage_instructions')->nullable();
             $table->string('application_rate')->nullable();
@@ -26,6 +29,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -29,11 +29,11 @@ class ProductsTable
                     ->collection('main_image')
                     ->label(__('Image'))
                     ->circular(),
-                TextColumn::make('name.ar')
+                TextColumn::make('name_ar')
                     ->label(__('Name (AR)'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('name.en')
+                TextColumn::make('name_en')
                     ->label(__('Name (EN)'))
                     ->searchable()
                     ->toggleable(),

@@ -9,23 +9,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
     /** @use HasFactory<ProductFactory> */
     use HasFactory;
 
-    use HasTranslations;
     use InteractsWithMedia;
     use SoftDeletes;
 
     protected $fillable = [
         'category_id',
-        'name',
+        'name_ar',
+        'name_en',
         'slug',
-        'short_description',
-        'description',
+        'short_description_ar',
+        'short_description_en',
+        'description_ar',
+        'description_en',
         'active_ingredient',
         'usage_instructions',
         'application_rate',
@@ -36,8 +37,25 @@ class Product extends Model implements HasMedia
         'sort_order',
     ];
 
-    /** @var list<string> */
-    public array $translatable = ['name', 'short_description', 'description'];
+    public function getTranslation(string $key, string $locale): ?string
+    {
+        return $this->{"{$key}_{$locale}"} ?? '';
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->getTranslation('name', app()->getLocale()) ?? '';
+    }
+
+    public function getShortDescriptionAttribute(): ?string
+    {
+        return $this->getTranslation('short_description', app()->getLocale());
+    }
+
+    public function getDescriptionAttribute(): ?string
+    {
+        return $this->getTranslation('description', app()->getLocale());
+    }
 
     protected function casts(): array
     {

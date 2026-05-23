@@ -10,28 +10,40 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 
 class Category extends Model implements HasMedia
 {
     /** @use HasFactory<CategoryFactory> */
     use HasFactory;
 
-    use HasTranslations;
     use InteractsWithMedia;
     use SoftDeletes;
 
     protected $fillable = [
         'parent_id',
-        'name',
+        'name_ar',
+        'name_en',
         'slug',
-        'description',
+        'description_ar',
+        'description_en',
         'is_active',
         'sort_order',
     ];
 
-    /** @var list<string> */
-    public array $translatable = ['name', 'description'];
+    public function getTranslation(string $key, string $locale): ?string
+    {
+        return $this->{"{$key}_{$locale}"} ?? '';
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->getTranslation('name', app()->getLocale()) ?? '';
+    }
+
+    public function getDescriptionAttribute(): ?string
+    {
+        return $this->getTranslation('description', app()->getLocale());
+    }
 
     protected function casts(): array
     {
@@ -52,6 +64,11 @@ class Category extends Model implements HasMedia
     }
 
     public function children(): HasMany
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function subCategories(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
     }

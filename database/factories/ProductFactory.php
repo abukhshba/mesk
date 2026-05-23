@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Product>
@@ -26,21 +28,17 @@ class ProductFactory extends Factory
             ['ar' => 'NPK المتوازن', 'en' => 'Balanced NPK'],
         ];
         $name = fake()->randomElement($names);
-        $slug = \Illuminate\Support\Str::slug($name['en']) . '-' . fake()->unique()->numberBetween(1, 99999);
+        $slug = Str::slug($name['en']).'-'.fake()->unique()->numberBetween(1, 99999);
 
         return [
-            'category_id' => \App\Models\Category::factory(),
-            'subcategory_id' => null,
-            'name' => $name,
+            'category_id' => Category::factory(),
+            'name_ar' => $name['ar'],
+            'name_en' => $name['en'],
             'slug' => $slug,
-            'short_description' => [
-                'ar' => fake()->sentence(8),
-                'en' => fake()->sentence(8),
-            ],
-            'description' => [
-                'ar' => fake()->paragraph(3),
-                'en' => fake()->paragraph(3),
-            ],
+            'short_description_ar' => fake()->sentence(8),
+            'short_description_en' => fake()->sentence(8),
+            'description_ar' => fake()->paragraph(3),
+            'description_en' => fake()->paragraph(3),
             'active_ingredient' => fake()->randomElement(['Imidacloprid 70%', 'Chlorpyrifos 48%', 'Mancozeb 80%', 'NPK 20-20-20']),
             'usage_instructions' => fake()->paragraph(2),
             'application_rate' => fake()->randomElement(['200 مل/دونم', '500 مل/هكتار', '1 لتر/فدان']),

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\WebsiteSetting;
 use App\Services\ProductService;
@@ -27,7 +26,7 @@ class ProductController extends Controller
     public function show(string $slug)
     {
         $product = Product::where('slug', $slug)->active()
-            ->with(['category', 'subCategory', 'media'])
+            ->with(['category.parent', 'media'])
             ->firstOrFail();
 
         $relatedProducts = $this->productService->getRelatedProducts($product, 4);
