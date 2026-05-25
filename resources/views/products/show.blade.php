@@ -76,10 +76,11 @@
         <div class="flex flex-col">
             @if($product->category)
             <span class="inline-flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-3 py-1 rounded-full w-fit">
-                {{ $product->category->getTranslation('name', app()->getLocale()) }}
-                @if($product->subCategory)
-                 · {{ $product->subCategory->getTranslation('name', app()->getLocale()) }}
+                @if($product->category->parent)
+                    {{ $product->category->parent->getTranslation('name', app()->getLocale()) }}
+                    <span class="mx-1 text-primary-400">·</span>
                 @endif
+                {{ $product->category->getTranslation('name', app()->getLocale()) }}
             </span>
             @endif
 

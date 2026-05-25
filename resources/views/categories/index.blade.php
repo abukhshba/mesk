@@ -4,14 +4,16 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-gradient-to-br from-primary-800 to-primary-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
-            <a href="{{ route('home') }}" class="hover:text-white transition-colors">{{ __('messages.home') }}</a>
-            <span>/</span>
-            <span class="text-white">{{ __('messages.categories') }}</span>
+<div class="page-header py-24 rounded-b-[3rem] shadow-sm mb-12">
+    <div class="page-header-grid"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-6">
+            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('messages.home') }}</a>
+            <span class="text-primary-600/40">/</span>
+            <span class="text-primary-600">{{ __('messages.categories') }}</span>
         </nav>
-        <h1 class="text-3xl sm:text-4xl font-bold text-white">{{ __('messages.featured_categories') }}</h1>
+        <div class="accent-line mb-5"></div>
+        <h1 class="text-4xl sm:text-5xl font-black text-primary-950 leading-tight">{{ __('messages.featured_categories') }}</h1>
     </div>
 </div>
 

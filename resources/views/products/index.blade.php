@@ -4,14 +4,16 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-gradient-to-br from-primary-800 to-primary-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
-            <a href="{{ route('home') }}" class="hover:text-white">{{ __('messages.home') }}</a>
-            <span>/</span>
-            <span class="text-white">{{ __('messages.products') }}</span>
+<div class="page-header py-24 rounded-b-[3rem] shadow-sm mb-12">
+    <div class="page-header-grid"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-6">
+            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('messages.home') }}</a>
+            <span class="text-primary-600/40">/</span>
+            <span class="text-primary-600">{{ __('messages.products') }}</span>
         </nav>
-        <h1 class="text-3xl sm:text-4xl font-bold text-white">{{ __('messages.products') }}</h1>
+        <div class="accent-line mb-5"></div>
+        <h1 class="text-4xl sm:text-5xl font-black text-primary-950 leading-tight">{{ __('messages.products') }}</h1>
     </div>
 </div>
 
@@ -19,18 +21,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- Search & Filter Bar -->
-        <form method="GET" action="{{ route('products.index') }}" class="flex flex-col sm:flex-row gap-4 mb-10 bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm">
-            <!-- Search -->
+        <form method="GET" action="{{ route('products.index') }}" class="flex flex-col sm:flex-row gap-3 mb-10 bg-white p-3 rounded-2xl border border-neutral-100 shadow-sm">
             <div class="flex-1 relative">
-                <svg class="absolute {{ app()->getLocale() === 'ar' ? 'right-3' : 'left-3' }} top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="absolute {{ app()->getLocale() === 'ar' ? 'right-3.5' : 'left-3.5' }} top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
                 <input type="text" name="search" value="{{ $search }}" placeholder="{{ __('messages.search_placeholder') }}"
-                       class="w-full {{ app()->getLocale() === 'ar' ? 'pr-10 pl-4' : 'pl-10 pr-4' }} py-3 text-sm border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 bg-neutral-50">
+                       class="w-full {{ app()->getLocale() === 'ar' ? 'pr-10 pl-4' : 'pl-10 pr-4' }} py-3 text-sm border-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50">
             </div>
-
-            <!-- Category Filter -->
-            <select name="category" class="px-4 py-3 text-sm border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 min-w-[180px]">
+            <select name="category" class="px-4 py-3 text-sm border-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 min-w-[180px]">
                 <option value="">{{ __('messages.all_categories') }}</option>
                 @foreach($categories as $cat)
                     <option value="{{ $cat->id }}" {{ $categoryId == $cat->id ? 'selected' : '' }}>
@@ -38,16 +37,16 @@
                     </option>
                 @endforeach
             </select>
-
-            <button type="submit" class="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors whitespace-nowrap">
-                {{ app()->getLocale() === 'ar' ? 'بحث' : 'Search' }}
-            </button>
-
-            @if($search || $categoryId)
-            <a href="{{ route('products.index') }}" class="px-6 py-3 border border-neutral-200 text-neutral-600 font-medium rounded-xl hover:bg-neutral-50 transition-colors whitespace-nowrap">
-                {{ app()->getLocale() === 'ar' ? 'مسح' : 'Clear' }}
-            </a>
-            @endif
+            <div class="flex gap-2">
+                <button type="submit" class="px-6 py-3 bg-neutral-900 text-white font-semibold rounded-xl hover:bg-neutral-800 transition-colors whitespace-nowrap text-sm">
+                    {{ app()->getLocale() === 'ar' ? 'بحث' : 'Search' }}
+                </button>
+                @if($search || $categoryId)
+                <a href="{{ route('products.index') }}" class="px-5 py-3 border border-neutral-200 text-neutral-600 font-medium rounded-xl hover:bg-neutral-50 transition-colors whitespace-nowrap text-sm">
+                    {{ app()->getLocale() === 'ar' ? 'مسح' : 'Clear' }}
+                </a>
+                @endif
+            </div>
         </form>
 
         <!-- Results count -->
