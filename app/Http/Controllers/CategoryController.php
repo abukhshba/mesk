@@ -12,7 +12,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::active()->with('media')->orderBy('sort_order')->get();
+        $parentCategoriesQuery = Category::active()->parents();
+        if ($parentCategoriesQuery->count() === 1) {
+            $singleParent = $parentCategoriesQuery->first();
+
+            return redirect()->route('categories.show', $singleParent->slug);
+        }
+
+        $categories = $parentCategoriesQuery->with('media')->orderBy('sort_order')->get();
         $settings = WebsiteSetting::getSettings();
 
         return view('categories.index', compact('categories', 'settings'));

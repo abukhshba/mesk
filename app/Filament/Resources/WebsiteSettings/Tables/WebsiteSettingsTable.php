@@ -14,8 +14,11 @@ class WebsiteSettingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('company_name')
-                    ->label(__('Company Name'))
+                TextColumn::make('company_name_ar')
+                    ->label(__('Company Name (Arabic)'))
+                    ->searchable(),
+                TextColumn::make('company_name_en')
+                    ->label(__('Company Name (English)'))
                     ->searchable(),
                 TextColumn::make('logo')
                     ->label(__('Logo'))

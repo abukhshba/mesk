@@ -14,9 +14,14 @@ class AboutUsTable
     {
         return $table
             ->columns([
-                TextColumn::make('title.ar')->label(__('Title (AR)'))->searchable(),
-                TextColumn::make('title.en')->label(__('Title (EN)'))->searchable()->toggleable(),
-                TextColumn::make('updated_at')->dateTime()->sortable(),
+                TextColumn::make('title_ar')
+                    ->label(__('Title (AR)'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('title_en')
+                    ->label(__('Title (EN)'))
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

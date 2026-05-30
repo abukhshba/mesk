@@ -5,22 +5,22 @@
 @section('content')
 
 {{-- 1. BRIGHT ORGANIC HERO --}}
-<section class="relative pt-16 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-primary-50/30">
+<section class="relative pt-8 pb-12 sm:pb-14 lg:pt-10 lg:pb-16 overflow-hidden bg-primary-50/30">
     {{-- Soft background glows --}}
     <div class="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary-200/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
     <div class="absolute bottom-0 left-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-accent-100/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16 lg:mt-0">
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 mt-4 sm:mt-6">
+        <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
 
             {{-- Text Content --}}
-            <div class="w-full lg:w-1/2 text-center rtl:lg:text-right ltr:lg:text-left z-20">
-                <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-primary-100 text-primary-600 text-[10px] sm:text-xs lg:text-sm font-bold tracking-wide mb-6 sm:mb-8 shadow-sm">
+            <div class="w-full lg:w-[45%] text-center rtl:lg:text-right ltr:lg:text-left z-20 shrink-0">
+                <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-primary-100 text-primary-600 text-[10px] sm:text-xs lg:text-sm font-bold tracking-wide mb-3 sm:mb-8 lg:mb-4 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
                     {{ app()->getLocale() === 'ar' ? 'تقنيات الحماية والتغذية الزراعية' : 'Agrochemical Protection & Nutrition' }}
                 </div>
 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-neutral-900 leading-[1.2] lg:leading-[1.1] tracking-tight mb-4 sm:mb-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black text-neutral-900 leading-[1.2] lg:leading-[1.1] tracking-tight mb-4 sm:mb-6 lg:mb-4">
                     @if(app()->getLocale() === 'ar')
                         نقاء <span class="text-primary-600">التقنية</span><br>الزراعية
                     @else
@@ -28,7 +28,7 @@
                     @endif
                 </h1>
 
-                <p class="text-neutral-500 text-sm sm:text-base lg:text-lg font-medium leading-relaxed mb-8 sm:mb-10 max-w-lg mx-auto lg:mx-0">
+                <p class="text-neutral-500 text-sm sm:text-base lg:text-base font-medium leading-relaxed mb-8 sm:mb-10 lg:mb-6 max-w-lg mx-auto lg:mx-0">
                     {{ __('messages.hero_subtitle') }}
                 </p>
 
@@ -38,16 +38,12 @@
                         {{ __('messages.hero_cta') }}
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
-                    <a href="{{ route('about') }}"
-                       class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-neutral-50 text-neutral-900 font-bold rounded-2xl border border-neutral-200 shadow-sm transition-all duration-300 hover:-translate-y-1">
-                        {{ __('messages.about') }}
-                    </a>
                 </div>
             </div>
 
             {{-- Image & Shapes --}}
-            <div class="w-full lg:w-1/2 relative mt-4 lg:mt-0 z-10">
-                <div class="relative w-full aspect-[4/3] sm:aspect-square lg:aspect-[4/5] max-w-md sm:max-w-lg mx-auto lg:max-w-none">
+            <div class="w-full lg:w-[55%] relative mt-4 lg:mt-0 z-10">
+                <div class="relative w-full aspect-[4/3] sm:aspect-square lg:aspect-[4/3] max-w-md sm:max-w-lg mx-auto lg:max-w-[480px] xl:max-w-[560px] {{ app()->getLocale() === 'ar' ? 'lg:mr-auto lg:ml-0' : 'lg:ml-auto lg:mr-0' }}">
                     {{-- Organic background shape behind image --}}
                     <div class="absolute inset-0 bg-primary-200 rounded-[2.5rem] sm:rounded-[3rem] rotate-3 scale-105 transition-transform duration-700 hover:rotate-6"></div>
 
@@ -57,24 +53,23 @@
                     </div>
 
                     {{-- Floating Badge --}}
-                    <div class="absolute -bottom-4 lg:-bottom-6 {{ app()->getLocale() === 'ar' ? '-right-2 sm:-right-6' : '-left-2 sm:-left-6' }} bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-neutral-100 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-accent-50 flex items-center justify-center shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <div class="absolute -bottom-4 lg:-bottom-6 {{ app()->getLocale() === 'ar' ? '-right-2 sm:-right-6' : '-left-2 sm:-left-6' }} bg-white rounded-2xl p-2 sm:p-4 shadow-md sm:shadow-xl border border-neutral-100 flex items-center gap-2 sm:gap-3 animate-bounce" style="animation-duration: 3s;">
+                        <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-accent-50 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                         </div>
                         <div>
-                            <p class="text-[9px] sm:text-[10px] text-neutral-400 font-bold uppercase tracking-wider mb-0.5">{{ app()->getLocale() === 'ar' ? 'اعتماد الجودة' : 'Certified' }}</p>
-                            <p class="text-[11px] sm:text-xs md:text-sm font-black text-neutral-900">{{ app()->getLocale() === 'ar' ? 'مرخص من الغذاء والدواء' : 'SFDA Approved' }}</p>
+                            <p class="text-[8px] sm:text-[10px] text-neutral-400 font-bold uppercase tracking-wider mb-0 sm:mb-0.5">{{ app()->getLocale() === 'ar' ? 'اعتماد الجودة' : 'Certified' }}</p>
+                            <p class="text-[10px] sm:text-xs md:text-sm font-black text-neutral-900 leading-tight sm:leading-normal">{{ app()->getLocale() === 'ar' ? 'مرخص من الغذاء والدواء' : 'SFDA Approved' }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
 {{-- 1.5. VISION 2030 BANNER --}}
-<section class="relative py-8 sm:py-10 overflow-hidden">
+<section class="relative py-4 sm:py-6 overflow-hidden">
     {{-- Beautiful Dynamic Background Gradient --}}
     <div class="absolute inset-0 bg-gradient-to-r from-primary-800 via-primary-600 to-accent-600"></div>
 
@@ -87,7 +82,7 @@
 
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-            <div class="flex flex-col sm:flex-row items-center text-center sm:text-left rtl:sm:text-right gap-4 sm:gap-6">
+            <div class="hidden md:flex flex-col sm:flex-row items-center text-center sm:text-left rtl:sm:text-right gap-4 sm:gap-6">
                 {{-- Vision 2030 stylized icon --}}
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-2xl bg-white/10 flex items-center justify-center border border-white/20 backdrop-blur-md shadow-lg transition-transform hover:scale-105">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -102,9 +97,20 @@
                 </div>
             </div>
 
-            {{-- Official Vision 2030 Logo --}}
-            <div class="flex items-center justify-center bg-white/10 border border-white/20 backdrop-blur-md py-3 px-6 sm:px-8 rounded-2xl shadow-lg hover:bg-white/15 transition-all">
-                <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-10 sm:h-12 md:h-14 w-auto object-contain brightness-0 invert drop-shadow-md">
+            {{-- Official Vision & Quality Logos --}}
+            <div class="flex flex-row items-center justify-center gap-4 sm:gap-8 shrink-0 w-full md:w-auto">
+                {{-- Vision 2030 Logo inside clean glassmorphic container --}}
+                <div class="flex items-center justify-center bg-white/10 border border-white/20 backdrop-blur-md py-1.5 px-4 sm:py-4 sm:px-10 rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:bg-white/15 transition-all">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-14 sm:h-18 md:h-22 lg:h-24 w-auto object-contain brightness-0 invert drop-shadow-sm">
+                </div>
+                {{-- Saudi Made Logo - Full borderless --}}
+                <div class="flex items-center justify-center">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-16 sm:h-20 md:h-26 lg:h-28 w-auto object-contain drop-shadow-sm transition-transform hover:scale-105">
+                </div>
+                {{-- ISO Certified Logo - Full borderless --}}
+                <div class="flex items-center justify-center">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-16 sm:h-20 md:h-26 lg:h-28 w-auto object-contain drop-shadow-sm transition-transform hover:scale-105">
+                </div>
             </div>
         </div>
     </div>
@@ -112,35 +118,38 @@
 
 {{-- 3. CATEGORIES --}}
 @if($categories->count())
-<section class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+<section class="py-10 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
 
         {{-- Section header --}}
         <div class="flex items-end justify-between mb-12">
             <div>
                 <div class="accent-line mb-4"></div>
-                <h2 class="text-4xl font-black text-neutral-900">{{ __('messages.featured_categories') }}</h2>
+                <h2 class="text-2xl sm:text-4xl font-black text-neutral-900">{{ __('messages.featured_categories') }}</h2>
             </div>
-            <a href="{{ route('categories.index') }}"
+            @php
+                $viewAllUrl = ($categoriesDisplayMode === 'children' && $singleParent)
+                    ? route('categories.show', $singleParent->slug)
+                    : route('categories.index');
+            @endphp
+            <a href="{{ $viewAllUrl }}"
                class="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-neutral-500 hover:text-neutral-900 transition-colors">
                 {{ app()->getLocale() === 'ar' ? 'عرض الكل' : 'View all' }}
                 <svg class="w-4 h-4 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
         </div>
 
-        {{-- Asymmetric grid: first item spans 2 rows --}}
-        @php $cats = $categories->take(5); @endphp
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-[280px]">
-            @foreach($cats as $i => $category)
-                @if($i === 0)
-                <div class="lg:row-span-2 lg:h-full h-[280px] rounded-3xl overflow-hidden hover-grow">
-                    <x-category-card :category="$category" class="h-full"/>
+        {{-- Standard responsive grid: 2 beside each other on mobile/tablet, 4 beside each other on desktop --}}
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+            @foreach($categories as $category)
+                @php
+                    $cardHref = ($categoriesDisplayMode === 'children' && $singleParent)
+                        ? route('categories.subcategory', [$singleParent->slug, $category->slug])
+                        : null;
+                @endphp
+                <div class="rounded-xl sm:rounded-3xl overflow-hidden hover-grow">
+                    <x-category-card :category="$category" :show-description="false" :href="$cardHref"/>
                 </div>
-                @else
-                <div class="rounded-3xl overflow-hidden hover-grow">
-                    <x-category-card :category="$category"/>
-                </div>
-                @endif
             @endforeach
         </div>
 
@@ -151,7 +160,7 @@
 
 {{-- 4. FEATURED PRODUCTS --}}
 @if($featuredProducts->count())
-<section class="py-24 bg-neutral-50 border-t border-neutral-100">
+<section class="py-10 sm:py-20 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
         <div class="flex items-end justify-between mb-12">
@@ -179,10 +188,31 @@
 
 {{-- 5. ABOUT — ORGANIC SHAPES --}}
 @if($about)
-<section class="py-24 bg-white overflow-hidden relative">
+<section class="py-10 sm:py-24 bg-white overflow-hidden relative">
     <div class="absolute top-0 left-0 w-full h-[800px] bg-primary-50 rounded-br-[100px] sm:rounded-br-[200px] -z-10"></div>
 
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        {{-- Content --}}
+        <div>
+            <p class="inline-block px-4 py-1.5 rounded-full bg-primary-50 text-primary-700 text-xs font-bold tracking-widest uppercase mb-6 border border-primary-100">
+                {{ __('messages.about_preview_title') }}
+            </p>
+
+            <h2 class="text-4xl lg:text-5xl font-black text-neutral-900 leading-tight mb-6">
+                {{ $about->getTranslation('title', app()->getLocale()) }}
+            </h2>
+
+            <p class="text-neutral-500 text-base leading-relaxed font-light mb-10 max-w-lg">
+                {!! Str::limit(strip_tags($about->getTranslation('description', app()->getLocale())), 320) !!}
+            </p>
+
+            <a href="{{ route('about') }}"
+               class="inline-flex items-center gap-2 px-8 py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-bold rounded-2xl transition-all duration-300 shadow-md">
+                {{ app()->getLocale() === 'ar' ? 'اكتشف قصتنا' : 'Discover Our Story' }}
+                <svg class="w-4.5 h-4.5 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+        </div>
 
         {{-- Image with Organic Shape --}}
         <div class="relative">
@@ -211,27 +241,6 @@
             </div>
         </div>
 
-        {{-- Content --}}
-        <div>
-            <p class="inline-block px-4 py-1.5 rounded-full bg-primary-50 text-primary-700 text-xs font-bold tracking-widest uppercase mb-6 border border-primary-100">
-                {{ __('messages.about_preview_title') }}
-            </p>
-
-            <h2 class="text-4xl lg:text-5xl font-black text-neutral-900 leading-tight mb-6">
-                {{ $about->getTranslation('title', app()->getLocale()) }}
-            </h2>
-
-            <p class="text-neutral-500 text-base leading-relaxed font-light mb-10 max-w-lg">
-                {!! Str::limit(strip_tags($about->getTranslation('description', app()->getLocale())), 320) !!}
-            </p>
-
-            <a href="{{ route('about') }}"
-               class="inline-flex items-center gap-2 px-8 py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-bold rounded-2xl transition-all duration-300 shadow-md">
-                {{ app()->getLocale() === 'ar' ? 'اكتشف قصتنا' : 'Discover Our Story' }}
-                <svg class="w-4.5 h-4.5 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-        </div>
-
     </div>
 </section>
 @endif
@@ -239,7 +248,7 @@
 
 {{-- 6. WHATSAPP CTA --}}
 @if(!empty($settings->whatsapp))
-<section class="py-16 bg-white border-t border-neutral-100">
+<section class="pt-16 bg-white border-t border-neutral-100">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>

@@ -20,9 +20,12 @@ class WebsiteSettingForm
                     ->columnSpanFull()
                     ->columns(2)
                     ->schema([
-                        TextInput::make('company_name')
-                            ->label(__('Company Name'))
-                            ->columnSpanFull(),
+                        TextInput::make('company_name_ar')
+                            ->label(__('Company Name (Arabic)'))
+                            ->required(),
+                        TextInput::make('company_name_en')
+                            ->label(__('Company Name (English)'))
+                            ->required(),
                         FileUpload::make('logo')
                             ->label(__('Logo'))
                             ->image()

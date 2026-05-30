@@ -21,6 +21,18 @@
         <span class="text-neutral-900 font-medium">{{ $product->getTranslation('name', app()->getLocale()) }}</span>
     </nav>
 
+    
+    @php
+        $locale = app()->getLocale();
+        $hasProperties = $product->getTranslation('properties', $locale);
+        $hasDescription = $product->getTranslation('description', $locale);
+        $hasApplicationRates = $product->application_rates_type === 'table'
+            ? !empty($product->application_rates_rows)
+            : ($product->getTranslation('application_rates_text', $locale));
+        $hasUsageInstructions = $product->usage_instructions;
+        $hasSafetyPrecautions = $product->safety_precautions;
+    @endphp
+
     <!-- Product Top Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
 
@@ -33,6 +45,7 @@
                 if ($mainImage) $allImages->push($mainImage);
                 foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
             @endphp
+
 
             @if($allImages->count() > 0)
             <!-- Main Swiper -->
@@ -97,24 +110,66 @@
             <!-- Quick Specs -->
             @if($product->active_ingredient || $product->package_sizes || $product->application_rate)
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                @if($product->active_ingredient)
+                {{-- @if($product->active_ingredient)
                 <div class="bg-neutral-50 rounded-xl p-4">
                     <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('messages.active_ingredient') }}</div>
                     <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->active_ingredient }}</div>
                 </div>
-                @endif
+                @endif --}}
                 @if($product->application_rate)
                 <div class="bg-neutral-50 rounded-xl p-4">
                     <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('messages.application_rate') }}</div>
                     <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->application_rate }}</div>
                 </div>
                 @endif
-                @if($product->package_sizes)
-                <div class="bg-neutral-50 rounded-xl p-4 sm:col-span-2">
-                    <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('messages.package_sizes') }}</div>
-                    <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->package_sizes }}</div>
+                @php
+                    $packageSizes = $locale === 'ar' 
+                        ? ($product->package_sizes_ar ?: $product->package_sizes_en) 
+                        : ($product->package_sizes_en ?: $product->package_sizes_ar);
+                @endphp
+                @if($packageSizes)
+                <div class="bg-neutral-50 rounded-xl p-4 sm:col-span-2 border border-neutral-100">
+                    <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        {{ __('messages.package_sizes') }}
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach(array_map('trim', explode(',', $packageSizes)) as $size)
+                            @if(!empty($size))
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm sm:text-base hover:shadow-lg hover:shadow-green-500/40 transition-shadow duration-300">
+                                {{ $size }}
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
                 @endif
+            </div>
+            @endif
+
+            
+            {{-- ─── SECTION 1: Properties & Benefits ─── --}}
+            @if($hasProperties)
+            <div class="my-3">
+                <div class="relative bg-gradient-to-br from-primary-50 via-white to-accent-50/30 rounded-3xl overflow-hidden border border-primary-100/60">
+                    {{-- Decorative corner shapes --}}
+                    <div class="absolute top-0 {{ $locale === 'ar' ? 'left-0' : 'right-0' }} w-32 h-32 bg-primary-100/40 rounded-full -translate-y-1/2 {{ $locale === 'ar' ? '-translate-x-1/2' : 'translate-x-1/2' }}"></div>
+                    <div class="absolute bottom-0 {{ $locale === 'ar' ? 'right-0' : 'left-0' }} w-20 h-20 bg-accent-100/30 rounded-full translate-y-1/2 {{ $locale === 'ar' ? 'translate-x-1/2' : '-translate-x-1/2' }}"></div>
+
+                    <div class="relative z-10 p-2 sm:p-4 lg:p-6">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center shadow-sm">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                            </div>
+                            <h2 class="text-xl sm:text-2xl font-black text-neutral-900">
+                                {{ $locale === 'ar' ? 'الخواص والمميزات' : 'Properties & Benefits' }}
+                            </h2>
+                        </div>
+                        <div class="text-neutral-700 leading-relaxed prose max-w-none text-sm sm:text-base">
+                            {!! $hasProperties !!}
+                        </div>
+                    </div>
+                </div>
             </div>
             @endif
 
@@ -132,43 +187,134 @@
         </div>
     </div>
 
-    <!-- Product Details Tabs -->
-    <div class="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden mb-16">
-        <div class="p-8">
-            <h2 class="text-2xl font-bold text-neutral-900 mb-6">{{ __('messages.product_specs') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                @if($product->getTranslation('description', app()->getLocale()))
-                <div>
-                    <h3 class="font-semibold text-neutral-700 mb-3 flex items-center gap-2">
-                        <span class="w-5 h-5 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs">📋</span>
-                        {{ __('messages.product_details') }}
-                    </h3>
-                    <div class="text-neutral-600 text-sm leading-relaxed prose max-w-none">
-                        {!! $product->getTranslation('description', app()->getLocale()) !!}
-                    </div>
+    {{-- ═══════════════════════════════════════════════════════════════════════
+         CREATIVE PRODUCT DETAILS SECTIONS
+         Each section uses a unique visual treatment to avoid monotony
+    ═══════════════════════════════════════════════════════════════════════ --}}
+
+
+    {{-- ─── SECTION 2: Directions & Application Rates ─── --}}
+    @if($hasApplicationRates)
+    <div class="mb-10">
+        <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
+            {{-- Section header with accent stripe --}}
+            <div class="bg-neutral-900 px-6 sm:px-8 lg:px-10 py-5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
                 </div>
+                <h2 class="text-xl sm:text-2xl font-black text-white">
+                    {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
+                </h2>
+            </div>
+
+            <div class="px-6 py-4 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
+                @if($product->application_rates_type === 'table' && !empty($product->application_rates_rows))
+                    {{-- ═══ TABLE MODE ═══ --}}
+                    <div class="overflow-x-auto -mx-2">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-primary-100">
+                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
+                                        {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
+                                    </th>
+                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
+                                        {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Application Rate with Irrigation Water' }}
+                                    </th>
+                                    @if($product->application_rates_has_notes)
+                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
+                                        {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
+                                    </th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($product->application_rates_rows as $i => $row)
+                                <tr class="{{ $i % 2 === 0 ? 'bg-neutral-50/70' : 'bg-white' }} hover:bg-primary-50/50 transition-colors">
+                                    <td class="py-3 px-4 font-semibold text-neutral-800">
+                                        {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
+                                    </td>
+                                    <td class="py-3 px-4 text-neutral-600">
+                                        {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
+                                    </td>
+                                    @if($product->application_rates_has_notes)
+                                    <td class="py-3 px-4 text-neutral-500 text-xs leading-relaxed">
+                                        {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
+                                    </td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{-- Footer note --}}
+                    @if($product->getTranslation('application_rates_footer', $locale))
+                    <div class="mt-6 flex items-start gap-2 bg-amber-50 border border-amber-200/60 rounded-xl px-4 py-3">
+                        <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <p class="text-amber-800 text-sm font-medium">{{ $product->getTranslation('application_rates_footer', $locale) }}</p>
+                    </div>
+                    @endif
+
+                @else
+                    {{-- ═══ TEXT MODE ═══ --}}
+                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
+                        {{ $product->getTranslation('application_rates_text', $locale) }}
+                    </div>
                 @endif
-
-                <div class="space-y-4">
-                    @if($product->usage_instructions)
-                    <div>
-                        <h3 class="font-semibold text-neutral-700 mb-2">{{ __('messages.usage_instructions') }}</h3>
-                        <p class="text-neutral-600 text-sm leading-relaxed">{{ $product->usage_instructions }}</p>
-                    </div>
-                    @endif
-
-                    @if($product->safety_precautions)
-                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                        <h3 class="font-semibold text-amber-800 mb-2 flex items-center gap-2">
-                            ⚠️ {{ __('messages.safety_precautions') }}
-                        </h3>
-                        <p class="text-amber-700 text-sm leading-relaxed">{{ $product->safety_precautions }}</p>
-                    </div>
-                    @endif
-                </div>
             </div>
         </div>
     </div>
+    @endif
+
+    {{-- ─── SECTION 3: Product Details & Usage ─── --}}
+    @if($hasDescription || $hasUsageInstructions || $hasSafetyPrecautions)
+    <div class="mb-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {{-- Description Card --}}
+            @if($hasDescription)
+            <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <svg class="w-4.5 h-4.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-neutral-900">{{ __('messages.product_details') }}</h3>
+                </div>
+                <div class="text-neutral-600 text-sm leading-relaxed prose max-w-none">
+                    {!! $product->getTranslation('description', $locale) !!}
+                </div>
+            </div>
+            @endif
+
+            <div class="space-y-6">
+                {{-- Usage Instructions --}}
+                @if($hasUsageInstructions)
+                <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <svg class="w-4.5 h-4.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-neutral-900">{{ __('messages.usage_instructions') }}</h3>
+                    </div>
+                    <p class="text-neutral-600 text-sm leading-relaxed whitespace-pre-line">{{ $product->usage_instructions }}</p>
+                </div>
+                @endif
+
+                {{-- Safety Precautions --}}
+                @if($hasSafetyPrecautions)
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/60 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-lg bg-amber-200 flex items-center justify-center">
+                            <svg class="w-4.5 h-4.5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-amber-900">{{ __('messages.safety_precautions') }}</h3>
+                    </div>
+                    <p class="text-amber-800 text-sm leading-relaxed whitespace-pre-line">{{ $product->safety_precautions }}</p>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    @endif
 
     <!-- Related Products -->
     @if($relatedProducts->count())

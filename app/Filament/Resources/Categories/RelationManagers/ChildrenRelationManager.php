@@ -37,13 +37,14 @@ class ChildrenRelationManager extends RelationManager
                 SpatieMediaLibraryFileUpload::make('image')
                     ->collection('image')
                     ->image()
+                    ->disk('public')
                     ->columnSpanFull(),
-                TextInput::make('name.ar')
+                TextInput::make('name_ar')
                     ->label(__('Name (Arabic)'))
                     ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
-                TextInput::make('name.en')
+                TextInput::make('name_en')
                     ->label(__('Name (English)'))
                     ->required(),
                 TextInput::make('slug')
@@ -76,11 +77,11 @@ class ChildrenRelationManager extends RelationManager
                     ->collection('image')
                     ->label(__('Image'))
                     ->circular(),
-                TextColumn::make('name.ar')
+                TextColumn::make('name_ar')
                     ->label(__('Name (AR)'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('name.en')
+                TextColumn::make('name_en')
                     ->label(__('Name (EN)'))
                     ->searchable()
                     ->toggleable(),

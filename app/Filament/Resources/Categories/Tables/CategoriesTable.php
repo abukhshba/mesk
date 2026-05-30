@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
+use App\Models\Category;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -22,17 +23,18 @@ class CategoriesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->query(Category::query()->whereNull('parent_id'))
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('image')
                     ->label(__('Image'))
                     ->circular()
                     ->defaultImageUrl(fn () => asset('images/placeholder.png')),
-                TextColumn::make('name.ar')
+                TextColumn::make('name_ar')
                     ->label(__('Name (AR)'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('name.en')
+                TextColumn::make('name_en')
                     ->label(__('Name (EN)'))
                     ->searchable(),
                 TextColumn::make('slug')

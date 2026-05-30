@@ -71,10 +71,9 @@ class CategoryForm
                         SpatieMediaLibraryFileUpload::make('image')
                             ->collection('image')
                             ->image()
-                            ->imageResizeMode('cover')
-                            ->imageCropAspectRatio('16:9')
                             ->disk('public')
                             ->directory('category')
+                            ->visibility('public')
                             ->columnSpanFull(),
                     ]),
             ]);
