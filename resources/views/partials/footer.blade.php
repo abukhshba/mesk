@@ -16,7 +16,7 @@
                         {{ $settings->company_name ?? 'AlMisk' }}
                     </span>
                 </a>
-                <p class="text-neutral-400 mx-2 text-sm leading-relaxed max-w-xs">{{ __('messages.footer_about') }}</p>
+                <p class="text-neutral-400 mx-2 text-sm leading-relaxed max-w-xs">{{ __('app.footer_about') }}</p>
 
                 <div class="flex items-center gap-3 mt-6">
                     @if(!empty($settings->facebook))
@@ -45,19 +45,19 @@
             <div class="lg:col-span-2 grid grid-cols-2 gap-8 sm:gap-10">
                 <!-- Quick Links -->
                 <div>
-                    <h4 class="text-white font-semibold mb-5">{{ __('messages.quick_links') }}</h4>
+                    <h4 class="text-white font-semibold mb-5">{{ __('app.quick_links') }}</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('home') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('messages.home') }}</a></li>
-                        <li><a href="{{ route('categories.index') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('messages.categories') }}</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('messages.products') }}</a></li>
-                        <li><a href="{{ route('about') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('messages.about') }}</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('messages.contact') }}</a></li>
+                        <li><a href="{{ route('home') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('app.home') }}</a></li>
+                        <li><a href="{{ route('categories.index') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('app.categories') }}</a></li>
+                        <li><a href="{{ route('products.index') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('app.products') }}</a></li>
+                        <li><a href="{{ route('about') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('app.about') }}</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-sm text-neutral-400 hover:text-primary-400 transition-colors">{{ __('app.contact') }}</a></li>
                     </ul>
                 </div>
 
                 <!-- Contact Info -->
                 <div>
-                    <h4 class="text-white font-semibold mb-5">{{ __('messages.contact') }}</h4>
+                    <h4 class="text-white font-semibold mb-5">{{ __('app.contact') }}</h4>
                     <ul class="space-y-3">
                         @if(!empty($settings->phone))
                         <li class="flex items-center gap-2 text-sm text-neutral-400">
@@ -83,7 +83,7 @@
         </div>
 
         <div class="border-t border-neutral-800 pt-8 text-center text-sm text-neutral-500">
-            © {{ date('Y') }} {{ $settings->company_name ?? 'مسك' }}. {{ __('messages.rights_reserved') }}.
+            © {{ date('Y') }} {{ $settings->company_name ?? 'مسك' }}. {{ __('app.rights_reserved') }}.
         </div>
     </div>
 </footer>

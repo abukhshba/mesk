@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('messages.contact') . ' | ' . ($settings->company_name ?? ''))
+@section('title', __('app.contact') . ' | ' . ($settings->company_name ?? ''))
 
 @section('content')
 <!-- Page Header -->
@@ -8,13 +8,13 @@
     <div class="page-header-grid"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-3">
-            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('messages.home') }}</a>
+            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
             <span class="text-primary-600/40">/</span>
-            <span class="text-primary-600">{{ __('messages.contact') }}</span>
+            <span class="text-primary-600">{{ __('app.contact') }}</span>
         </nav>
         <div class="accent-line mb-3"></div>
-        <h1 class="text-3xl sm:text-4xl font-black text-primary-950 leading-tight">{{ __('messages.contact_title') }}</h1>
-        <p class="mt-4 text-primary-800/70 text-base font-light">{{ __('messages.contact_subtitle') }}</p>
+        <h1 class="text-3xl sm:text-4xl font-black text-primary-950 leading-tight">{{ __('app.contact_title') }}</h1>
+        <p class="mt-4 text-primary-800/70 text-base font-light">{{ __('app.contact_subtitle') }}</p>
     </div>
 </div>
 
@@ -25,7 +25,7 @@
             <!-- Contact Info -->
             <div class="space-y-4">
                 <div class="accent-line mb-6"></div>
-                <h2 class="text-2xl font-black text-neutral-900 mb-6">{{ __('messages.contact_title') }}</h2>
+                <h2 class="text-2xl font-black text-neutral-900 mb-6">{{ __('app.contact_title') }}</h2>
 
                 @if(!empty($settings->phone))
                 <div class="flex items-center gap-4 p-5 bg-neutral-50 rounded-2xl border border-neutral-100 hover:border-neutral-200 transition-colors">
@@ -33,7 +33,7 @@
                         <svg class="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                     </div>
                     <div>
-                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('messages.call_us') }}</div>
+                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('app.call_us') }}</div>
                         <a href="tel:{{ $settings->phone }}" class="text-neutral-900 font-bold hover:text-primary-600 transition-colors">{{ $settings->phone }}</a>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <svg class="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
                     <div>
-                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('messages.email_us') }}</div>
+                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('app.email_us') }}</div>
                         <a href="mailto:{{ $settings->email }}" class="text-neutral-900 font-bold hover:text-primary-600 transition-colors">{{ $settings->email }}</a>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <svg class="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     </div>
                     <div>
-                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('messages.our_location') }}</div>
+                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wide">{{ __('app.our_location') }}</div>
                         <p class="text-neutral-900 font-medium text-sm mt-0.5">{{ $settings->address }}</p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div>
                         <div class="text-xs text-white/40 font-semibold uppercase tracking-wide">WhatsApp</div>
-                        <div class="text-white font-bold text-sm">{{ __('messages.whatsapp_cta_button') }}</div>
+                        <div class="text-white font-bold text-sm">{{ __('app.whatsapp_cta_button') }}</div>
                     </div>
                 </a>
                 @endif
@@ -87,43 +87,43 @@
                 @endif
 
                 <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-8">
-                    <h3 class="text-xl font-bold text-neutral-900 mb-6">{{ __('messages.send_message') }}</h3>
+                    <h3 class="text-xl font-bold text-neutral-900 mb-6">{{ __('app.send_message') }}</h3>
                     <form action="{{ route('contact.store') }}" method="POST" class="space-y-5">
                         @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
-                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('messages.your_name') }} <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('app.your_name') }} <span class="text-red-500">*</span></label>
                                 <input type="text" name="name" value="{{ old('name') }}" required
                                        class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 bg-neutral-50 text-sm @error('name') border-red-400 @enderror">
                                 @error('name')<p class="mt-1 text-red-500 text-xs">{{ $message }}</p>@enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('messages.your_phone') }}</label>
+                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('app.your_phone') }}</label>
                                 <input type="tel" name="phone" value="{{ old('phone') }}"
                                        class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 text-sm">
                             </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
-                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('messages.your_email') }}</label>
+                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('app.your_email') }}</label>
                                 <input type="email" name="email" value="{{ old('email') }}"
                                        class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 text-sm">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('messages.subject') }}</label>
+                                <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('app.subject') }}</label>
                                 <input type="text" name="subject" value="{{ old('subject') }}"
                                        class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 text-sm">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('messages.your_message') }} <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-medium text-neutral-700 mb-1.5">{{ __('app.your_message') }} <span class="text-red-500">*</span></label>
                             <textarea name="message" rows="5" required
                                       class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-300 bg-neutral-50 text-sm resize-none @error('message') border-red-400 @enderror">{{ old('message') }}</textarea>
                             @error('message')<p class="mt-1 text-red-500 text-xs">{{ $message }}</p>@enderror
                         </div>
                         <button type="submit"
                                 class="w-full py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-bold rounded-xl transition-all duration-200 text-sm tracking-wide">
-                            {{ __('messages.send_message') }}
+                            {{ __('app.send_message') }}
                         </button>
                     </form>
                 </div>

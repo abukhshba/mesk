@@ -26,7 +26,7 @@ class ChildrenRelationManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return __('Child Categories');
+        return __('app.child_categories');
     }
 
     public function form(Schema $schema): Schema
@@ -40,29 +40,29 @@ class ChildrenRelationManager extends RelationManager
                     ->disk('public')
                     ->columnSpanFull(),
                 TextInput::make('name_ar')
-                    ->label(__('Name (Arabic)'))
+                    ->label(__('app.name_ar'))
                     ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
                 TextInput::make('name_en')
-                    ->label(__('Name (English)'))
+                    ->label(__('app.name_en'))
                     ->required(),
                 TextInput::make('slug')
-                    ->label(__('Slug'))
+                    ->label(__('app.slug'))
                     ->required()
                     ->unique('categories', 'slug', ignoreRecord: true)
                     ->columnSpanFull(),
                 Textarea::make('description.ar')
-                    ->label(__('Description (Arabic)'))
+                    ->label(__('app.description_ar'))
                     ->rows(2),
                 Textarea::make('description.en')
-                    ->label(__('Description (English)'))
+                    ->label(__('app.description_en'))
                     ->rows(2),
                 Toggle::make('is_active')
-                    ->label(__('Active'))
+                    ->label(__('app.is_active'))
                     ->default(true),
                 TextInput::make('sort_order')
-                    ->label(__('Sort Order'))
+                    ->label(__('app.order'))
                     ->numeric()
                     ->default(0),
             ]);
@@ -75,20 +75,20 @@ class ChildrenRelationManager extends RelationManager
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('image')
-                    ->label(__('Image'))
+                    ->label(__('app.image'))
                     ->circular(),
                 TextColumn::make('name_ar')
-                    ->label(__('Name (AR)'))
+                    ->label(__('app.name_ar'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name_en')
-                    ->label(__('Name (EN)'))
+                    ->label(__('app.name_en'))
                     ->searchable()
                     ->toggleable(),
                 ToggleColumn::make('is_active')
-                    ->label(__('Active')),
+                    ->label(__('app.is_active')),
                 TextColumn::make('sort_order')
-                    ->label(__('Sort Order'))
+                    ->label(__('app.order'))
                     ->numeric()
                     ->sortable(),
             ])

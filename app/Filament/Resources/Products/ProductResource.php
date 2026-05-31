@@ -24,17 +24,17 @@ class ProductResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Catalog');
+        return __('app.catalog');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Product');
+        return __('app.product');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Products');
+        return __('app.products');
     }
 
     public static function form(Schema $schema): Schema

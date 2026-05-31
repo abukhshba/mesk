@@ -15,11 +15,11 @@ class AboutUsTable
         return $table
             ->columns([
                 TextColumn::make('title_ar')
-                    ->label(__('Title (AR)'))
+                    ->label(__('app.title_ar'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('title_en')
-                    ->label(__('Title (EN)'))
+                    ->label(__('app.title_en'))
                     ->searchable()
                     ->sortable(),
             ])

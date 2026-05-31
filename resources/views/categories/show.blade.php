@@ -13,9 +13,9 @@
     <div class="page-header-grid"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-3">
-            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('messages.home') }}</a>
+            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
             <span class="text-primary-600/40">/</span>
-            <a href="{{ route('categories.index') }}" class="hover:text-primary-600 transition-colors">{{ __('messages.categories') }}</a>
+            <a href="{{ route('categories.index') }}" class="hover:text-primary-600 transition-colors">{{ __('app.categories') }}</a>
             <span class="text-primary-600/40">/</span>
             <span class="text-primary-600">{{ $category->getTranslation('name', app()->getLocale()) }}</span>
         </nav>
@@ -53,7 +53,7 @@
         <div class="mt-8 text-center">
             <a href="{{ route('products.index') }}?category={{ $category->id }}"
                class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors">
-                {{ __('messages.view_all') }} {{ __('messages.products') }}
+                {{ __('app.view_all') }} {{ __('app.products') }}
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
         </div>

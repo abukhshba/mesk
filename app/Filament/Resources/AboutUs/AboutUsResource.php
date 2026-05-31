@@ -24,17 +24,17 @@ class AboutUsResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Content');
+        return __('app.content');
     }
 
     public static function getModelLabel(): string
     {
-        return __('About Us');
+        return __('app.about');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('About Us');
+        return __('app.about');
     }
 
     public static function form(Schema $schema): Schema

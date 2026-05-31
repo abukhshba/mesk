@@ -24,17 +24,17 @@ class WebsiteSettingResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('System');
+        return __('app.system');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Website Setting');
+        return __('app.website_setting');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Website Settings');
+        return __('app.website_settings');
     }
 
     public static function form(Schema $schema): Schema

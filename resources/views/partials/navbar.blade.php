@@ -49,11 +49,11 @@
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('home') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('messages.home') }}</a>
-                    <a href="{{ route('categories.index') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('categories.*') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('messages.categories') }}</a>
-                    <a href="{{ route('products.index') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('products.*') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('messages.products') }}</a>
-                    <a href="{{ route('about') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('about') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('messages.about') }}</a>
-                    <a href="{{ route('contact') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('contact') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('messages.contact') }}</a>
+                    <a href="{{ route('home') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('home') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('app.home') }}</a>
+                    <a href="{{ route('categories.index') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('categories.*') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('app.categories') }}</a>
+                    <a href="{{ route('products.index') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('products.*') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('app.products') }}</a>
+                    <a href="{{ route('about') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('about') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('app.about') }}</a>
+                    <a href="{{ route('contact') }}" class="text-sm font-bold uppercase tracking-wider transition-colors duration-300 {{ request()->routeIs('contact') ? 'text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">{{ __('app.contact') }}</a>
                 </nav>
 
                 <!-- Actions -->
@@ -75,8 +75,11 @@
 
                     <!-- Mobile Menu Button -->
                     <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
@@ -86,11 +89,11 @@
         <!-- Mobile Navigation Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-100 bg-white">
             <div class="px-4 py-3 space-y-1 shadow-inner">
-                <a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('home') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('messages.home') }}</a>
-                <a href="{{ route('categories.index') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('categories.*') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('messages.categories') }}</a>
-                <a href="{{ route('products.index') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('products.*') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('messages.products') }}</a>
-                <a href="{{ route('about') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('about') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('messages.about') }}</a>
-                <a href="{{ route('contact') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('messages.contact') }}</a>
+                <a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('home') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('app.home') }}</a>
+                <a href="{{ route('categories.index') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('categories.*') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('app.categories') }}</a>
+                <a href="{{ route('products.index') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('products.*') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('app.products') }}</a>
+                <a href="{{ route('about') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('about') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('app.about') }}</a>
+                <a href="{{ route('contact') }}" class="block px-4 py-3 rounded-xl text-base font-bold transition-all {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600' }}">{{ __('app.contact') }}</a>
             </div>
         </div>
     </div>
@@ -105,10 +108,14 @@
         const navContainer = document.getElementById('nav-container');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
 
         // Mobile Toggle
         mobileMenuBtn?.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
+            iconMenu?.classList.toggle('hidden');
+            iconClose?.classList.toggle('hidden');
         });
 
         // Scroll Effect (Shadow toggle only)

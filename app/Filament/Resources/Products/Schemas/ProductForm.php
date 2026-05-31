@@ -21,20 +21,20 @@ class ProductForm
     {
         return $schema
             ->components([
-                Section::make(__('Product Images'))
+                Section::make(__('app.product_images'))
                     ->icon(Heroicon::OutlinedPhoto)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('main_image')
-                            ->label(__('Main Image'))
+                            ->label(__('app.main_image'))
                             ->collection('main_image')
                             ->image()
                             ->imageResizeMode('cover')
                             ->disk('public')
                             ->visibility('public'),
                         SpatieMediaLibraryFileUpload::make('gallery')
-                            ->label(__('Gallery Images'))
+                            ->label(__('app.gallery_images'))
                             ->collection('gallery')
                             ->image()
                             ->multiple()
@@ -43,21 +43,21 @@ class ProductForm
                             ->visibility('public'),
                     ]),
 
-                Section::make(__('Product Info'))
+                Section::make(__('app.product_info'))
                     ->icon(Heroicon::OutlinedLanguage)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
                         TextInput::make('name_ar')
-                            ->label(__('Name (Arabic)'))
+                            ->label(__('app.name_ar'))
                             ->required()
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
                         TextInput::make('name_en')
-                            ->label(__('Name (English)'))
+                            ->label(__('app.name_en'))
                             ->required(),
                         TextInput::make('slug')
-                            ->label(__('Slug'))
+                            ->label(__('app.slug'))
                             ->required()
                             ->unique(
                                 table: 'products',
@@ -67,7 +67,7 @@ class ProductForm
                             )
                             ->columnSpanFull(),
                         Select::make('category_id')
-                            ->label(__('Category'))
+                            ->label(__('app.category'))
                             ->options(function () {
                                 $locale = app()->getLocale();
                                 $options = [];
@@ -89,44 +89,44 @@ class ProductForm
                             ->required()
                             ->searchable(),
                         Textarea::make('short_description_ar')
-                            ->label(__('Short Description (AR)'))->rows(2),
+                            ->label(__('app.short_description_ar'))->rows(2),
                         Textarea::make('short_description_en')
-                            ->label(__('Short Description (EN)'))->rows(2),
+                            ->label(__('app.short_description_en'))->rows(2),
                     ]),
 
-                Section::make(__('Full Description'))
+                Section::make(__('app.full_description'))
                     ->icon(Heroicon::OutlinedDocumentText)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
-                        RichEditor::make('description_ar')->label(__('Description (Arabic)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
-                        RichEditor::make('description_en')->label(__('Description (English)'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
+                        RichEditor::make('description_ar')->label(__('app.description_ar'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
+                        RichEditor::make('description_en')->label(__('app.description_en'))->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
                     ]),
 
-                Section::make(__('Properties & Benefits'))
+                Section::make(__('app.properties_benefits'))
                     ->icon(Heroicon::OutlinedSparkles)
-                    ->description(__('The properties, features, and benefits of this product'))
+                    ->description(__('app.properties_benefits_hint'))
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
                         RichEditor::make('properties_ar')
-                            ->label(__('Properties & Benefits (Arabic)'))
+                            ->label(__('app.properties_benefits_ar'))
                             ->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
                         RichEditor::make('properties_en')
-                            ->label(__('Properties & Benefits (English)'))
+                            ->label(__('app.properties_benefits_en'))
                             ->toolbarButtons(['bold', 'bulletList', 'orderedList', 'redo', 'undo']),
                     ]),
 
-                Section::make(__('Directions & Application Rates'))
+                Section::make(__('app.directions_application_rates'))
                     ->icon(Heroicon::OutlinedTableCells)
-                    ->description(__('Define how this product should be applied. Choose text for simple directions, or table for crop-specific rates.'))
+                    ->description(__('app.directions_hint'))
                     ->columnSpanFull()
                     ->schema([
                         Select::make('application_rates_type')
-                            ->label(__('Display Format'))
+                            ->label(__('app.display_format'))
                             ->options([
-                                'text' => __('Simple Text Description'),
-                                'table' => __('Structured Table (Crops × Rates)'),
+                                'text' => __('app.simple_text'),
+                                'table' => __('app.structured_table'),
                             ])
                             ->default('text')
                             ->required()
@@ -135,85 +135,85 @@ class ProductForm
 
                         // --- TEXT MODE ---
                         Textarea::make('application_rates_text_ar')
-                            ->label(__('Directions Text (Arabic)'))
+                            ->label(__('app.directions_text_ar'))
                             ->rows(4)
                             ->visible(fn ($get) => $get('application_rates_type') === 'text'),
                         Textarea::make('application_rates_text_en')
-                            ->label(__('Directions Text (English)'))
+                            ->label(__('app.directions_text_en'))
                             ->rows(4)
                             ->visible(fn ($get) => $get('application_rates_type') === 'text'),
 
                         // --- TABLE MODE ---
                         Toggle::make('application_rates_has_notes')
-                            ->label(__('Include Notes Column'))
-                            ->helperText(__('Enable to add a notes/remarks column to the application rates table'))
+                            ->label(__('app.include_notes'))
+                            ->helperText(__('app.include_notes_hint'))
                             ->visible(fn ($get) => $get('application_rates_type') === 'table')
                             ->live()
                             ->columnSpanFull(),
 
                         Repeater::make('application_rates_rows')
-                            ->label(__('Application Rates Table'))
+                            ->label(__('app.application_rates_table'))
                             ->schema([
                                 TextInput::make('crop_ar')
-                                    ->label(__('Crop (Arabic)'))
+                                    ->label(__('app.crop_ar'))
                                     ->required(),
                                 TextInput::make('crop_en')
-                                    ->label(__('Crop (English)'))
+                                    ->label(__('app.crop_en'))
                                     ->required(),
                                 TextInput::make('rate_ar')
-                                    ->label(__('Rate (Arabic)'))
+                                    ->label(__('app.rate_ar'))
                                     ->required(),
                                 TextInput::make('rate_en')
-                                    ->label(__('Rate (English)'))
+                                    ->label(__('app.rate_en'))
                                     ->required(),
                                 TextInput::make('notes_ar')
-                                    ->label(__('Notes (Arabic)'))
+                                    ->label(__('app.notes_ar'))
                                     ->visible(fn ($get) => $get('../../application_rates_has_notes')),
                                 TextInput::make('notes_en')
-                                    ->label(__('Notes (English)'))
+                                    ->label(__('app.notes_en'))
                                     ->visible(fn ($get) => $get('../../application_rates_has_notes')),
                             ])
                             ->columns(2)
                             ->defaultItems(1)
-                            ->addActionLabel(__('Add Crop Row'))
+                            ->addActionLabel(__('app.add_crop_row'))
                             ->reorderable()
                             ->collapsible()
                             ->visible(fn ($get) => $get('application_rates_type') === 'table')
                             ->columnSpanFull(),
 
                         Textarea::make('application_rates_footer_ar')
-                            ->label(__('Footer Note (Arabic)'))
-                            ->helperText(__('e.g. For foliar spray: 2–3 kg / 1000 liters of water / hectare'))
+                            ->label(__('app.footer_note_ar'))
+                            ->helperText(__('app.footer_note_hint'))
                             ->rows(2)
                             ->visible(fn ($get) => $get('application_rates_type') === 'table'),
                         Textarea::make('application_rates_footer_en')
-                            ->label(__('Footer Note (English)'))
+                            ->label(__('app.footer_note_en'))
                             ->rows(2)
                             ->visible(fn ($get) => $get('application_rates_type') === 'table'),
                     ])
                     ->columns(2),
 
-                Section::make(__('Specifications'))
+                Section::make(__('app.specifications'))
                     ->icon(Heroicon::OutlinedBeaker)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
-                        TextInput::make('active_ingredient')->label(__('Active Ingredient')),
-                        TextInput::make('application_rate')->label(__('Application Rate (Legacy)')),
-                        TextInput::make('package_sizes_ar')->label(__('Package Sizes (Arabic)'))->placeholder('1 كجم, 10 كجم, 25 كجم'),
-                        TextInput::make('package_sizes_en')->label(__('Package Sizes (English)'))->placeholder('1 kg, 10 kg, 25 kg'),
-                        Textarea::make('usage_instructions')->label(__('Usage Instructions'))->rows(3),
-                        Textarea::make('safety_precautions')->label(__('Safety Precautions'))->rows(3),
+                        TextInput::make('active_ingredient')->label(__('app.active_ingredient')),
+                        TextInput::make('application_rate')->label(__('app.application_rate_legacy')),
+                        TextInput::make('package_sizes_ar')->label(__('app.package_sizes_ar'))->placeholder('1 كجم, 10 كجم, 25 كجم'),
+                        TextInput::make('package_sizes_en')->label(__('app.package_sizes_en'))->placeholder('1 kg, 10 kg, 25 kg'),
+                        Textarea::make('usage_instructions')->label(__('app.usage_instructions'))->rows(3),
+                        Textarea::make('safety_precautions')->label(__('app.safety_precautions'))->rows(3),
                     ]),
 
-                Section::make(__('Settings'))
+                Section::make(__('app.settings'))
                     ->icon(Heroicon::OutlinedCog6Tooth)
                     ->columns(3)
                     ->columnSpanFull()
                     ->schema([
-                        Toggle::make('is_featured')->label(__('Featured'))->default(false),
-                        Toggle::make('is_active')->label(__('Active'))->default(true),
-                        TextInput::make('sort_order')->label(__('Sort Order'))->numeric()->default(0),
+                        Toggle::make('is_featured')->label(__('app.is_featured'))->default(false),
+                        Toggle::make('is_active')->label(__('app.is_active'))->default(true),
+                        TextInput::make('sort_order')->label(__('app.order'))->numeric()->default(0),
                     ]),
             ]);
     }

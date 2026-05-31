@@ -27,35 +27,35 @@
     </div>
 
     <!-- Info -->
-    <div class="p-4">
+    <div class="p-3 sm:p-4">
         @if($product->category)
-        <span class="text-xs font-medium text-primary-600 uppercase tracking-wide">
+        <span class="text-[10px] sm:text-xs font-medium text-primary-600 uppercase tracking-wide">
             {{ $product->category->getTranslation('name', app()->getLocale()) }}
         </span>
         @endif
 
-        <h3 class="mt-1 font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors line-clamp-2">
+        <h3 class="mt-1 font-semibold text-sm sm:text-base text-neutral-900 group-hover:text-primary-700 transition-colors line-clamp-2">
             {{ $product->getTranslation('name', app()->getLocale()) }}
         </h3>
 
         @if($product->getTranslation('short_description', app()->getLocale()))
-        <p class="mt-1 text-sm text-neutral-500 line-clamp-2">
+        <p class="hidden sm:block mt-1 text-xs sm:text-sm text-neutral-500 line-clamp-2">
             {{ $product->getTranslation('short_description', app()->getLocale()) }}
         </p>
         @endif
 
         @if($product->active_ingredient)
-        <div class="mt-3 flex items-center gap-1.5">
+        <div class="mt-2 sm:mt-3 flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5 text-primary-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
-            <span class="text-xs text-neutral-500">{{ $product->active_ingredient }}</span>
+            <span class="text-[10px] sm:text-xs text-neutral-500 line-clamp-1">{{ $product->active_ingredient }}</span>
         </div>
         @endif
 
-        <div class="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
-            <span class="text-xs text-primary-600 font-bold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                {{ __('messages.product_details') }}
+        <div class="mt-3 sm:mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
+            <span class="text-[10px] sm:text-xs text-primary-600 font-bold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                {{ __('app.product_details') }}
                 <svg class="w-3 h-3 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </span>
         </div>

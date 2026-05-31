@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', $settings->company_name ?? 'مسك للمبيدات والأسمدة')</title>
-    <meta name="description" content="@yield('description', __('messages.hero_subtitle'))">
+    <meta name="description" content="@yield('description', __('app.hero_subtitle'))">
 
     <!-- Favicon -->
     @if(!empty($settings->favicon))

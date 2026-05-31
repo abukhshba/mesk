@@ -27,24 +27,24 @@ class CategoriesTable
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('image')
-                    ->label(__('Image'))
+                    ->label(__('app.image'))
                     ->circular()
                     ->defaultImageUrl(fn () => asset('images/placeholder.png')),
                 TextColumn::make('name_ar')
-                    ->label(__('Name (AR)'))
+                    ->label(__('app.name_ar'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name_en')
-                    ->label(__('Name (EN)'))
+                    ->label(__('app.name_en'))
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->label(__('Slug'))
+                    ->label(__('app.slug'))
                     ->searchable()
                     ->toggleable(),
                 ToggleColumn::make('is_active')
-                    ->label(__('Active')),
+                    ->label(__('app.is_active')),
                 TextColumn::make('sort_order')
-                    ->label(__('Sort Order'))
+                    ->label(__('app.order'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -53,7 +53,7 @@ class CategoriesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TernaryFilter::make('is_active')->label(__('Active')),
+                TernaryFilter::make('is_active')->label(__('app.is_active')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

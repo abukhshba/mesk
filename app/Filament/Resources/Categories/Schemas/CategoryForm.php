@@ -17,23 +17,23 @@ class CategoryForm
     {
         return $schema
             ->components([
-                Section::make(__('Category Details'))
+                Section::make(__('app.category_details'))
                     ->icon(Heroicon::OutlinedLanguage)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
                         TextInput::make('name_ar')
-                            ->label(__('Name (Arabic)'))
+                            ->label(__('app.name_ar'))
                             ->required()
                             ->live(onBlur: true),
                         TextInput::make('name_en')
-                            ->label(__('Name (English)'))
+                            ->label(__('app.name_en'))
                             ->required()
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
 
                         TextInput::make('slug')
-                            ->label(__('Slug'))
+                            ->label(__('app.slug'))
                             ->required()
                             ->unique(
                                 table: 'categories',
@@ -43,28 +43,28 @@ class CategoryForm
                             )
                             ->columnSpanFull(),
                         Textarea::make('description_ar')
-                            ->label(__('Description (Arabic)'))
+                            ->label(__('app.description_ar'))
                             ->rows(3),
                         Textarea::make('description_en')
-                            ->label(__('Description (English)'))
+                            ->label(__('app.description_en'))
                             ->rows(3),
                     ]),
 
-                Section::make(__('Settings'))
+                Section::make(__('app.settings'))
                     ->icon(Heroicon::OutlinedCog6Tooth)
                     ->columns(2)
                     ->columnSpanFull()
                     ->schema([
                         Toggle::make('is_active')
-                            ->label(__('Active'))
+                            ->label(__('app.is_active'))
                             ->default(true),
                         TextInput::make('sort_order')
-                            ->label(__('Sort Order'))
+                            ->label(__('app.order'))
                             ->numeric()
                             ->default(0),
                     ]),
 
-                Section::make(__('Category Image'))
+                Section::make(__('app.category_image'))
                     ->icon(Heroicon::OutlinedPhoto)
                     ->columnSpanFull()
                     ->schema([
