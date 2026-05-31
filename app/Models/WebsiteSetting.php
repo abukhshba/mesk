@@ -12,7 +12,8 @@ class WebsiteSetting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_name',
+        'company_name_ar',
+        'company_name_en',
         'logo',
         'favicon',
         'email',
@@ -25,10 +26,16 @@ class WebsiteSetting extends Model
         'linkedin',
     ];
 
+    public function getCompanyNameAttribute(): ?string
+    {
+        return app()->getLocale() === 'ar' ? $this->company_name_ar : $this->company_name_en;
+    }
+
     public static function getSettings(): self
     {
         return static::firstOrCreate([], [
-            'company_name' => 'مسك للمبيدات والأسمدة',
+            'company_name_ar' => 'شركة المسك للصناعة',
+            'company_name_en' => 'ALMISK COMPANY FOR INDUSTRY',
         ]);
     }
 }

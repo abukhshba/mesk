@@ -1,6 +1,6 @@
-@props(['category'])
-<a href="{{ route('categories.show', $category->slug) }}"
-   class="group relative block rounded-2xl overflow-hidden aspect-[4/3] bg-neutral-100 hover:shadow-xl transition-all duration-500">
+@props(['category', 'showDescription' => true, 'href' => null])
+<a href="{{ $href ?? route('categories.show', $category->slug) }}"
+   class="group relative block rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] bg-neutral-100 hover:shadow-xl transition-all duration-500">
 
     <!-- Background image or gradient -->
     @if($category->hasMedia('image'))
@@ -18,23 +18,17 @@
     @endif
 
     <!-- Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-neutral-900/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-neutral-900/40 group-hover:bg-neutral-900/50 transition-colors duration-500"></div>
 
     <!-- Content -->
-    <div class="absolute inset-0 flex flex-col justify-end p-5">
-        <h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary-300 transition-colors">
+    <div class="absolute inset-0 flex flex-col items-center justify-center p-3 sm:p-5 text-center">
+        <h3 class="text-white font-bold text-base sm:text-lg lg:text-xl leading-tight group-hover:text-primary-300 transition-colors">
             {{ $category->getTranslation('name', app()->getLocale()) }}
         </h3>
-        @if($category->getTranslation('description', app()->getLocale()))
-        <p class="mt-1 text-white/70 text-sm line-clamp-2">
+        @if($showDescription && $category->getTranslation('description', app()->getLocale()))
+        <p class="mt-1.5 text-white/80 text-xs sm:text-sm line-clamp-2 max-w-[220px]">
             {{ $category->getTranslation('description', app()->getLocale()) }}
         </p>
         @endif
-        <div class="mt-3 flex items-center gap-1.5 text-primary-300 text-sm font-medium">
-            <span>{{ __('messages.view_all') }}</span>
-            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 {{ app()->getLocale() === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-        </div>
     </div>
 </a>

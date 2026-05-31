@@ -25,17 +25,17 @@ class CategoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Catalog');
+        return __('app.catalog');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Category');
+        return __('app.category');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Categories');
+        return __('app.categories');
     }
 
     public static function form(Schema $schema): Schema

@@ -24,19 +24,19 @@ class ContactMessagesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label(__('Name'))
+                    ->label(__('app.name'))
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label(__('Phone'))
+                    ->label(__('app.phone'))
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label(__('Email address'))
+                    ->label(__('app.email_address'))
                     ->searchable(),
                 TextColumn::make('subject')
-                    ->label(__('Subject'))
+                    ->label(__('app.subject'))
                     ->searchable(),
                 IconColumn::make('is_read')
-                    ->label(__('Read'))
+                    ->label(__('app.is_read'))
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -48,7 +48,7 @@ class ContactMessagesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TernaryFilter::make('is_read')->label(__('Read')),
+                TernaryFilter::make('is_read')->label(__('app.is_read')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

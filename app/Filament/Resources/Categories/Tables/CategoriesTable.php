@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
+use App\Models\Category;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -22,27 +23,28 @@ class CategoriesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->query(Category::query()->whereNull('parent_id'))
             ->columns([
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('image')
-                    ->label(__('Image'))
+                    ->label(__('app.image'))
                     ->circular()
                     ->defaultImageUrl(fn () => asset('images/placeholder.png')),
-                TextColumn::make('name.ar')
-                    ->label(__('Name (AR)'))
+                TextColumn::make('name_ar')
+                    ->label(__('app.name_ar'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('name.en')
-                    ->label(__('Name (EN)'))
+                TextColumn::make('name_en')
+                    ->label(__('app.name_en'))
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->label(__('Slug'))
+                    ->label(__('app.slug'))
                     ->searchable()
                     ->toggleable(),
                 ToggleColumn::make('is_active')
-                    ->label(__('Active')),
+                    ->label(__('app.is_active')),
                 TextColumn::make('sort_order')
-                    ->label(__('Sort Order'))
+                    ->label(__('app.order'))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -51,7 +53,7 @@ class CategoriesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TernaryFilter::make('is_active')->label(__('Active')),
+                TernaryFilter::make('is_active')->label(__('app.is_active')),
                 TrashedFilter::make(),
             ])
             ->recordActions([

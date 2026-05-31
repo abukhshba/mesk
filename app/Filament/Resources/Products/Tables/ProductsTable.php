@@ -27,36 +27,36 @@ class ProductsTable
             ->columns([
                 SpatieMediaLibraryImageColumn::make('main_image')
                     ->collection('main_image')
-                    ->label(__('Image'))
+                    ->label(__('app.image'))
                     ->circular(),
                 TextColumn::make('name_ar')
-                    ->label(__('Name (AR)'))
+                    ->label(__('app.name_ar'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name_en')
-                    ->label(__('Name (EN)'))
+                    ->label(__('app.name_en'))
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('category.name')
-                    ->label(__('Category'))
+                    ->label(__('app.category'))
                     ->formatStateUsing(fn ($state) => is_array($state) ? ($state['ar'] ?? '') : $state)
                     ->sortable(),
                 TextColumn::make('active_ingredient')
-                    ->label(__('Active Ingredient'))
+                    ->label(__('app.active_ingredient'))
                     ->searchable()
                     ->toggleable(),
                 IconColumn::make('is_featured')
-                    ->label(__('Featured'))
+                    ->label(__('app.is_featured'))
                     ->boolean(),
-                ToggleColumn::make('is_active')->label(__('Active')),
-                TextColumn::make('sort_order')->label(__('Sort Order'))->numeric()->sortable(),
+                ToggleColumn::make('is_active')->label(__('app.is_active')),
+                TextColumn::make('sort_order')->label(__('app.order'))->numeric()->sortable(),
                 TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TernaryFilter::make('is_active')->label(__('Active')),
-                TernaryFilter::make('is_featured')->label(__('Featured')),
+                TernaryFilter::make('is_active')->label(__('app.is_active')),
+                TernaryFilter::make('is_featured')->label(__('app.is_featured')),
                 SelectFilter::make('category_id')
-                    ->label(__('Category'))
+                    ->label(__('app.category'))
                     ->relationship('category', 'name')
                     ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', 'ar')),
                 TrashedFilter::make(),

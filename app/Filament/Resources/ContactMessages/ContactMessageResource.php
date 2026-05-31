@@ -24,17 +24,17 @@ class ContactMessageResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Content');
+        return __('app.content');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Contact Message');
+        return __('app.contact_message');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Contact Messages');
+        return __('app.contact_messages');
     }
 
     protected static ?string $navigationBadge = null;

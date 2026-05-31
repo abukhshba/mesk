@@ -14,22 +14,22 @@ class ContactMessageForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label(__('Name'))
+                    ->label(__('app.name'))
                     ->required(),
                 TextInput::make('phone')
-                    ->label(__('Phone'))
+                    ->label(__('app.phone'))
                     ->tel(),
                 TextInput::make('email')
-                    ->label(__('Email address'))
+                    ->label(__('app.email_address'))
                     ->email(),
                 TextInput::make('subject')
-                    ->label(__('Subject')),
+                    ->label(__('app.subject')),
                 Textarea::make('message')
-                    ->label(__('Message'))
+                    ->label(__('app.message'))
                     ->required()
                     ->columnSpanFull(),
                 Toggle::make('is_read')
-                    ->label(__('Read'))
+                    ->label(__('app.is_read'))
                     ->required(),
             ]);
     }

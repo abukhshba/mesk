@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('website_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name')->nullable();
+            $table->string('company_name_ar')->nullable();
+            $table->string('company_name_en')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
             $table->string('email')->nullable();

@@ -14,35 +14,38 @@ class WebsiteSettingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('company_name')
-                    ->label(__('Company Name'))
+                TextColumn::make('company_name_ar')
+                    ->label(__('app.company_name_ar'))
+                    ->searchable(),
+                TextColumn::make('company_name_en')
+                    ->label(__('app.company_name_en'))
                     ->searchable(),
                 TextColumn::make('logo')
-                    ->label(__('Logo'))
+                    ->label(__('app.logo'))
                     ->searchable(),
                 TextColumn::make('favicon')
-                    ->label(__('Favicon'))
+                    ->label(__('app.favicon'))
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label(__('Email'))
+                    ->label(__('app.email'))
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label(__('Phone'))
+                    ->label(__('app.phone'))
                     ->searchable(),
                 TextColumn::make('whatsapp')
-                    ->label(__('WhatsApp Number'))
+                    ->label(__('app.whatsapp_number'))
                     ->searchable(),
                 TextColumn::make('facebook')
-                    ->label(__('Facebook URL'))
+                    ->label(__('app.facebook_url'))
                     ->searchable(),
                 TextColumn::make('instagram')
-                    ->label(__('Instagram URL'))
+                    ->label(__('app.instagram_url'))
                     ->searchable(),
                 TextColumn::make('twitter')
-                    ->label(__('Twitter / X URL'))
+                    ->label(__('app.twitter_url'))
                     ->searchable(),
                 TextColumn::make('linkedin')
-                    ->label(__('LinkedIn URL'))
+                    ->label(__('app.linkedin_url'))
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

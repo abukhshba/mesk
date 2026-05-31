@@ -12,8 +12,9 @@ class WebsiteSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        WebsiteSetting::firstOrCreate([], [
-            'company_name' => 'مسك للمبيدات والأسمدة',
+        WebsiteSetting::updateOrCreate(['id' => 1], [
+            'company_name_ar' => 'شركة المسك للصناعة',
+            'company_name_en' => 'ALMISK COMPANY FOR INDUSTRY',
             'email' => 'info@mesk.sa',
             'phone' => '+966500000000',
             'whatsapp' => '966500000000',
