@@ -71,16 +71,11 @@ class ProductForm
                             ->options(function () {
                                 $locale = app()->getLocale();
                                 $options = [];
-                                $parents = Category::parents()->active()->with('children')->get();
+                                $parents = Category::parents()->active()->with(['children' => fn ($query) => $query->active()])->get();
                                 foreach ($parents as $parent) {
                                     $parentName = $parent->getTranslation('name', $locale);
-                                    if ($parent->children->isEmpty()) {
-                                        $options[$parent->id] = $parentName;
-                                    } else {
-                                        $options[$parent->id] = $parentName;
-                                        foreach ($parent->children as $child) {
-                                            $options[$child->id] = '— '.$child->getTranslation('name', $locale);
-                                        }
+                                    foreach ($parent->children as $child) {
+                                        $options[$child->id] = $parentName.' - '.$child->getTranslation('name', $locale);
                                     }
                                 }
 
