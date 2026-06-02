@@ -74,15 +74,7 @@
                     {{ app()->getLocale() === 'ar' ? 'اتصل بنا' : 'Contact Us' }}
                 </h4>
                 <ul class="space-y-4 text-sm text-neutral-400">
-                    <!-- Address -->
-                    <li class="flex items-start gap-3">
-                        <svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span class="leading-relaxed whitespace-pre-line">
-                            {{ !empty($settings->address) ? $settings->address : (app()->getLocale() === 'ar' ? 'المدينة الصناعية الثانية، الدمام ٣٤٣٢٦، المملكة العربية السعودية' : '2nd Industrial City, Dammam 34326, Saudi Arabia') }}
-                        </span>
-                    </li>
+                    
 
                     <!-- Phone -->
                     @if(!empty($settings->phone))
@@ -103,6 +95,16 @@
                         <a href="mailto:{{ $settings->email }}" class="hover:text-primary-400 transition-colors font-semibold">{{ $settings->email }}</a>
                     </li>
                     @endif
+
+                    <!-- Address -->
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span class="leading-relaxed">
+                            {{ !empty($settings->address) ? $settings->address : (app()->getLocale() === 'ar' ? 'المدينة الصناعية الثانية، الدمام ٣٤٣٢٦، المملكة العربية السعودية' : '2nd Industrial City, Dammam 34326, Saudi Arabia') }}
+                        </span>
+                    </li>
                 </ul>
 
             </div>

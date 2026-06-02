@@ -2,18 +2,26 @@
     $navCategories = \App\Models\Category::active()->parents()->orderBy('sort_order')->get();
 @endphp
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm transition-all duration-300" id="main-header">
+<style>
+    @media (min-width: 1024px) {
+        #main-header {
+            position: relative !important;
+            box-shadow: none !important;
+        }
+    }
+</style>
+<header class="sticky top-0 z-50 w-full bg-white shadow-sm transition-all duration-300" id="main-header">
     <!-- Main Navigation Bar -->
     <div class="bg-white border-b border-neutral-100">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-            <div class="flex items-center justify-between h-20 transition-all duration-300" id="nav-container">
+            <div class="flex items-center justify-between h-24 sm:h-28 transition-all duration-300" id="nav-container">
                 
                 <!-- Brand / Logo -->
                 <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
                     @if(!empty($settings->logo))
-                        <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105">
+                        <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-16 sm:h-20 lg:h-24 w-auto transition-transform group-hover:scale-105">
                     @else
-                        <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="AlMisk" class="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105">
+                        <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="AlMisk" class="h-16 sm:h-20 lg:h-24 w-auto transition-transform group-hover:scale-105">
                     @endif
                 </a>
 
@@ -114,8 +122,7 @@
     </div>
 </header>
 
-<!-- Spacer -->
-<div class="h-20"></div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
