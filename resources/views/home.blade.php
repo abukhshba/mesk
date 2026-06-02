@@ -14,7 +14,9 @@
 
         <!-- Hero Image Frame -->
         <div class="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-2xl border-[8px] border-white max-w-7xl mx-auto z-10">
-            <img src="{{ asset('images/hero2.jpg') }}" alt="Feeding a growing world" class="w-full h-full object-cover">
+            <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                <source src="{{ asset('images/vid3.mp4') }}" type="video/mp4">
+            </video>
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
@@ -67,10 +69,10 @@
 </section>
 
 {{-- SECTION 2: PARALLAX DRONE SPRAYING BANNER --}}
-<section class="relative py-32 sm:py-48 overflow-hidden bg-neutral-900">
+<section class="relative flex items-center justify-center overflow-hidden bg-neutral-900" style="min-height: 600px;">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/hero3.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-50">
+        <img src="{{ asset('images/tractor-working-green-field.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-50">
         <div class="absolute inset-0 bg-emerald-950/20 mix-blend-overlay"></div>
     </div>
 
@@ -90,7 +92,7 @@
 <section class="py-20 bg-white">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- Grid of Dynamic Categories -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 mb-16">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-16">
             @foreach($categories as $category)
                 @php
                     $cardHref = ($categoriesDisplayMode === 'children' && $singleParent)
@@ -191,200 +193,12 @@
 </section>
 @endif
 
-{{-- SECTION 5: PREMIUM CORPORATE BRANDS --}}
-<section class="relative bg-white border-t border-b border-neutral-100 overflow-hidden py-10 logo-ticker-section">
-    <style>
-        @keyframes scroll-logos-ltr {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        @keyframes scroll-logos-rtl {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(50%);
-            }
-        }
-        
-        .logo-ticker-track {
-            display: flex;
-            width: max-content;
-            animation: scroll-logos-ltr 28s linear infinite;
-        }
-
-        /* If Arabic/RTL, reverse scroll direction for natural text flow */
-        html[dir="rtl"] .logo-ticker-track {
-            animation: scroll-logos-rtl 28s linear infinite;
-        }
-        
-        .logo-ticker-container:hover .logo-ticker-track {
-            animation-play-state: paused;
-        }
-    </style>
-
-    <!-- Fade Overlays for Elegant Entry/Exit -->
-    <div class="absolute inset-y-0 left-0 w-12 sm:w-36 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute inset-y-0 right-0 w-12 sm:w-36 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-
-    <div class="logo-ticker-container max-w-[1440px] mx-auto overflow-hidden whitespace-nowrap relative">
-        <div class="logo-ticker-track flex items-center gap-16 lg:gap-24">
-            
-            <!-- FIRST SET -->
-            <div class="flex items-center gap-16 lg:gap-24 shrink-0">
-                <!-- 1. LIBRO -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <!-- Bull Logo -->
-                    <svg class="w-12 h-12 text-[#AEEA00]" viewBox="0 0 100 100" fill="currentColor">
-                        <path d="M70,40 C65,30 50,25 40,30 C30,35 25,50 30,65 C35,75 50,85 70,75 C75,70 80,60 80,50 C80,45 75,42 70,40 Z" fill="#C5E1A5" />
-                        <path d="M35,35 L40,15 L48,32" stroke="#1B5E20" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <circle cx="60" cy="45" r="5" fill="#1B5E20" />
-                    </svg>
-                    <span class="text-3xl font-black tracking-tight text-[#1B5E20]" style="font-family: 'Outfit', sans-serif;">LIBRO</span>
-                </div>
-
-                <!-- 2. Farmer -->
-                <div class="flex flex-col items-center shrink-0 select-none">
-                    <div class="relative flex items-center justify-center px-6 py-2 border-[3px] border-red-500 rounded-full">
-                        <span class="text-2xl font-black text-[#0D47A1]" style="font-family: 'Inter', sans-serif;">Farmer</span>
-                        <div class="absolute -top-3 right-4 bg-emerald-500 text-white rounded-full px-2 py-0.5 text-[8px] font-black tracking-widest uppercase">NPK</div>
-                    </div>
-                    <span class="text-[9px] font-bold text-emerald-800 tracking-wider mt-1.5 uppercase">Growing Prosperity</span>
-                </div>
-
-                <!-- 3. GranSol -->
-                <div class="flex items-center gap-2.5 shrink-0 select-none">
-                    <!-- Sun / Wave SVG -->
-                    <svg class="w-10 h-10 text-orange-500" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="6" fill="#F57C00" />
-                        <path d="M12,2 L12,4 M12,20 L12,22 M2,12 L4,12 M20,12 L22,12 M5,5 L7,7 M17,17 L19,19 M5,19 L7,17 M17,5 L19,7" stroke="#F57C00" stroke-width="2.5" stroke-linecap="round" />
-                    </svg>
-                    <span class="text-3xl font-black tracking-tight text-[#0D47A1]">Gran<span class="text-orange-500">Sol</span></span>
-                </div>
-
-                <!-- 4. NORUS -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <span class="text-3xl font-black tracking-tight text-[#1565C0] italic" style="font-family: 'Outfit', sans-serif;">NORUS</span>
-                    <!-- Wing / Wave SVG -->
-                    <svg class="w-10 h-10 text-[#1565C0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 12c4-8 15-8 18 0-3 8-14 8-18 0z" />
-                        <path d="M3 12h18" />
-                    </svg>
-                </div>
-
-                <!-- 5. Palm Secrets -->
-                <div class="flex flex-col items-center shrink-0 select-none">
-                    <!-- Palm Tree SVG -->
-                    <svg class="w-10 h-10 text-emerald-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22V10M12 10C9 8 5 9 5 9M12 10C15 8 19 9 19 9M12 10C10 6 7 5 7 5M12 10C14 6 17 5 17 5" stroke-linecap="round" />
-                    </svg>
-                    <span class="text-lg font-black tracking-tight text-emerald-800 -mt-1" style="font-family: 'Cairo', cursive;">Palm Secrets</span>
-                </div>
-
-                <!-- 6. NOVAQUA -->
-                <div class="flex items-center gap-2 shrink-0 select-none">
-                    <!-- Droplet wave SVG -->
-                    <svg class="w-10 h-10 text-cyan-600" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,2 C12,2 6,10 6,14 C6,17.3 8.7,20 12,20 C15.3,20 18,17.3 18,14 C18,10 12,2 12,2 Z" />
-                    </svg>
-                    <span class="text-2xl font-black tracking-tight text-[#006064]" style="font-family: 'Inter', sans-serif;">NOVAQUA</span>
-                </div>
-
-                <!-- 7. OPTIMAL -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <!-- Target Circle SVG -->
-                    <svg class="w-9 h-9 text-[#2E7D32]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <circle cx="12" cy="12" r="9" />
-                        <circle cx="12" cy="12" r="5" />
-                        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-                    </svg>
-                    <div class="text-left rtl:text-right">
-                        <span class="block text-2xl font-black text-neutral-900 tracking-tight leading-none">OPTIMAL</span>
-                        <span class="text-[8px] font-bold text-orange-500 tracking-widest uppercase">Granular NPK</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DUPLICATED SECOND SET FOR INFINITE LOOP TICKER -->
-            <div class="flex items-center gap-16 lg:gap-24 shrink-0" aria-hidden="true">
-                <!-- 1. LIBRO -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <!-- Bull Logo -->
-                    <svg class="w-12 h-12 text-[#AEEA00]" viewBox="0 0 100 100" fill="currentColor">
-                        <path d="M70,40 C65,30 50,25 40,30 C30,35 25,50 30,65 C35,75 50,85 70,75 C75,70 80,60 80,50 C80,45 75,42 70,40 Z" fill="#C5E1A5" />
-                        <path d="M35,35 L40,15 L48,32" stroke="#1B5E20" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <circle cx="60" cy="45" r="5" fill="#1B5E20" />
-                    </svg>
-                    <span class="text-3xl font-black tracking-tight text-[#1B5E20]" style="font-family: 'Outfit', sans-serif;">LIBRO</span>
-                </div>
-
-                <!-- 2. Farmer -->
-                <div class="flex flex-col items-center shrink-0 select-none">
-                    <div class="relative flex items-center justify-center px-6 py-2 border-[3px] border-red-500 rounded-full">
-                        <span class="text-2xl font-black text-[#0D47A1]" style="font-family: 'Inter', sans-serif;">Farmer</span>
-                        <div class="absolute -top-3 right-4 bg-emerald-500 text-white rounded-full px-2 py-0.5 text-[8px] font-black tracking-widest uppercase">NPK</div>
-                    </div>
-                    <span class="text-[9px] font-bold text-emerald-800 tracking-wider mt-1.5 uppercase">Growing Prosperity</span>
-                </div>
-
-                <!-- 3. GranSol -->
-                <div class="flex items-center gap-2.5 shrink-0 select-none">
-                    <!-- Sun / Wave SVG -->
-                    <svg class="w-10 h-10 text-orange-500" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="6" fill="#F57C00" />
-                        <path d="M12,2 L12,4 M12,20 L12,22 M2,12 L4,12 M20,12 L22,12 M5,5 L7,7 M17,17 L19,19 M5,19 L7,17 M17,5 L19,7" stroke="#F57C00" stroke-width="2.5" stroke-linecap="round" />
-                    </svg>
-                    <span class="text-3xl font-black tracking-tight text-[#0D47A1]">Gran<span class="text-orange-500">Sol</span></span>
-                </div>
-
-                <!-- 4. NORUS -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <span class="text-3xl font-black tracking-tight text-[#1565C0] italic" style="font-family: 'Outfit', sans-serif;">NORUS</span>
-                    <!-- Wing / Wave SVG -->
-                    <svg class="w-10 h-10 text-[#1565C0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 12c4-8 15-8 18 0-3 8-14 8-18 0z" />
-                        <path d="M3 12h18" />
-                    </svg>
-                </div>
-
-                <!-- 5. Palm Secrets -->
-                <div class="flex flex-col items-center shrink-0 select-none">
-                    <!-- Palm Tree SVG -->
-                    <svg class="w-10 h-10 text-emerald-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22V10M12 10C9 8 5 9 5 9M12 10C15 8 19 9 19 9M12 10C10 6 7 5 7 5M12 10C14 6 17 5 17 5" stroke-linecap="round" />
-                    </svg>
-                    <span class="text-lg font-black tracking-tight text-emerald-800 -mt-1" style="font-family: 'Cairo', cursive;">Palm Secrets</span>
-                </div>
-
-                <!-- 6. NOVAQUA -->
-                <div class="flex items-center gap-2 shrink-0 select-none">
-                    <!-- Droplet wave SVG -->
-                    <svg class="w-10 h-10 text-cyan-600" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,2 C12,2 6,10 6,14 C6,17.3 8.7,20 12,20 C15.3,20 18,17.3 18,14 C18,10 12,2 12,2 Z" />
-                    </svg>
-                    <span class="text-2xl font-black tracking-tight text-[#006064]" style="font-family: 'Inter', sans-serif;">NOVAQUA</span>
-                </div>
-
-                <!-- 7. OPTIMAL -->
-                <div class="flex items-center gap-3 shrink-0 select-none">
-                    <!-- Target Circle SVG -->
-                    <svg class="w-9 h-9 text-[#2E7D32]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <circle cx="12" cy="12" r="9" />
-                        <circle cx="12" cy="12" r="5" />
-                        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-                    </svg>
-                    <div class="text-left rtl:text-right">
-                        <span class="block text-2xl font-black text-neutral-900 tracking-tight leading-none">OPTIMAL</span>
-                        <span class="text-[8px] font-bold text-orange-500 tracking-widest uppercase">Granular NPK</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+{{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS --}}
+<section class="relative bg-white border-t border-b border-neutral-100 py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex justify-center items-center gap-12 sm:gap-24 lg:gap-32 flex-wrap">
+        <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-24 sm:h-32 lg:h-40 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+        <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-24 sm:h-32 lg:h-40 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+        <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-24 sm:h-32 lg:h-40 object-contain hover:scale-105 transition-transform duration-300 drop-shadow-sm">
     </div>
 </section>
 

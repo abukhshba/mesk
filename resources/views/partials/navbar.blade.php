@@ -87,14 +87,6 @@
                         </svg>
                     </a>
 
-                    <!-- Shopping Cart Icon -->
-                    <a href="#" class="p-2 text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-full transition-colors relative" title="{{ app()->getLocale() === 'ar' ? 'السلة' : 'Cart' }}">
-                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                        <span class="absolute top-1 right-1 w-4 h-4 bg-primary-600 text-white text-[9px] font-black rounded-full flex items-center justify-center">0</span>
-                    </a>
-
                     <!-- Mobile Menu Button -->
                     <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300">
                         <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

@@ -43,6 +43,16 @@
                     {{ app()->getLocale() === 'ar' ? 'روابط مفيدة' : 'Useful Links' }}
                 </h4>
                 <ul class="space-y-4 text-sm font-semibold text-neutral-400">
+                    
+                    @foreach(\App\Models\Category::active()->parents()->orderBy('sort_order')->get() as $parentCat)
+                    <li>
+                        <a href="{{ route('categories.show', $parentCat->slug) }}" class="hover:text-primary-400 transition-colors flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                            {{ $parentCat->getTranslation('name', app()->getLocale()) }}
+                        </a>
+                    </li>
+                    @endforeach
+
                     <li>
                         <a href="{{ route('about') }}" class="hover:text-primary-400 transition-colors flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
@@ -50,9 +60,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="hover:text-primary-400 transition-colors flex items-center gap-2">
+                        <a href="{{ route('contact') }}" class="hover:text-primary-400 transition-colors flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                            {{ app()->getLocale() === 'ar' ? 'سياسة الاستبدال والاسترجاع' : 'Return & Exchange Policy' }}
+                            {{ app()->getLocale() === 'ar' ? 'اتصل بنا' : 'Contact Us' }}
                         </a>
                     </li>
                 </ul>
@@ -69,10 +79,8 @@
                         <svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span class="leading-relaxed">
-                            {{ app()->getLocale() === 'ar' 
-                                ? 'المدينة الصناعية الثانية، الدمام ٣٤٣٢٦، المملكة العربية السعودية' 
-                                : '2nd Industrial City, Dammam 34326, Saudi Arabia' }}
+                        <span class="leading-relaxed whitespace-pre-line">
+                            {{ !empty($settings->address) ? $settings->address : (app()->getLocale() === 'ar' ? 'المدينة الصناعية الثانية، الدمام ٣٤٣٢٦، المملكة العربية السعودية' : '2nd Industrial City, Dammam 34326, Saudi Arabia') }}
                         </span>
                     </li>
 
@@ -97,30 +105,6 @@
                     @endif
                 </ul>
 
-                <!-- Google Play & Apple Store Badges -->
-                <div class="flex items-center gap-3 pt-4">
-                    <!-- Google Play Badge -->
-                    <a href="#" class="inline-block hover:scale-105 transition-transform">
-                        <svg class="h-10 w-auto" viewBox="0 0 135 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="135" height="40" rx="6" fill="black"/>
-                            <path d="M20 10V30L34 20L20 10Z" fill="#A4C639"/>
-                            <text x="42" y="18" fill="white" font-size="7" font-family="sans-serif" font-weight="bold">GET IT ON</text>
-                            <text x="42" y="32" fill="white" font-size="12" font-family="sans-serif" font-weight="black">Google Play</text>
-                        </svg>
-                    </a>
-
-                    <!-- App Store Badge -->
-                    <a href="#" class="inline-block hover:scale-105 transition-transform">
-                        <svg class="h-10 w-auto" viewBox="0 0 135 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="135" height="40" rx="6" fill="black"/>
-                            <!-- Apple Icon outline -->
-                            <path d="M22 17C21 17 19.5 18 19.5 19.5C19.5 21.5 21.5 23.5 23 23.5C23.5 23.5 24 23 24 22.5C24 20.5 23 17 22 17Z" fill="white"/>
-                            <path d="M22 15C22.5 13.5 23.5 13.5 23.5 13.5C23.5 13.5 23 14.5 22 15Z" fill="white"/>
-                            <text x="42" y="18" fill="white" font-size="7" font-family="sans-serif" font-weight="bold">Download on the</text>
-                            <text x="42" y="32" fill="white" font-size="12" font-family="sans-serif" font-weight="black">App Store</text>
-                        </svg>
-                    </a>
-                </div>
             </div>
 
         </div>
@@ -139,29 +123,6 @@
                     <span>{{ app()->getLocale() === 'ar' ? 'الرقم الضريبي: ٣٠٠٠٥٢٨٠١٦١٠٠٠٣' : 'VAT registration number: 300052801610003' }}</span>
                     <!-- VAT Green Badge -->
                     <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded text-[10px] font-black">VAT</span>
-                </div>
-            </div>
-
-            <!-- Right: Payment icons SVGs -->
-            <div class="flex items-center gap-3">
-                <!-- Apple Pay -->
-                <div class="bg-white/10 px-3 py-1 rounded-md flex items-center justify-center h-8" title="Apple Pay">
-                    <span class="text-white text-xs font-black tracking-tight" style="font-family: sans-serif;"> Pay</span>
-                </div>
-
-                <!-- Mada -->
-                <div class="bg-white/10 px-3 py-1 rounded-md flex items-center justify-center h-8" title="Mada">
-                    <span class="text-white text-xs font-black tracking-widest uppercase italic" style="font-family: sans-serif;">mada</span>
-                </div>
-
-                <!-- Visa -->
-                <div class="bg-white/10 px-3 py-1 rounded-md flex items-center justify-center h-8" title="Visa">
-                    <span class="text-[#1A1F71] bg-white px-1.5 rounded font-black text-xs italic tracking-wider" style="font-family: sans-serif;">VISA</span>
-                </div>
-
-                <!-- Mastercard -->
-                <div class="bg-white/10 px-3 py-1 rounded-md flex items-center justify-center h-8" title="Mastercard">
-                    <span class="text-white text-xs font-black italic tracking-tighter" style="font-family: sans-serif;">mastercard</span>
                 </div>
             </div>
         </div>
