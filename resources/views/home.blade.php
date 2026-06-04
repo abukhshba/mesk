@@ -223,12 +223,47 @@
 </section>
 @endif
 
-{{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS --}}
-<section class="relative bg-white border-t border-b border-neutral-100 py-8 sm:py-10">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-12 flex justify-center items-center gap-4 sm:gap-24 lg:gap-32 flex-nowrap sm:flex-wrap">
-        <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-20 sm:h-32 lg:h-40 w-auto object-contain shrink min-w-0 hover:scale-105 transition-transform duration-300 drop-shadow-sm">
-        <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-20 sm:h-32 lg:h-40 w-auto object-contain shrink min-w-0 hover:scale-105 transition-transform duration-300 drop-shadow-sm">
-        <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-20 sm:h-32 lg:h-40 w-auto object-contain shrink min-w-0 hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+{{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS (SOIL & VISION LOGOS) --}}
+<section class="relative w-full bg-white overflow-hidden border-t border-b border-neutral-200">
+    
+    <!-- Faint Background Logo (Watermark) -->
+    <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
+        <img src="{{ asset('images/favicon-removebg-preview.png') }}" alt="Watermark" class="w-[150%] sm:w-[120%] lg:w-[100%] max-w-[1800px] object-contain grayscale opacity-[0.10] ltr:translate-x-[15%] rtl:-translate-x-[15%]">
+    </div>
+
+    <!-- Soil Background & Logos Container -->
+    <div class="relative w-full z-20 pt-[60px] sm:pt-[100px] lg:pt-[150px]">
+        
+        <!-- Wrapper to tie Logos strictly to the Soil Image aspect ratio -->
+        <div class="relative w-full">
+            
+            <!-- The Vision Logos (Overlapping the soil) -->
+            <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[10px]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                </div>
+            </div>
+
+            <!-- The Soil Image (Switches on Language) -->
+            <div class="w-full">
+                @if(app()->getLocale() === 'ar')
+                    <img src="{{ asset('images/soil-right-removebg-preview.png') }}" alt="Soil" class="w-full h-auto block">
+                @else
+                    <img src="{{ asset('images/soil-left-removebg-preview.png') }}" alt="Soil" class="w-full h-auto block">
+                @endif
+            </div>
+
+            <!-- Certification Text Over Soil -->
+            <div class="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full z-30 pointer-events-none text-center px-4">
+                <p class="text-white/90 text-[10px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية.' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark.' }}
+                </p>
+            </div>
+
+        </div>
+        
     </div>
 </section>
 
