@@ -9,7 +9,7 @@
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
         <!-- Hero Text -->
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-            {{ app()->getLocale() === 'ar' ? 'تغذية عالم متنامٍ' : 'Feeding a growing world' }}
+            {{ app()->getLocale() === 'ar' ? 'تغذية عالم متزايد' : 'Feeding a growing world' }}
         </h1>
 
         <!-- Hero Image Frame -->

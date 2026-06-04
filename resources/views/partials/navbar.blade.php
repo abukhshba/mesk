@@ -14,19 +14,29 @@
     <!-- Main Navigation Bar -->
     <div class="bg-white border-b border-neutral-100">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-            <div class="flex items-center justify-between h-24 sm:h-28 transition-all duration-300" id="nav-container">
+            <div class="flex items-center justify-between h-28 sm:h-32 xl:h-28 transition-all duration-300 w-full relative" id="nav-container">
                 
-                <!-- Brand / Logo -->
-                <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300 z-10 order-1 xl:order-none">
+                    <svg id="icon-menu" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <!-- Brand / Logo (Absolute Center on Mobile, Static Start on Desktop) -->
+                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:left-auto flex items-center gap-2 group z-20 xl:order-1">
                     @if(!empty($settings->logo))
-                        <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-16 sm:h-20 lg:h-24 w-auto transition-transform group-hover:scale-105">
+                        <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-24 sm:h-28 lg:h-32 xl:h-28 w-auto transition-transform group-hover:scale-105 drop-shadow-sm">
                     @else
-                        <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="AlMisk" class="h-16 sm:h-20 lg:h-24 w-auto transition-transform group-hover:scale-105">
+                        <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="AlMisk" class="h-24 sm:h-28 lg:h-32 xl:h-28 w-auto transition-transform group-hover:scale-105 drop-shadow-sm">
                     @endif
                 </a>
 
                 <!-- Desktop Menu -->
-                <nav class="hidden xl:flex items-center gap-6 xl:gap-8 mx-auto font-medium text-neutral-700 text-sm">
+                <nav class="hidden xl:flex items-center gap-6 xl:gap-8 mx-auto font-medium text-neutral-700 text-sm z-10 xl:order-2">
                     <!-- Homepage -->
                     <a href="{{ route('home') }}" class="py-2 hover:text-primary-600 transition-colors {{ request()->routeIs('home') ? 'text-primary-600 font-bold' : '' }}">
                         {{ app()->getLocale() === 'ar' ? 'الرئيسية' : 'Homepage' }}
@@ -72,8 +82,8 @@
                     </a>
                 </nav>
 
-                <!-- Actions (Locale, Search, User, Cart) -->
-                <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <!-- End Group: Actions (Locale, Search) -->
+                <div class="flex items-center gap-2 sm:gap-4 shrink-0 z-10 order-2 xl:order-3">
                     <!-- Locale Switcher -->
                     @if(app()->getLocale() === 'ar')
                         <a href="{{ route('locale.switch', 'en') }}" class="px-2.5 py-1 text-sm font-bold text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-lg transition-colors">EN</a>
@@ -83,27 +93,10 @@
 
                     <!-- Search Icon -->
                     <a href="{{ route('products.index') }}" class="p-2 text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-full transition-colors" title="{{ app()->getLocale() === 'ar' ? 'بحث' : 'Search' }}">
-                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </a>
-
-                    <!-- User Profile Icon -->
-                    <a href="/admin" class="p-2 text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-full transition-colors" title="{{ app()->getLocale() === 'ar' ? 'حسابي' : 'My Account' }}">
-                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </a>
-
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300">
-                        <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
