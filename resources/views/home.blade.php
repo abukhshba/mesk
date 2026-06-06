@@ -238,11 +238,11 @@
         <div class="relative w-full">
             
             <!-- The Vision Logos (Overlapping the soil) -->
-            <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[10px]">
+            <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
-                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-16 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
                 </div>
             </div>
 
@@ -257,7 +257,7 @@
 
             <!-- Certification Text Over Soil -->
             <div class="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full z-30 pointer-events-none text-center px-4">
-                <p class="text-white/90 text-[10px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                <p class="text-white/90 text-[7px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                     {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية.' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark.' }}
                 </p>
             </div>
