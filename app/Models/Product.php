@@ -22,6 +22,8 @@ class Product extends Model implements HasMedia
         'category_id',
         'name_ar',
         'name_en',
+        'sub_title_ar',
+        'sub_title_en',
         'slug',
         'short_description_ar',
         'short_description_en',
@@ -55,6 +57,11 @@ class Product extends Model implements HasMedia
     public function getNameAttribute(): string
     {
         return $this->getTranslation('name', app()->getLocale()) ?? '';
+    }
+
+    public function getSubTitleAttribute(): ?string
+    {
+        return $this->getTranslation('sub_title', app()->getLocale());
     }
 
     public function getShortDescriptionAttribute(): ?string

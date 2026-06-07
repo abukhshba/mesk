@@ -38,6 +38,12 @@
             {{ $product->getTranslation('name', app()->getLocale()) }}
         </h3>
 
+        @if($product->getTranslation('sub_title', app()->getLocale()))
+        <p class="mt-0.5 text-[10px] sm:text-xs font-semibold text-primary-600 line-clamp-1">
+            {{ $product->getTranslation('sub_title', app()->getLocale()) }}
+        </p>
+        @endif
+
         @if($product->getTranslation('short_description', app()->getLocale()))
         <p class="hidden sm:block mt-1 text-xs sm:text-sm text-neutral-500 line-clamp-2">
             {{ $product->getTranslation('short_description', app()->getLocale()) }}

@@ -70,6 +70,8 @@ return [
     'product' => 'منتج',
     'name_ar' => 'الاسم (عربي)',
     'name_en' => 'الاسم (إنجليزي)',
+    'sub_title_ar' => 'العنوان الفرعي (عربي)',
+    'sub_title_en' => 'العنوان الفرعي (إنجليزي)',
     'description_ar' => 'الوصف (عربي)',
     'description_en' => 'الوصف (إنجليزي)',
     'short_description_ar' => 'الوصف القصير (عربي)',

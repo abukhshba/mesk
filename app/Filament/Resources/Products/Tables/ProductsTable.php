@@ -37,6 +37,9 @@ class ProductsTable
                     ->label(__('app.name_en'))
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('sub_title_ar')
+                    ->label(__('app.sub_title_ar'))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('category.name')
                     ->label(__('app.category'))
                     ->formatStateUsing(fn ($state) => is_array($state) ? ($state['ar'] ?? '') : $state)

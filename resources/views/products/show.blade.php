@@ -129,6 +129,12 @@
                 {{ $product->getTranslation('name', app()->getLocale()) }}
             </h1>
 
+            @if($product->getTranslation('sub_title', app()->getLocale()))
+            <p class="mt-1 text-base font-semibold text-primary-600 tracking-wide">
+                {{ $product->getTranslation('sub_title', app()->getLocale()) }}
+            </p>
+            @endif
+
             @if($product->getTranslation('short_description', app()->getLocale()))
             <p class="mt-4 text-neutral-600 leading-relaxed text-lg">
                 {{ $product->getTranslation('short_description', app()->getLocale()) }}

@@ -161,8 +161,8 @@ class ProductSeeder extends Seeder
             // ── 1. MISK - PREMIER 20-20-20 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - بريمير 20-20-20',
-                'name_en' => 'MISK - PREMIER 20-20-20',
+                'name_ar' => 'مسك - بريمير',
+                'name_en' => 'MISK - PREMIER',
                 'active_ingredient' => '20 - 20 - 20',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -182,8 +182,8 @@ class ProductSeeder extends Seeder
             // ── 2. MISK - PREMIER 40-0-4 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - بريمير 40-0-4',
-                'name_en' => 'MISK - PREMIER 40-0-4',
+                'name_ar' => 'مسك - بريمير',
+                'name_en' => 'MISK - PREMIER',
                 'active_ingredient' => '40 - 0 - 4',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -232,8 +232,8 @@ class ProductSeeder extends Seeder
             // ── 4. MISK 0-0-50+1% MgO+18% S ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-0-50+1% MgO+18% S',
-                'name_en' => 'MISK 0-0-50+1% MgO+18% S',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '0 - 0 - 50 + 1% MgO + 18% S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -261,8 +261,8 @@ class ProductSeeder extends Seeder
             // ── 5. MISK 0-52-34+1% MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-52-34+1% MgO',
-                'name_en' => 'MISK 0-52-34+1% MgO',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '0 - 52 - 34 + 1% MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -289,8 +289,8 @@ class ProductSeeder extends Seeder
             // ── 6. MISK 12-60-0+1MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 12-60-0+1MgO',
-                'name_en' => 'MISK 12-60-0+1MgO',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '12 - 60 - 0 + 1MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -317,8 +317,8 @@ class ProductSeeder extends Seeder
             // ── 7. MISK 21 N + 1MgO + 24 S ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 21 N + 1MgO + 24 S',
-                'name_en' => 'MISK 21 N + 1MgO + 24 S',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '21 N + 1MgO + 24 S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -345,8 +345,8 @@ class ProductSeeder extends Seeder
             // ── 8. Amino Green 50% ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'أمينو جرين 50%',
-                'name_en' => 'Amino Green 50%',
+                'name_ar' => 'أمينو جرين',
+                'name_en' => 'Amino Green',
                 'active_ingredient' => 'PLANT AMINO ACID 50% - NITROGEN 16%',
                 'package_sizes_en' => '1 kg, 10 kg, 20 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 20 كجم, 50 كجم',
@@ -428,8 +428,8 @@ class ProductSeeder extends Seeder
             // ── 1. MISK - GREEN FARM 12-12-17 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 12-12-17',
-                'name_en' => 'MISK - GREEN FARM 12-12-17',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '12 - 12 - 17',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -449,8 +449,8 @@ class ProductSeeder extends Seeder
             // ── 2. MISK - GREEN FARM 18-18-5 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 18-18-5',
-                'name_en' => 'MISK - GREEN FARM 18-18-5',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '18 - 18 - 5',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -470,8 +470,8 @@ class ProductSeeder extends Seeder
             // ── 3. MISK - GREEN FARM 15-15-15+4%MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 15-15-15+4%MgO',
-                'name_en' => 'MISK - GREEN FARM 15-15-15+4%MgO',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '15 - 15 - 15 + 4% MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -491,8 +491,8 @@ class ProductSeeder extends Seeder
             // ── 4. MISK 0-0-50+1%MgO+18%S (Granular) ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-0-50+1%MgO+18%S (محبب)',
-                'name_en' => 'MISK 0-0-50+1%MgO+18%S (Granular)',
+                'name_ar' => 'مسك (محبب)',
+                'name_en' => 'MISK (Granular)',
                 'active_ingredient' => '0 - 0 - 50 + 1% MgO + 18% S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
@@ -607,8 +607,8 @@ class ProductSeeder extends Seeder
             // ── 4. PhosphoGreen 85% ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'فوسفوجرين 85%',
-                'name_en' => 'PhosphoGreen 85%',
+                'name_ar' => 'فوسفوجرين',
+                'name_en' => 'PhosphoGreen',
                 'active_ingredient' => 'Phosphogreen 85%',
                 'package_sizes_en' => '1 L, 5 L, 20 L',
                 'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
@@ -644,8 +644,8 @@ class ProductSeeder extends Seeder
             // ── 1. NUTRIVA 25-25-18 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'نوتريفا 25-25-18',
-                'name_en' => 'NUTRIVA 25-25-18',
+                'name_ar' => 'نوتريفا',
+                'name_en' => 'NUTRIVA',
                 'active_ingredient' => '25 - 25 - 18',
                 'package_sizes_en' => '20 kg',
                 'package_sizes_ar' => '20 كجم',
@@ -673,8 +673,8 @@ class ProductSeeder extends Seeder
             // ── 2. NUTRIVA 0-52-34 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'نوتريفا 0-52-34',
-                'name_en' => 'NUTRIVA 0-52-34',
+                'name_ar' => 'نوتريفا',
+                'name_en' => 'NUTRIVA',
                 'active_ingredient' => '0 - 52 - 34',
                 'package_sizes_en' => '20 kg',
                 'package_sizes_ar' => '20 كجم',

@@ -70,6 +70,8 @@ return [
     'product' => 'Product',
     'name_ar' => 'Name (Arabic)',
     'name_en' => 'Name (English)',
+    'sub_title_ar' => 'Sub Title (Arabic)',
+    'sub_title_en' => 'Sub Title (English)',
     'description_ar' => 'Description (Arabic)',
     'description_en' => 'Description (English)',
     'short_description_ar' => 'Short Description (Arabic)',
