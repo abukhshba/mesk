@@ -4,7 +4,7 @@
 @section('description', Str::limit(strip_tags($product->getTranslation('short_description', app()->getLocale())), 160))
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
 
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm text-neutral-500 mb-8 flex-wrap">
@@ -13,7 +13,7 @@
         <a href="{{ route('products.index') }}" class="hover:text-primary-600 transition-colors">{{ __('app.products') }}</a>
         @if($product->category)
         <span>/</span>
-        <a href="{{ route('categories.show', $product->category->slug) }}" class="hover:text-primary-600 transition-colors">
+        <a href="{{ route('categories.subcategory', [$product->category->parent->slug, $product->category->slug]) }}" class="hover:text-primary-600 transition-colors">
             {{ $product->category->getTranslation('name', app()->getLocale()) }}
         </a>
         @endif
@@ -24,69 +24,97 @@
     
     @php
         $locale = app()->getLocale();
-        $hasProperties = $product->getTranslation('properties', $locale);
-        $hasDescription = $product->getTranslation('description', $locale);
+        $propertiesText = $product->getTranslation('properties', $locale);
+        $hasProperties = !empty($propertiesText) && !empty(trim(strip_tags($propertiesText)));
+
+        $descText = $product->getTranslation('description', $locale);
+        $hasDescription = !empty($descText) && !empty(trim(strip_tags($descText)));
+
+        $appRatesText = $product->getTranslation('application_rates_text', $locale);
         $hasApplicationRates = $product->application_rates_type === 'table'
             ? !empty($product->application_rates_rows)
-            : ($product->getTranslation('application_rates_text', $locale));
-        $hasUsageInstructions = $product->usage_instructions;
-        $hasSafetyPrecautions = $product->safety_precautions;
+            : (!empty($appRatesText) && !empty(trim(strip_tags($appRatesText))));
+
+        $hasUsageInstructions = !empty($product->usage_instructions) && !empty(trim(strip_tags($product->usage_instructions)));
+        $hasSafetyPrecautions = !empty($product->safety_precautions) && !empty(trim(strip_tags($product->safety_precautions)));
     @endphp
 
     <!-- Product Top Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16">
 
         <!-- Gallery -->
-        <div>
+        <div class="lg:col-span-7 flex flex-row gap-4 sm:gap-6 items-center">
             @php
-                $mainImage = $product->getFirstMediaUrl('main_image');
-                $gallery = $product->getMedia('gallery');
-                $allImages = collect();
-                if ($mainImage) $allImages->push($mainImage);
-                foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
+                $packageSizes = $locale === 'ar' 
+                    ? ($product->package_sizes_ar ?: $product->package_sizes_en) 
+                    : ($product->package_sizes_en ?: $product->package_sizes_ar);
             @endphp
-
-
-            @if($allImages->count() > 0)
-            <!-- Main Swiper -->
-            <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-square">
-                <div class="swiper-wrapper">
-                    @foreach($allImages as $imgUrl)
-                    <div class="swiper-slide">
-                        <img src="{{ $imgUrl }}" alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
-                             class="w-full h-full object-cover">
+            @if($packageSizes)
+            <div class="flex flex-col gap-2 sm:gap-3 shrink-0">
+                @php
+                    $sizesArray = array_filter(array_map('trim', explode(',', $packageSizes)));
+                    $totalSizes = count($sizesArray);
+                @endphp
+                @foreach($sizesArray as $index => $size)
+                    @php
+                        $opacityPct = 40 + round(($index / max(1, $totalSizes - 1)) * 60);
+                    @endphp
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[10px] sm:text-sm font-black text-white shadow-sm transition-transform duration-300 hover:scale-105" 
+                         style="background-color: rgba(19, 117, 71, {{ $opacityPct / 100 }}); font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                        {{ $size }}
                     </div>
-                    @endforeach
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-
-            @if($allImages->count() > 1)
-            <!-- Thumbs Swiper -->
-            <div class="swiper product-thumb-swiper mt-3">
-                <div class="swiper-wrapper">
-                    @foreach($allImages as $imgUrl)
-                    <div class="swiper-slide cursor-pointer rounded-xl overflow-hidden aspect-square bg-neutral-100 border-2 border-transparent hover:border-primary-400 transition-colors">
-                        <img src="{{ $imgUrl }}" class="w-full h-full object-cover">
-                    </div>
-                    @endforeach
-                </div>
+                @endforeach
             </div>
             @endif
 
-            @else
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
-                <svg class="w-24 h-24 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                </svg>
+            <div class="flex-1 min-w-0">
+                @php
+                    $gallery = $product->getMedia('gallery');
+                    $allImages = collect();
+                    foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
+                @endphp
+
+                @if($allImages->count() > 0)
+                <!-- Main Swiper -->
+                <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-[4/3]">
+                    <div class="swiper-wrapper">
+                        @foreach($allImages as $imgUrl)
+                        <div class="swiper-slide flex items-center justify-center">
+                            <img src="{{ $imgUrl }}" alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
+                                 class="max-w-full max-h-full object-contain">
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                @if($allImages->count() > 1)
+                <!-- Thumbs Swiper -->
+                <div class="swiper product-thumb-swiper mt-3">
+                    <div class="swiper-wrapper">
+                        @foreach($allImages as $imgUrl)
+                        <div class="swiper-slide cursor-pointer rounded-xl overflow-hidden aspect-square bg-neutral-50 border-2 border-transparent hover:border-primary-400 transition-colors flex items-center justify-center p-2">
+                            <img src="{{ $imgUrl }}" class="max-w-full max-h-full object-contain">
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
+                @else
+                <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                @endif
             </div>
-            @endif
         </div>
 
         <!-- Product Info -->
-        <div class="flex flex-col">
+        <div class="lg:col-span-5 flex flex-col">
             @if($product->category)
             <span class="inline-flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-3 py-1 rounded-full w-fit">
                 @if($product->category->parent)
@@ -108,42 +136,12 @@
             @endif
 
             <!-- Quick Specs -->
-            @if($product->active_ingredient || $product->package_sizes || $product->application_rate)
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {{-- @if($product->active_ingredient)
-                <div class="bg-neutral-50 rounded-xl p-4">
-                    <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.active_ingredient') }}</div>
-                    <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->active_ingredient }}</div>
-                </div>
-                @endif --}}
-                @if($product->application_rate)
-                <div class="bg-neutral-50 rounded-xl p-4">
+            @if($product->application_rate)
+            <div class="mt-6 grid grid-cols-1 gap-4">
+                <div class="bg-neutral-50 rounded-xl p-4 border border-neutral-100">
                     <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.application_rate') }}</div>
                     <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->application_rate }}</div>
                 </div>
-                @endif
-                @php
-                    $packageSizes = $locale === 'ar' 
-                        ? ($product->package_sizes_ar ?: $product->package_sizes_en) 
-                        : ($product->package_sizes_en ?: $product->package_sizes_ar);
-                @endphp
-                @if($packageSizes)
-                <div class="bg-neutral-50 rounded-xl p-4 sm:col-span-2 border border-neutral-100">
-                    <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                        {{ __('app.package_sizes') }}
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        @foreach(array_map('trim', explode(',', $packageSizes)) as $size)
-                            @if(!empty($size))
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm sm:text-base hover:shadow-lg hover:shadow-green-500/40 transition-shadow duration-300">
-                                {{ $size }}
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-                @endif
             </div>
             @endif
 
@@ -166,7 +164,7 @@
                             </h2>
                         </div>
                         <div class="text-neutral-700 leading-relaxed prose max-w-none text-sm sm:text-base">
-                            {!! $hasProperties !!}
+                            {!! $propertiesText !!}
                         </div>
                     </div>
                 </div>
@@ -207,7 +205,7 @@
                 </h2>
             </div>
 
-            <div class="px-6 py-4 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
+            <div class="px-4 py-4 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
                 @if($product->application_rates_type === 'table' && !empty($product->application_rates_rows))
                     {{-- ═══ TABLE MODE ═══ --}}
                     <div class="overflow-x-auto -mx-2">
@@ -230,14 +228,14 @@
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
                                 <tr class="{{ $i % 2 === 0 ? 'bg-neutral-50/70' : 'bg-white' }} hover:bg-primary-50/50 transition-colors">
-                                    <td class="py-3 px-4 font-semibold text-neutral-800">
+                                    <td class="py-3 px-2 sm:px-4 font-semibold text-neutral-800">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>
-                                    <td class="py-3 px-4 text-neutral-600">
+                                    <td class="py-3 px-3 text-neutral-600">
                                         {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
                                     </td>
                                     @if($product->application_rates_has_notes)
-                                    <td class="py-3 px-4 text-neutral-500 text-xs leading-relaxed">
+                                    <td class="py-3 px-2 sm:px-4 text-neutral-500 text-xs leading-relaxed">
                                         {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
                                     </td>
                                     @endif
@@ -320,7 +318,7 @@
     @if($relatedProducts->count())
     <div>
         <h2 class="text-2xl font-bold text-neutral-900 mb-8">{{ __('app.related_products') }}</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             @foreach($relatedProducts as $related)
                 <x-product-card :product="$related"/>
             @endforeach

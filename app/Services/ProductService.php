@@ -91,6 +91,7 @@ class ProductService
     public function getActiveCategories(): Collection
     {
         return Category::active()
+            ->whereNotNull('parent_id')
             ->with(['media'])
             ->orderBy('sort_order')
             ->get();

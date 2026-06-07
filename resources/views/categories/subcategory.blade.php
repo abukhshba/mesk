@@ -29,7 +29,7 @@
                     <x-product-card :product="$product"/>
                 @endforeach
             </div>
-            <div class="mt-12">{{ $products->links() }}</div>
+            <div class="mt-12">{{ $products->links('vendor.pagination.tailwind') }}</div>
         @else
             <div class="text-center py-20">
                 <p class="text-neutral-500 text-lg">{{ __('app.no_products') }}</p>

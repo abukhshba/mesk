@@ -20,6 +20,7 @@ class WebsiteSetting extends Model
         'phone',
         'whatsapp',
         'address',
+        'google_maps_link',
         'facebook',
         'instagram',
         'twitter',

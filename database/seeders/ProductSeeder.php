@@ -16,32 +16,38 @@ class ProductSeeder extends Seeder
     {
         Product::query()->forceDelete();
 
-        $soluble = Category::where('slug', 'soluble-fertilizer')->first();
+        $soluble = Category::where('slug', 'soluble-fertilizer')
+            ->orWhere('slug', 'alasmd-althoab')
+            ->orWhere('name_en', 'Soluble Fertilizer')
+            ->first();
 
-        if (! $soluble) {
-            return;
-        }
+        if ($soluble) {
+            $products = $this->solubleProducts($soluble->id);
 
-        $products = $this->solubleProducts($soluble->id);
+            foreach ($products as $k => $data) {
+                $product = Product::create(array_merge($data, [
+                    'slug' => Str::slug($data['name_en']).'-'.$soluble->id.'-'.$k,
+                    'is_active' => true,
+                    'is_featured' => $k === 0,
+                    'sort_order' => $k,
+                ]));
 
-        foreach ($products as $k => $data) {
-            $product = Product::create(array_merge($data, [
-                'slug' => Str::slug($data['name_en']).'-'.$soluble->id.'-'.$k,
-                'is_active' => true,
-                'is_featured' => $k === 0,
-                'sort_order' => $k,
-            ]));
-
-            $imageName = 'product_fertilizer_bag.png';
-            $imagePath = public_path('images/'.$imageName);
-            if (file_exists($imagePath)) {
-                $product->addMedia($imagePath)
-                    ->preservingOriginal()
-                    ->toMediaCollection('main_image');
+                $imageName = 'product_fertilizer_bag.png';
+                $imagePath = public_path('images/'.$imageName);
+                if (file_exists($imagePath)) {
+                    $product->addMedia($imagePath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('main_image');
+                    $product->addMedia($imagePath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('gallery');
+                }
             }
         }
 
-        $granular = Category::where('slug', 'granular-fertilizer')->first();
+        $granular = Category::where('slug', 'granular-fertilizer')
+            ->orWhere('name_en', 'Granular Fertilizer')
+            ->first();
 
         if ($granular) {
             $granularProducts = $this->granularProducts($granular->id);
@@ -63,11 +69,16 @@ class ProductSeeder extends Seeder
                     $product->addMedia($imagePath)
                         ->preservingOriginal()
                         ->toMediaCollection('main_image');
+                    $product->addMedia($imagePath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('gallery');
                 }
             }
         }
 
-        $liquid = Category::where('slug', 'liquid-fertilizer')->first();
+        $liquid = Category::where('slug', 'liquid-fertilizer')
+            ->orWhere('name_en', 'Liquid Fertilizer')
+            ->first();
 
         if ($liquid) {
             $liquidProducts = $this->liquidProducts($liquid->id);
@@ -89,11 +100,16 @@ class ProductSeeder extends Seeder
                     $product->addMedia($imagePath)
                         ->preservingOriginal()
                         ->toMediaCollection('main_image');
+                    $product->addMedia($imagePath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('gallery');
                 }
             }
         }
 
-        $suspension = Category::where('slug', 'suspension-fertilizers')->first();
+        $suspension = Category::where('slug', 'suspension-fertilizers')
+            ->orWhere('name_en', 'Suspension Fertilizers')
+            ->first();
 
         if ($suspension) {
             $suspensionProducts = $this->suspensionProducts($suspension->id);
@@ -118,6 +134,9 @@ class ProductSeeder extends Seeder
                     $product->addMedia($imagePath)
                         ->preservingOriginal()
                         ->toMediaCollection('main_image');
+                    $product->addMedia($imagePath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('gallery');
                 }
             }
         }
@@ -196,8 +215,8 @@ class ProductSeeder extends Seeder
                 'application_rates_type' => 'table',
                 'application_rates_has_notes' => true,
                 'application_rates_rows' => [
-                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three payments are given at the beginning of the emergence of the ears of grain.'],
-                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three payments are given per season after harvest.'],
+                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three irrigation cycles are required from the beginning of the ear of grain.'],
+                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three irrigation cycles are given per season after harvest.'],
                     ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف مرحلة تطور الثمار', 'notes_en' => 'Fruit development stage added.'],
                     ['crop_ar' => 'البطاطس', 'crop_en' => 'Potato', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'يعطى بعد تحضين البطاطس', 'notes_en' => 'It is given after the potatoes have been incubated.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تعطى مرة واحدة اسبوعيا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a week during the fruit development stage.'],
@@ -225,14 +244,13 @@ class ProductSeeder extends Seeder
                 'application_rates_type' => 'table',
                 'application_rates_has_notes' => true,
                 'application_rates_rows' => [
-                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three payments are given at the beginning of the emergence of the ears of grain.'],
-                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three payments are given per season after harvest.'],
+                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three irrigation cycles are required from the beginning of the ear of grain.'],
+                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three irrigation cycles are given per season after harvest.'],
                     ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف مرحلة تطور الثمار', 'notes_en' => 'Fruit development stage added.'],
                     ['crop_ar' => 'البطاطس', 'crop_en' => 'Potato', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'يعطى بعد تحضين البطاطس', 'notes_en' => 'It is given after the potatoes have been incubated.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تعطى مرة واحدة اسبوعيا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a week during the fruit development stage.'],
                     ['crop_ar' => 'أشجار الفاكهة', 'crop_en' => 'Fruit trees', 'rate_ar' => '6 - 8 لتر/هكتار', 'rate_en' => '6 – 8 liters/hectare', 'notes_ar' => 'تعطى مرة واحدة شهريا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a month during the fruit development stage.'],
-                    ['crop_ar' => 'النخيل', 'crop_en' => 'Palm', 'rate_ar' => '5 - 8 لتر/هكتار', 'rate_en' => '5 – 8 liters/hectare', 'notes_ar' => '', 'notes_en' => ''],
-                    ['crop_ar' => 'نباتات الزينة والمسطحات الخضراء', 'crop_en' => 'Ornamental plants and turfgrass', 'rate_ar' => '3 - 4 لتر/هكتار', 'rate_en' => '3 – 4 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Add as needed or once every two months.'],
+                    ['crop_ar' => 'النخيل', 'crop_en' => 'Palm', 'rate_ar' => '5 - 8 لتر/هكتار', 'rate_en' => '5 – 8 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Add as needed or once every two months.'],
                 ],
                 'application_rates_footer_ar' => 'للرش الورقي: 2-3 كجم / 1000 لتر ماء / هكتار',
                 'application_rates_footer_en' => 'For foliar spray: 2–3 kg / 1000 liters of water / hectare',
@@ -257,7 +275,7 @@ class ProductSeeder extends Seeder
                 'application_rates_rows' => [
                     ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى بعد الزراعة بداية التفريع', 'notes_en' => 'Apply after planting at the beginning of tillering.'],
                     ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى بعد الحصاد بأسبوع', 'notes_en' => 'Apply one week after harvest.'],
-                    ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '6 - 7 لتر/هكتار', 'rate_en' => '6 – 7 liters/hectare', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
+                    ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
                     ['crop_ar' => 'أشجار الفاكهة والنخيل', 'crop_en' => 'Fruit trees and palm trees', 'rate_ar' => '6 - 8 لتر/هكتار', 'rate_en' => '6 – 8 liters/hectare', 'notes_ar' => 'تعطى دفعتين خلال التزهار والعقد', 'notes_en' => 'Apply in two doses during flowering and fruit set.'],
                     ['crop_ar' => 'نباتات الزينة والمسطحات الخضراء', 'crop_en' => 'Ornamental plants and turfgrass', 'rate_ar' => '3 - 4 لتر/هكتار', 'rate_en' => '3 – 4 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Apply as needed or once every two months.'],
@@ -372,8 +390,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'مايكروسبيشال',
                 'name_en' => 'Micro Special',
                 'active_ingredient' => 'Soluble Fertilizer',
-                'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
-                'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
+                'package_sizes_en' => '1 kg',
+                'package_sizes_ar' => '1 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي علي النيتروجين والبوتاسيوم',
                 'short_description_en' => 'Soluble fertilizer containing nitrogen and potassium',
                 'properties_ar' => 'سماد ذواب يحتوي علي النيتروجين والبوتاسيوم',
@@ -513,8 +531,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'تيرا سولت',
                 'name_en' => 'TERRA SALT',
                 'active_ingredient' => 'Anti-Salinity معالج ملوحة',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'package_sizes_en' => '5 L, 17 L',
+                'package_sizes_ar' => '5 لتر, 17 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي علي النتروجين و الكالسيوم و الاحماض العضوية',
                 'short_description_en' => 'A liquid fertilizer containing nitrogen, calcium, and organic acids.',
                 'properties_ar' => 'سماد سائل يحتوي علي النتروجين و الكالسيوم و الاحماض العضوية ، يستخدم كمعالج ملوحة و لمعالجة نقص عنصر الكالسيوم. يزيد من سعة التبادل الكاتيوني لحبيبات التربة ، فيعمل على طرد الصوديوم من التربة و يعمل على تحسين قوام التربة',
@@ -542,8 +560,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'روت فارم',
                 'name_en' => 'ROOT FARM',
                 'active_ingredient' => 'Root stimulation منشط الجذور',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل لتنشيط الجذور يحتوي علي النتروجين و الفوسفور و البوتاسيوم و المغنيسيوم',
                 'short_description_en' => 'A liquid fertilizer for root stimulation containing nitrogen, phosphorus, potassium, and magnesium',
                 'properties_ar' => 'سماد سائل لتنشيط الجذور يحتوي علي النتروجين و الفوسفور و البوتاسيوم و المغنيسيوم و نسب بسيطة من العناصر الصغرى ( الحديد،الزنك، المنجنيز) المخلبة على ايديتا .',
@@ -571,8 +589,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'أمينو',
                 'name_en' => 'Amino',
                 'active_ingredient' => 'Improves soil properties يحسن خواص التربة',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي علي الاحماض الامينية و النيتروجين و البوتاسيوم',
                 'short_description_en' => 'Liquid fertilizer containing amino acids, nitrogen, and potassium',
                 'properties_ar' => 'سماد سائل يحتوي علي الاحماض الامينية و النيتروجين و البوتاسيوم ويحتوي على حمض الهيوميك و الفولفيك المستخرجة من صخور الليونارديت الطبيعية. تساهم الاحماض الامينية في تحمل النبات للظروف البيئية القاسية مثل الإجهاد المائي (الجفاف)، والتغيرات المناخية، والملوثات.كما يساهم حمض الهيوميك و الفولفيك في تحسين خواص التربة الفيزيائية والكيميائية ، مما يساهم في زيادة تيسر العناصر الغذائية للنباتات وزيادة الإنتاجية',
@@ -592,8 +610,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'فوسفوجرين 85%',
                 'name_en' => 'PhosphoGreen 85%',
                 'active_ingredient' => 'Phosphogreen 85%',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي على نسبة عالية من الفوسفور',
                 'short_description_en' => 'Liquid fertilizer with a high phosphorus content',
                 'properties_ar' => 'سماد سائل يحتوي على نسبة عالية من الفوسفور',
@@ -629,8 +647,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'نوتريفا 25-25-18',
                 'name_en' => 'NUTRIVA 25-25-18',
                 'active_ingredient' => '25 - 25 - 18',
-                'package_sizes_en' => '25 L',
-                'package_sizes_ar' => '25 لتر',
+                'package_sizes_en' => '20 kg',
+                'package_sizes_ar' => '20 كجم',
                 'short_description_ar' => 'سماد معلق يحتوي علي النيتروجين و الفوسفور و البوتاسيوم .',
                 'short_description_en' => 'A suspension fertilizer containing nitrogen, phosphorus, and potassium.',
                 'properties_ar' => 'سماد معلق يحتوي علي النيتروجين و الفوسفور و البوتاسيوم .',
@@ -658,8 +676,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'نوتريفا 0-52-34',
                 'name_en' => 'NUTRIVA 0-52-34',
                 'active_ingredient' => '0 - 52 - 34',
-                'package_sizes_en' => '25 L',
-                'package_sizes_ar' => '25 لتر',
+                'package_sizes_en' => '20 kg',
+                'package_sizes_ar' => '20 كجم',
                 'short_description_ar' => 'سماد معلق يحتوي علي الفوسفور و البوتاسيوم',
                 'short_description_en' => 'A suspension fertilizer containing phosphorus and potassium.',
                 'properties_ar' => 'سماد معلق يحتوي علي الفوسفور و البوتاسيوم',

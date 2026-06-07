@@ -108,6 +108,7 @@ return [
     'twitter_url' => 'Twitter / X URL',
     'linkedin_url' => 'LinkedIn URL',
     'address' => 'Address',
+    'google_maps_link' => 'Google Maps Link',
     'system' => 'System',
     'website_setting' => 'Website Setting',
     'website_settings' => 'Website Settings',
@@ -121,13 +122,13 @@ return [
     'vision_ar' => 'Vision (Arabic)',
     'vision_en' => 'Vision (English)',
     'about_us_image' => 'About Us Image',
-    
+
     // Categories
     'child_categories' => 'Child Categories',
     'slug' => 'Slug',
     'category_details' => 'Category Details',
     'category_image' => 'Category Image',
-    
+
     // Contact Messages
     'contact_message' => 'Contact Message',
     'contact_messages' => 'Contact Messages',
@@ -135,7 +136,7 @@ return [
     'email_address' => 'Email address',
     'message' => 'Message',
     'is_read' => 'Read',
-    
+
     // Products
     'product_images' => 'Product Images',
     'main_image' => 'Main Image',
@@ -165,7 +166,7 @@ return [
     'footer_note_en' => 'Footer Note (English)',
     'specifications' => 'Specifications',
     'application_rate_legacy' => 'Application Rate (Legacy)',
-    
+
     // Others
     'brand' => 'Brand',
     'social_media' => 'Social Media',

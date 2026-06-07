@@ -7,7 +7,7 @@
 <div class="page-header py-6 sm:py-10 rounded-b-2xl sm:rounded-b-[2.5rem] shadow-sm mb-6 sm:mb-10">
     @if($category->hasMedia('image'))
         <div class="absolute inset-0">
-            <img src="{{ $category->getFirstMediaUrl('image') }}" class="w-full h-full object-cover opacity-10">
+            <img src="{{ $category->getFirstMediaUrl('image') }}" class="w-full h-full object-cover opacity-30">
         </div>
     @endif
     <div class="page-header-grid"></div>
@@ -41,9 +41,7 @@
                     @php
                         $cardHref = route('categories.subcategory', [$category->slug, $subCategory->slug]);
                     @endphp
-                    <div class="rounded-xl sm:rounded-3xl overflow-hidden hover-grow">
-                        <x-category-card :category="$subCategory" :show-description="false" :href="$cardHref"/>
-                    </div>
+                    <x-category-card :category="$subCategory" :show-description="false" :href="$cardHref"/>
                 @endforeach
             </div>
         </div>

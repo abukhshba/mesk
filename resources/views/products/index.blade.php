@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<section class="py-12">
+<section class="py-6 sm:py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- Search & Filter Bar -->
@@ -63,7 +63,7 @@
                     <x-product-card :product="$product"/>
                 @endforeach
             </div>
-            <div class="mt-12">{{ $products->links() }}</div>
+            <div class="mt-12">{{ $products->links('vendor.pagination.tailwind') }}</div>
         @else
             <div class="text-center py-20">
                 <svg class="w-20 h-20 text-neutral-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

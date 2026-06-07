@@ -38,7 +38,7 @@ class CategorySeeder extends Seeder
 
         $children = [
             [
-                'name_ar' => 'سماد ذواب',
+                'name_ar' => 'الأسمدة الذوابة',
                 'name_en' => 'Soluble Fertilizer',
                 'slug' => 'soluble-fertilizer',
                 'description_ar' => 'أسمدة ذوابة متكاملة وسريعة الذوبان والامتصاص للنبات.',

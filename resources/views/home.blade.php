@@ -39,28 +39,28 @@
                 <!-- Panel 2: Worldwide (Navy) -->
                 <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
-                        <!-- Globe SVG -->
+                        <!-- Flask / Beaker SVG -->
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '٢٥+ فرعاً' : '25+ Branches' }}</p>
-                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'حول العالم' : 'Worldwide' }}</p>
+                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+ منتجاً' : $productsCount . '+ Products' }}</p>
+                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'مبتكر وفعال' : 'Innovative & effective' }}</p>
                     </div>
                 </div>
 
-                <!-- Panel 3: Factories (Yellow) -->
+                <!-- Panel 3: Clients (Yellow) -->
                 <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
-                        <!-- Factory SVG -->
+                        <!-- Users SVG -->
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-lg sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '٦ مصانع دولية' : '6 International Factories' }}</p>
-                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'في الشرق الأوسط وأوروبا' : 'In MENA & Europe' }}</p>
+                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٤٤ ألف عميل' : '+44K Clients' }}</p>
+                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'شركاء نجاحنا' : 'Our success partners' }}</p>
                     </div>
                 </div>
             </div>

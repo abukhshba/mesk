@@ -54,6 +54,10 @@ class WebsiteSettingForm
                         Textarea::make('address')
                             ->label(__('app.address'))
                             ->rows(2)->columnSpanFull(),
+                        TextInput::make('google_maps_link')
+                            ->label(__('app.google_maps_link'))
+                            ->url()
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make(__('app.social_media'))

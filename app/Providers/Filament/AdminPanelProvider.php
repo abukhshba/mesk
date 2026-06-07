@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\SetLocale;
+use App\Models\WebsiteSetting;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -24,12 +25,21 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        try {
+            $settings = WebsiteSetting::getSettings();
+            $logoUrl = ! empty($settings->logo) ? asset('storage/'.$settings->logo) : asset('images/main-logo-removebg-preview.png');
+        } catch (\Exception $e) {
+            $logoUrl = asset('images/main-logo-removebg-preview.png');
+        }
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->authGuard('admin')
             ->login()
+            ->brandLogo($logoUrl)
+            ->brandLogoHeight('3.5rem')
             ->colors([
                 'primary' => '#1a9d48',
                 'secondary' => '#d1b147',
@@ -68,6 +78,10 @@ class AdminPanelProvider extends PanelProvider
                     <style>
                         html[lang="ar"], html[lang="ar"] * {
                             font-family: "Cairo", ui-sans-serif, system-ui, sans-serif !important;
+                        }
+                        .fi-simple-header .fi-logo,
+                        .fi-simple-header img {
+                            height: 6rem !important;
                         }
                     </style>
                 ',

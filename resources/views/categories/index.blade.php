@@ -23,9 +23,7 @@
         @if($categories->count())
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
                 @foreach($categories as $category)
-                    <div class="rounded-xl sm:rounded-3xl overflow-hidden hover-grow">
-                        <x-category-card :category="$category" :show-description="false"/>
-                    </div>
+                    <x-category-card :category="$category" :show-description="false"/>
                 @endforeach
             </div>
         @else
