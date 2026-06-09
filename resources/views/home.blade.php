@@ -10,7 +10,7 @@
 @section('schema')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@graph": [
         {
             "@type": "WebSite",
@@ -63,19 +63,19 @@
 <section class="relative bg-white pt-4 pb-6 sm:pb-8 overflow-hidden">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
         <!-- Hero Text -->
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
             {{ app()->getLocale() === 'ar' ? 'تغذية عالم متزايد' : 'Feeding a growing world' }}
         </h1>
 
         <!-- Hero Image Frame -->
-        <div class="relative w-full aspect-[4/3] sm:aspect-[21/9] lg:aspect-[24/9] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white max-w-6xl mx-auto z-10">
-            <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[540px]">
+            <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline>
                 <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 max-w-6xl mx-auto -mt-12 sm:-mt-16 lg:-mt-20 px-4">
+        <div class="relative z-20 max-w-6xl mx-auto -mt-4 sm:-mt-16 lg:-mt-20 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-6">
                 <!-- Panel 1: Saudi Branches (Green) -->
                 <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -167,10 +167,10 @@
                         : route('categories.show', $category->slug);
                 @endphp
                 <a href="{{ $cardHref }}" class="group relative block w-full bg-white rounded-[2rem] p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 overflow-hidden">
-                    
+
                     <!-- Decorative background gradient (hidden by default, fades in on hover) -->
                     <div class="absolute inset-0 bg-gradient-to-br from-[#137547]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     <div class="relative z-10 flex flex-col items-center">
                         <!-- Image Container -->
                         <div class="w-full h-48 sm:h-60 mb-6 sm:mb-8 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
@@ -188,7 +188,7 @@
                             <span class="text-xl sm:text-2xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                                 {{ $category->getTranslation('name', app()->getLocale()) }}
                             </span>
-                            
+
                             <!-- Arrow Icon Container -->
                             <div class="w-10 h-10 shrink-0 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-400 group-hover:bg-[#137547] group-hover:text-white transition-all duration-300 {{ app()->getLocale() === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -251,7 +251,7 @@
 @if($featuredProducts->count())
 <section class="py-10 sm:py-12 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-        
+
         <!-- Header -->
         <div class="flex items-end justify-between mb-8">
             <div>
@@ -280,7 +280,7 @@
 
 {{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS (SOIL & VISION LOGOS) --}}
 <section class="relative w-full bg-white overflow-hidden border-t border-b border-neutral-200">
-    
+
     <!-- Faint Background Logo (Watermark) -->
     <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
         <img src="{{ asset('images/favicon-removebg-preview.png') }}" alt="Watermark" class="w-[150%] sm:w-[120%] lg:w-[100%] max-w-[1800px] object-contain grayscale opacity-[0.10] ltr:translate-x-[15%] rtl:-translate-x-[15%]">
@@ -288,10 +288,10 @@
 
     <!-- Soil Background & Logos Container -->
     <div class="relative w-full z-20 pt-[60px] sm:pt-[100px] lg:pt-[150px]">
-        
+
         <!-- Wrapper to tie Logos strictly to the Soil Image aspect ratio -->
         <div class="relative w-full">
-            
+
             <!-- The Vision Logos (Overlapping the soil) -->
             <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
@@ -318,7 +318,7 @@
             </div>
 
         </div>
-        
+
     </div>
 </section>
 

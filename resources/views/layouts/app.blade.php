@@ -46,7 +46,7 @@
     {{-- ═══ JSON-LD Structured Data ═══ --}}
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "Organization",
         "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
         "alternateName": ["مسك", "المسك", "شركة المسك", "Mesk Agri", "Mesk Agricultural Fertilizers", "المسك للزراعة", "مسك للأسمدة"],
