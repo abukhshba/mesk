@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 // Locale switcher
@@ -27,3 +28,6 @@ Route::get('/products/{slug}', [ProductController::class, 'show'])->name('produc
 // Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Sitemap
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');

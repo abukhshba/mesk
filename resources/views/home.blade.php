@@ -1,6 +1,61 @@
 @extends('layouts.app')
 
-@section('title', $settings->company_name ?? __('app.hero_title'))
+@section('title', ($settings->company_name ?? 'شركة مسك للأسمدة الزراعية') . ' | المسك للزراعة - الشركة الرائدة في السعودية')
+@section('description', "شركة مسك للأسمدة الزراعية في المملكة العربية السعودية - نوفر أفضل الأسمدة الزراعية والمبيدات لتحقيق أعلى إنتاجية. Mesk Agricultural Fertilizers - Saudi Arabia's leading fertilizer company aligned with Vision 2030.")
+@section('keywords', 'مسك, المسك, شركة المسك, شركة المسك للأسمدة, شركة المسك للاسمدة الزراعية, المسك للزراعة, مسك للأسمدة, المسك للمبيدات والأسمدة, أسمدة زراعية السعودية, مبيدات زراعية, أسمدة NPK, Mesk, Mesk Agri, Mesk Saudi Arabia, Mesk Agricultural Fertilizers, mesk fertilizers, agricultural company Saudi Arabia, اسمدة المسك, مسك اسمدة')
+@section('og_title', ($settings->company_name ?? 'شركة مسك للأسمدة الزراعية') . ' | الشركة الرائدة في السعودية')
+@section('og_description', "شركة مسك للأسمدة الزراعية - نوفر أفضل الأسمدة الزراعية والمبيدات في المملكة العربية السعودية. Mesk - Saudi Arabia's leading agricultural fertilizer company.")
+
+
+@section('schema')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "url": "{{ url('/') }}",
+            "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
+            "alternateName": ["مسك", "المسك", "Mesk Agri", "شركة المسك", "المسك للزراعة"],
+            "description": "شركة مسك للأسمدة الزراعية - الشركة الرائدة في المملكة العربية السعودية",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ url('/products') }}?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "{{ url('/') }}#business",
+            "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
+            "alternateName": ["مسك", "المسك", "شركة المسك", "Mesk Agricultural Fertilizers", "Mesk Agri", "المسك للزراعة", "مسك للأسمدة", "شركة المسك للاسمدة الزراعية"],
+            "image": "{{ asset('images/logo.png') }}",
+            "logo": "{{ asset('images/logo.png') }}",
+            "url": "{{ url('/') }}",
+            "telephone": "{{ $settings->phone ?? '' }}",
+            "priceRange": "$$",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "SA",
+                "addressRegion": "المملكة العربية السعودية"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "24.7136",
+                "longitude": "46.6753"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "Saudi Arabia"
+            },
+            "description": "شركة مسك للأسمدة الزراعية - الشركة الرائدة في المملكة العربية السعودية لتوريد الأسمدة والمبيدات الزراعية. Mesk Agricultural Fertilizers is Saudi Arabia's premier agricultural fertilizer supplier, supporting Vision 2030 food security goals.",
+            "knowsAbout": ["أسمدة زراعية", "مبيدات زراعية", "NPK fertilizers", "agricultural solutions", "الأمن الغذائي", "رؤية 2030"]
+        }
+    ]
+}
+</script>
+@endsection
+
 
 @section('content')
 
@@ -15,7 +70,7 @@
         <!-- Hero Image Frame -->
         <div class="relative w-full aspect-[4/3] sm:aspect-[21/9] lg:aspect-[24/9] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white max-w-6xl mx-auto z-10">
             <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                <source src="{{ asset('images/vid1.mp4') }}" type="video/mp4">
+                <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
         </div>
 
@@ -71,12 +126,12 @@
 {{-- SECTION 2: PARALLAX DRONE SPRAYING BANNER --}}
 <style>
     .section-parallax { min-height: 300px; }
-    @media (min-width: 768px) { .section-parallax { min-height: 600px; } }
+    @verbatim @media (min-width: 768px) { .section-parallax { min-height: 600px; } } @endverbatim
 </style>
 <section class="relative flex items-center justify-center overflow-hidden bg-neutral-900 section-parallax">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/tractor-working-green-field.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-50">
+        <img src="{{ asset('images/img221.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-80">
         <div class="absolute inset-0 bg-emerald-950/20 mix-blend-overlay"></div>
     </div>
 
