@@ -1,6 +1,61 @@
 @extends('layouts.app')
 
-@section('title', $settings->company_name ?? __('app.hero_title'))
+@section('title', ($settings->company_name ?? 'شركة مسك للأسمدة الزراعية') . ' | المسك للزراعة - الشركة الرائدة في السعودية')
+@section('description', "شركة مسك للأسمدة الزراعية في المملكة العربية السعودية - نوفر أفضل الأسمدة الزراعية والمبيدات لتحقيق أعلى إنتاجية. Mesk Agricultural Fertilizers - Saudi Arabia's leading fertilizer company aligned with Vision 2030.")
+@section('keywords', 'مسك, المسك, شركة المسك, شركة المسك للأسمدة, شركة المسك للاسمدة الزراعية, المسك للزراعة, مسك للأسمدة, المسك للمبيدات والأسمدة, أسمدة زراعية السعودية, مبيدات زراعية, أسمدة NPK, Mesk, Mesk Agri, Mesk Saudi Arabia, Mesk Agricultural Fertilizers, mesk fertilizers, agricultural company Saudi Arabia, اسمدة المسك, مسك اسمدة')
+@section('og_title', ($settings->company_name ?? 'شركة مسك للأسمدة الزراعية') . ' | الشركة الرائدة في السعودية')
+@section('og_description', "شركة مسك للأسمدة الزراعية - نوفر أفضل الأسمدة الزراعية والمبيدات في المملكة العربية السعودية. Mesk - Saudi Arabia's leading agricultural fertilizer company.")
+
+
+@section('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "url": "{{ url('/') }}",
+            "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
+            "alternateName": ["مسك", "المسك", "Mesk Agri", "شركة المسك", "المسك للزراعة"],
+            "description": "شركة مسك للأسمدة الزراعية - الشركة الرائدة في المملكة العربية السعودية",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ url('/products') }}?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "LocalBusiness",
+            "@id": "{{ url('/') }}#business",
+            "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
+            "alternateName": ["مسك", "المسك", "شركة المسك", "Mesk Agricultural Fertilizers", "Mesk Agri", "المسك للزراعة", "مسك للأسمدة", "شركة المسك للاسمدة الزراعية"],
+            "image": "{{ asset('images/logo.png') }}",
+            "logo": "{{ asset('images/logo.png') }}",
+            "url": "{{ url('/') }}",
+            "telephone": "{{ $settings->phone ?? '' }}",
+            "priceRange": "$$",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "SA",
+                "addressRegion": "المملكة العربية السعودية"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "24.7136",
+                "longitude": "46.6753"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "Saudi Arabia"
+            },
+            "description": "شركة مسك للأسمدة الزراعية - الشركة الرائدة في المملكة العربية السعودية لتوريد الأسمدة والمبيدات الزراعية. Mesk Agricultural Fertilizers is Saudi Arabia's premier agricultural fertilizer supplier, supporting Vision 2030 food security goals.",
+            "knowsAbout": ["أسمدة زراعية", "مبيدات زراعية", "NPK fertilizers", "agricultural solutions", "الأمن الغذائي", "رؤية 2030"]
+        }
+    ]
+}
+</script>
+@endsection
+
 
 @section('content')
 
@@ -8,19 +63,19 @@
 <section class="relative bg-white pt-4 pb-6 sm:pb-8 overflow-hidden">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
         <!-- Hero Text -->
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
             {{ app()->getLocale() === 'ar' ? 'تغذية عالم متزايد' : 'Feeding a growing world' }}
         </h1>
 
         <!-- Hero Image Frame -->
-        <div class="relative w-full aspect-[4/3] sm:aspect-[21/9] lg:aspect-[24/9] rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white max-w-6xl mx-auto z-10">
-            <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                <source src="{{ asset('images/vid1.mp4') }}" type="video/mp4">
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[540px]">
+            <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline>
+                <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 max-w-6xl mx-auto -mt-12 sm:-mt-16 lg:-mt-20 px-4">
+        <div class="relative z-20 max-w-6xl mx-auto -mt-4 sm:-mt-16 lg:-mt-20 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-6">
                 <!-- Panel 1: Saudi Branches (Green) -->
                 <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -71,12 +126,12 @@
 {{-- SECTION 2: PARALLAX DRONE SPRAYING BANNER --}}
 <style>
     .section-parallax { min-height: 300px; }
-    @media (min-width: 768px) { .section-parallax { min-height: 600px; } }
+    @verbatim @media (min-width: 768px) { .section-parallax { min-height: 600px; } } @endverbatim
 </style>
 <section class="relative flex items-center justify-center overflow-hidden bg-neutral-900 section-parallax">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/tractor-working-green-field.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-50">
+        <img src="{{ asset('images/img221.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-80">
         <div class="absolute inset-0 bg-emerald-950/20 mix-blend-overlay"></div>
     </div>
 
@@ -112,10 +167,10 @@
                         : route('categories.show', $category->slug);
                 @endphp
                 <a href="{{ $cardHref }}" class="group relative block w-full bg-white rounded-[2rem] p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 overflow-hidden">
-                    
+
                     <!-- Decorative background gradient (hidden by default, fades in on hover) -->
                     <div class="absolute inset-0 bg-gradient-to-br from-[#137547]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     <div class="relative z-10 flex flex-col items-center">
                         <!-- Image Container -->
                         <div class="w-full h-48 sm:h-60 mb-6 sm:mb-8 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
@@ -133,7 +188,7 @@
                             <span class="text-xl sm:text-2xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                                 {{ $category->getTranslation('name', app()->getLocale()) }}
                             </span>
-                            
+
                             <!-- Arrow Icon Container -->
                             <div class="w-10 h-10 shrink-0 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-400 group-hover:bg-[#137547] group-hover:text-white transition-all duration-300 {{ app()->getLocale() === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +251,7 @@
 @if($featuredProducts->count())
 <section class="py-10 sm:py-12 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-        
+
         <!-- Header -->
         <div class="flex items-end justify-between mb-8">
             <div>
@@ -225,7 +280,7 @@
 
 {{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS (SOIL & VISION LOGOS) --}}
 <section class="relative w-full bg-white overflow-hidden border-t border-b border-neutral-200">
-    
+
     <!-- Faint Background Logo (Watermark) -->
     <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
         <img src="{{ asset('images/favicon-removebg-preview.png') }}" alt="Watermark" class="w-[150%] sm:w-[120%] lg:w-[100%] max-w-[1800px] object-contain grayscale opacity-[0.10] ltr:translate-x-[15%] rtl:-translate-x-[15%]">
@@ -233,10 +288,10 @@
 
     <!-- Soil Background & Logos Container -->
     <div class="relative w-full z-20 pt-[60px] sm:pt-[100px] lg:pt-[150px]">
-        
+
         <!-- Wrapper to tie Logos strictly to the Soil Image aspect ratio -->
         <div class="relative w-full">
-            
+
             <!-- The Vision Logos (Overlapping the soil) -->
             <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
@@ -263,7 +318,7 @@
             </div>
 
         </div>
-        
+
     </div>
 </section>
 

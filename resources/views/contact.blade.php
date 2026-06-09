@@ -188,10 +188,10 @@
             {{ app()->getLocale() === 'ar' ? 'نعمل بشغف والتزام لتقديم أفضل الحلول الزراعية التي تواكب رؤية المملكة 2030، مساهمين في تحقيق الأمن الغذائي والتنمية المستدامة.' : 'We work with passion and commitment to provide the best agricultural solutions that align with the Kingdom’s Vision 2030, contributing to food security and sustainable development.' }}
         </p>
 
-        <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500 mb-6 sm:mb-12">
-            <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-12 sm:h-16 w-auto object-contain">
-            <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-12 sm:h-16 w-auto object-contain">
-            <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-12 sm:h-16 w-auto object-contain">
+        <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-16 lg:gap-20 mb-6 sm:mb-12">
+            <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-16 sm:h-24 lg:h-28 w-auto object-contain drop-shadow-sm">
+            <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-16 sm:h-24 lg:h-28 w-auto object-contain drop-shadow-sm">
+            <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-16 sm:h-24 lg:h-28 w-auto object-contain drop-shadow-sm">
         </div>
     </div>
 </section>
