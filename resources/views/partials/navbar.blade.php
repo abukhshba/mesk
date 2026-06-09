@@ -27,7 +27,7 @@
                 </button>
 
                 <!-- Brand / Logo (Absolute Center on Mobile, Static Start on Desktop) -->
-                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:left-auto flex items-center gap-2 group z-20 xl:order-1">
+                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:left-auto flex items-center gap-2 group z-20 xl:order-1 mt-[3px]">
                     @if(!empty($settings->logo))
                         <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-24 sm:h-28 lg:h-32 xl:h-28 w-auto transition-transform group-hover:scale-105 drop-shadow-sm">
                     @else

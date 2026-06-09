@@ -2,7 +2,7 @@
     $footerCategories = \App\Models\Category::active()->parents()->orderBy('sort_order')->get();
     $categoriesCount = $footerCategories->count();
 @endphp
-<footer class="pt-8 sm:pt-16 pb-8 border-t border-white/10 text-slate-200" style="background-color: #5b656f;">
+<footer class="pt-4 sm:pt-10 pb-8 border-t border-white/10 text-slate-200" style="background-color: #5b656f;">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <div class="grid grid-cols-2 md:grid-cols-[4fr_repeat(var(--cols-count),_2fr)] gap-10 mb-12" style="--cols-count: {{ $categoriesCount + 2 }};">
 
@@ -45,7 +45,7 @@
             </div>
 
             <!-- Column 2: Useful Links -->
-            <div class="col-span-1 md:pl-8 rtl:md:pr-8 mt-0 sm:mt-10 md:mt-0 px-2">
+            <div class="col-span-1 md:pl-8 rtl:md:pr-8 mt-0 sm:mt-10 px-2">
                 <h4 class="text-white font-bold text-base md:text-lg mb-6 border-b border-white/10 pb-3" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                     {{ app()->getLocale() === 'ar' ? 'روابط مفيدة' : 'Useful Links' }}
                 </h4>
@@ -82,7 +82,7 @@
                 @php
                     $subs = $parentCat->subCategories()->active()->orderBy('sort_order')->get();
                 @endphp
-                <div class="col-span-1 mt-0 sm:mt-10 md:mt-0">
+                <div class="col-span-1 mt-0 sm:mt-10">
                     <h4 class="text-white font-bold text-base md:text-lg mb-6 border-b border-white/10 pb-3" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                         <a href="{{ route('categories.show', $parentCat->slug) }}" class="hover:text-white transition-colors">
                             {{ $parentCat->getTranslation('name', app()->getLocale()) }}
@@ -102,7 +102,7 @@
             @endforeach
 
             <!-- Column 3: Contact Us & App Badges -->
-            <div class="col-span-2 md:col-span-1 space-y-6 mt-0 sm:mt-10 md:mt-0 px-2">
+            <div class="col-span-2 md:col-span-1 space-y-6 mt-0 sm:mt-10 px-2">
                 <h4 class="text-white font-bold text-base md:text-lg mb-6 border-b border-white/10 pb-3" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                     {{ app()->getLocale() === 'ar' ? 'اتصل بنا' : 'Contact Us' }}
                 </h4>

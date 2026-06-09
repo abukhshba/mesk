@@ -28,7 +28,7 @@
         <nav class="flex items-center gap-2 text-primary-200/60 text-xs font-bold uppercase tracking-widest mb-8">
             <a href="{{ route('home') }}" class="hover:text-white transition-colors">{{ __('app.home') }}</a>
             <span class="text-primary-500/40">/</span>
-            <span class="text-accent-400">{{ __('app.contact') }}</span>
+            <span class="text-[#dbdcde]">{{ __('app.contact') }}</span>
         </nav>
 
         <div class="max-w-3xl">

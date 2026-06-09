@@ -63,9 +63,9 @@
 <section class="relative bg-white pt-4 pb-6 sm:pb-8 overflow-hidden">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
         <!-- Hero Text -->
-        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+        <!-- <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight mb-6 sm:mb-8" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
             {{ app()->getLocale() === 'ar' ? 'تغذية عالم متزايد' : 'Feeding a growing world' }}
-        </h1>
+        </h1> -->
 
         <!-- Hero Image Frame -->
         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[540px]">
@@ -153,7 +153,7 @@
         <!-- Section Header -->
         <div class="text-center mb-8 sm:mb-10">
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 mb-4 tracking-tight" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-                {{ app()->getLocale() === 'ar' ? 'تصفح الاصناف' : 'Explore Categories' }}
+                {{ app()->getLocale() === 'ar' ? 'تصفح الاقسام' : 'Explore Categories' }}
             </h2>
             <div class="w-24 h-1.5 bg-[#137547] mx-auto rounded-full"></div>
         </div>
@@ -279,11 +279,11 @@
 @endif
 
 {{-- SECTION 5: CERTIFICATIONS & PARTNERSHIPS (SOIL & VISION LOGOS) --}}
-<section class="relative w-full bg-white overflow-hidden border-t border-b border-neutral-200">
+<section class="relative w-full bg-[#ededed] overflow-hidden border-t border-b border-neutral-200">
 
     <!-- Faint Background Logo (Watermark) -->
-    <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
-        <img src="{{ asset('images/favicon-removebg-preview.png') }}" alt="Watermark" class="w-[150%] sm:w-[120%] lg:w-[100%] max-w-[1800px] object-contain grayscale opacity-[0.10] ltr:translate-x-[15%] rtl:-translate-x-[15%]">
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <img src="{{ asset('images/water_mark-removebg-preview.svg') }}" alt="Watermark" class="w-full h-full object-cover" style="object-position: center 25%;">
     </div>
 
     <!-- Soil Background & Logos Container -->
@@ -293,11 +293,11 @@
         <div class="relative w-full">
 
             <!-- The Vision Logos (Overlapping the soil) -->
-            <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
-                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+            <div class="absolute bottom-[48%] sm:bottom-[54%] lg:bottom-[60%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-1.5 sm:gap-5 lg:gap-8">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
                 </div>
             </div>
 

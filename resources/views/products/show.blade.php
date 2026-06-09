@@ -269,7 +269,7 @@
                             </thead>
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
-                                <tr class="{{ $i % 2 === 0 ? 'bg-neutral-50/70' : 'bg-white' }} hover:bg-primary-50/50 transition-colors">
+                                <tr class="bg-[#f0eeef] hover:bg-[#e0dedf] transition-colors">
                                     <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-neutral-800">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>

@@ -4,30 +4,26 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="page-header py-6 sm:py-10 rounded-b-2xl sm:rounded-b-[2.5rem] shadow-sm mb-6 sm:mb-10">
+<div class="page-header py-4 sm:py-10 rounded-b-2xl sm:rounded-b-[2.5rem] shadow-sm mb-4 sm:mb-10">
     <div class="page-header-grid"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-3">
             <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
-            <span class="text-primary-600/40">/</span>
-            <span class="text-primary-600">{{ __('app.about') }}</span>
         </nav>
         <div class="accent-line mb-3"></div>
         <h1 class="text-3xl sm:text-4xl font-black text-primary-950 leading-tight">{{ __('app.about') }}</h1>
-        @if($about)
-        <p class="mt-4 text-primary-800/70 text-base max-w-xl font-light">{{ $about->getTranslation('title', app()->getLocale()) }}</p>
-        @endif
+       
     </div>
 </div>
 
 @if($about)
 <!-- Company Story -->
-<section class="py-10 md:py-20">
+<section class="py-6 md:py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="mt-2 text-3xl font-bold text-neutral-900">{{ $about->getTranslation('title', app()->getLocale()) }}</h2>
-                <div class="mt-5 text-neutral-600 leading-relaxed prose max-w-none">
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-neutral-900">{{ $about->getTranslation('title', app()->getLocale()) }}</h2>
+                <div class="mt-5 text-neutral-600 leading-relaxed prose max-w-none text-base sm:text-lg">
                     {!! $about->getTranslation('description', app()->getLocale()) !!}
                 </div>
             </div>
@@ -58,22 +54,26 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @if($about->getTranslation('mission', app()->getLocale()))
             <div class="bg-neutral-50 rounded-3xl p-10 border border-neutral-100">
-                <div class="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center mb-8">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-neutral-900">{{ __('app.our_mission') }}</h3>
                 </div>
-                <h3 class="text-xl font-black text-neutral-900 mb-4">{{ __('app.our_mission') }}</h3>
-                <div class="text-neutral-600 leading-relaxed prose max-w-none text-sm">
+                <div class="text-neutral-600 leading-relaxed prose max-w-none text-base">
                     {!! $about->getTranslation('mission', app()->getLocale()) !!}
                 </div>
             </div>
             @endif
             @if($about->getTranslation('vision', app()->getLocale()))
-            <div class="bg-neutral-950 rounded-3xl p-10">
-                <div class="w-12 h-12 bg-white/8 border border-white/10 rounded-2xl flex items-center justify-center mb-8">
-                    <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            <div class="bg-[#5c666f] rounded-3xl p-10">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-white">{{ __('app.our_vision') }}</h3>
                 </div>
-                <h3 class="text-xl font-black text-white mb-4">{{ __('app.our_vision') }}</h3>
-                <div class="text-neutral-400 leading-relaxed prose prose-invert max-w-none text-sm">
+                <div class="text-white/90 leading-relaxed prose prose-invert max-w-none text-base">
                     {!! $about->getTranslation('vision', app()->getLocale()) !!}
                 </div>
             </div>
@@ -82,11 +82,11 @@
     </div>
 </section>
 
-<section class="relative w-full bg-white overflow-hidden border-t border-b border-neutral-200">
+<section class="relative w-full bg-[#ededed] overflow-hidden border-t border-b border-neutral-200">
     
     <!-- Faint Background Logo (Watermark) -->
-    <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
-        <img src="{{ asset('images/favicon-removebg-preview.png') }}" alt="Watermark" class="w-[150%] sm:w-[120%] lg:w-[100%] max-w-[1800px] object-contain grayscale opacity-[0.10] ltr:translate-x-[15%] rtl:-translate-x-[15%]">
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <img src="{{ asset('images/water_mark-removebg-preview.png') }}" alt="Watermark" class="w-full h-full object-cover" style="object-position: center 25%;">
     </div>
 
     <!-- Soil Background & Logos Container -->
@@ -96,11 +96,11 @@
         <div class="relative w-full">
             
             <!-- The Vision Logos (Overlapping the soil) -->
-            <div class="absolute bottom-[38%] sm:bottom-[42%] lg:bottom-[48%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-2 sm:gap-8 lg:gap-12">
-                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-12 sm:h-32 lg:h-44 w-auto object-contain drop-shadow-md">
+            <div class="absolute bottom-[48%] sm:bottom-[54%] lg:bottom-[60%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-1.5 sm:gap-5 lg:gap-8">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
                 </div>
             </div>
 

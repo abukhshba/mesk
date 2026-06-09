@@ -94,23 +94,29 @@ html[lang="en"] * {
 /* Bright Organic Page Header */
 .page-header {
     position: relative;
-    background: oklch(0.985 0.005 145);
+    background-color: #efefef;
+    background-image: url('/images/crump.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
 .page-header::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 120%, oklch(0.85 0.08 145 / 0.4) 0%, transparent 70%);
     pointer-events: none;
 }
 .page-header-grid {
     position: absolute;
     inset: 0;
     background-image:
-        radial-gradient(oklch(0.55 0.15 145 / 0.05) 1px, transparent 1px);
+        radial-gradient(oklch(0.55 0.15 145 / 0.03) 1px, transparent 1px);
     background-size: 24px 24px;
     pointer-events: none;
+}
+.page-header .accent-line {
+    background: #dbdcde;
 }
 
 /* Glassmorphism Premium Cards - Pristine Luxe Glass */
