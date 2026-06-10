@@ -14,7 +14,7 @@
     <!-- Main Navigation Bar -->
     <div class="bg-white border-b border-neutral-100">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-            <div class="flex items-center justify-between h-28 sm:h-32 xl:h-28 transition-all duration-300 w-full relative" id="nav-container">
+            <div class="flex items-center justify-between h-32 sm:h-36 xl:h-36 transition-all duration-300 w-full relative" id="nav-container">
                 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300 z-10 order-1 xl:order-none">
@@ -27,7 +27,7 @@
                 </button>
 
                 <!-- Brand / Logo (Absolute Center on Mobile, Static Start on Desktop) -->
-                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:left-auto flex items-center gap-2 group z-20 xl:order-1 mt-[3px]">
+                <a href="{{ route('home') }}" class="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:left-auto flex items-center gap-2 group z-20 xl:order-1">
                     @if(!empty($settings->logo))
                         <img src="{{ asset('storage/' . $settings->logo) }}" alt="{{ $settings->company_name }}" class="h-24 sm:h-28 lg:h-32 xl:h-28 w-auto transition-transform group-hover:scale-105 drop-shadow-sm">
                     @else

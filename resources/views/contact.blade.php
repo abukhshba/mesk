@@ -11,7 +11,7 @@
 ══════════════════════════════════════════ */
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
+    from { opacity: 0; transform: translateY(60px); }
     to   { opacity: 1; transform: translateY(0);    }
 }
 @keyframes fadeIn {
@@ -118,7 +118,7 @@
 {{-- ══════════════════════════════════════
      HERO SECTION
 ══════════════════════════════════════ --}}
-<div class="relative overflow-hidden" style="background: #a5aaae; padding-top: 5rem; padding-bottom: 13rem;">
+<div class="relative overflow-hidden" style="background: #a5aaae; padding-top: 5rem; padding-bottom: 7rem;">
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -165,14 +165,14 @@
 <section style="background: #f5f2ee; margin-top: -2px; padding-bottom: 5rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start" style="margin-top: -5.5rem;">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch" style="margin-top: -5.5rem;">
 
             {{-- ─── LEFT: Contact Info Cards ─── --}}
-            <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="lg:col-span-5 flex flex-col gap-4 lg:gap-5 h-full">
 
                 @if(!empty($settings->phone))
                 <a href="tel:{{ $settings->phone }}"
-                   class="ccard fade-up-2 flex items-center gap-5 bg-white rounded-[1.75rem] p-6 sm:p-7"
+                   class="ccard fade-up-2 flex items-center gap-5 bg-white rounded-[1.75rem] p-4 sm:p-5 lg:flex-1"
                    style="border: 1.5px solid rgba(0,0,0,0.07); box-shadow: 0 4px 20px rgba(0,0,0,0.04); text-decoration: none;">
                     <div class="ccard-icon w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
                          style="background: #a5aaae;">
@@ -194,7 +194,7 @@
 
                 @if(!empty($settings->email))
                 <a href="mailto:{{ $settings->email }}"
-                   class="ccard fade-up-3 flex items-center gap-5 bg-white rounded-[1.75rem] p-6 sm:p-7"
+                   class="ccard fade-up-3 flex items-center gap-5 bg-white rounded-[1.75rem] p-4 sm:p-5 lg:flex-1"
                    style="border: 1.5px solid rgba(0,0,0,0.07); box-shadow: 0 4px 20px rgba(0,0,0,0.04); text-decoration: none;">
                     <div class="ccard-icon w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
                          style="background: #a5aaae;">
@@ -217,9 +217,9 @@
                 @if(!empty($settings->address))
                 <a href="{{ !empty($settings->google_maps_link) ? $settings->google_maps_link : 'https://maps.google.com/?q='.urlencode($settings->address) }}"
                    target="_blank"
-                   class="ccard fade-up-4 flex items-start gap-5 bg-white rounded-[1.75rem] p-6 sm:p-7"
+                   class="ccard fade-up-4 flex items-center gap-5 bg-white rounded-[1.75rem] p-4 sm:p-5 lg:flex-1"
                    style="border: 1.5px solid rgba(0,0,0,0.07); box-shadow: 0 4px 20px rgba(0,0,0,0.04); text-decoration: none;">
-                    <div class="ccard-icon w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mt-0.5"
+                    <div class="ccard-icon w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
                          style="background: #a5aaae;">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -241,7 +241,7 @@
 
                 @if(!empty($settings->whatsapp))
                 <a href="https://wa.me/{{ $settings->whatsapp }}" target="_blank"
-                   class="ccard fade-up-5 flex items-center gap-5 rounded-[1.75rem] p-6 sm:p-7"
+                   class="ccard fade-up-5 flex items-center gap-5 rounded-[1.75rem] p-4 sm:p-5 lg:flex-1"
                    style="background: #25D366; box-shadow: 0 12px 36px rgba(37,211,102,0.25); text-decoration: none; border: 1.5px solid #25D366;">
                     <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
                          style="background: rgba(255,255,255,0.18); transition: background 0.3s ease;">
@@ -261,16 +261,7 @@
                 </a>
                 @endif
 
-                {{-- Response time badge --}}
-                <div class="fade-up-6 flex items-center gap-3 px-5 py-3.5 rounded-2xl"
-                     style="background: rgba(200,169,92,0.08); border: 1px solid rgba(200,169,92,0.2);">
-                    <div class="w-2 h-2 rounded-full shrink-0" style="background: #c8a95c; animation: goldPulse 2s ease-in-out infinite;"></div>
-                    <span style="font-size: 0.8rem; font-weight: 700; color: #9b8a60;">
-                        {{ app()->getLocale() === 'ar'
-                            ? 'نرد على استفساراتكم خلال 24 ساعة عمل'
-                            : 'We respond within 24 business hours' }}
-                    </span>
-                </div>
+
             </div>
 
             {{-- ─── RIGHT: Premium Form ─── --}}
@@ -293,9 +284,9 @@
 
                     {{-- Form header: deep dark with gold geo tile --}}
                     <div class="geo-tile relative overflow-hidden px-8 sm:px-10 py-7"
-                         style="background: #5a656b;">
+                         style="background: #5c666f;">
                         {{-- subtle darkening overlay on the tile --}}
-                        <div class="absolute inset-0" style="background: rgba(13,15,17,0.55);"></div>
+                        <div class="absolute inset-0" style="background: #5c666f;"></div>
                         <div class="relative z-10 flex items-center gap-4">
                             <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                                  style="background: rgba(200,169,92,0.12); border: 1px solid rgba(200,169,92,0.28);">
@@ -363,8 +354,8 @@
 
                         <div class="pt-1">
                             <button type="submit"
-                                    class="gold-shimmer-btn group w-full flex items-center justify-center gap-3 py-4 font-black rounded-xl"
-                                    style="font-size: 0.88rem; letter-spacing: 0.09em; text-transform: uppercase;">
+                                    class="group w-full flex items-center justify-center gap-3 py-4 font-black rounded-xl text-white transition-opacity hover:opacity-90"
+                                    style="background: #5c666f; font-size: 0.88rem; letter-spacing: 0.09em; text-transform: uppercase;">
                                 <span>{{ __('app.send_message') }}</span>
                                 <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }} group-hover:translate-x-1 transition-transform"
                                      fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -376,51 +367,52 @@
                 </div>
             </div>
         </div>
+
+        {{-- Centered Response time badge & QR Code under the grid --}}
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-6 fade-up-6">
+
+            @if(!empty($settings->contact_info_pdf))
+                {{-- QR Code — Contact Info PDF --}}
+                <a href="{{ asset('storage/' . $settings->contact_info_pdf) }}" target="_blank" class="transition-transform hover:scale-105 duration-300">
+                    {!! QrCode::format('svg')->size(180)->color(37, 211, 102)->margin(0)->generate(asset('storage/' . $settings->contact_info_pdf)) !!}
+                </a>
+            @endif
+
+            <div class="flex items-center gap-3 px-6 py-4 rounded-full"
+                 style="background: rgba(200,169,92,0.08); border: 1px solid rgba(200,169,92,0.2);">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0" style="background: #c8a95c; animation: goldPulse 2s ease-in-out infinite;"></div>
+                <span style="font-size: 0.9rem; font-weight: 700; color: #9b8a60;">
+                    {{ app()->getLocale() === 'ar'
+                        ? 'نرد على استفساراتكم خلال 24 ساعة عمل'
+                        : 'We respond within 24 business hours' }}
+                </span>
+            </div>
+
+        </div>
+
     </div>
 </section>
 
 {{-- ══════════════════════════════════════
      VISION 2030 BAND
 ══════════════════════════════════════ --}}
-<section class="geo-tile relative overflow-hidden" style="background: #0d0f11; padding: 4.5rem 0 5rem;">
-    <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(13,15,17,0.85) 0%, rgba(13,15,17,0.5) 50%, rgba(13,15,17,0.85) 100%);"></div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
-        {{-- Gold ornament top --}}
-        <div class="flex items-center justify-center gap-4 mb-8">
-            <div class="gold-rule" style="width: 4rem;"></div>
-            <svg class="w-5 h-5" style="color: #c8a95c;" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
-            </svg>
-            <div class="gold-rule" style="width: 4rem;"></div>
+<!-- Saudi Touch / Vision 2030 Banner -->
+<section class="pt-8 sm:pt-16 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-sm mb-6">
+            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
-
-        <h3 class="font-black text-white mb-3" style="font-size: clamp(1.25rem, 2.8vw, 1.75rem); letter-spacing: -0.01em;">
-            {{ app()->getLocale() === 'ar'
-                ? 'نفخر بخدمة القطاع الزراعي في المملكة'
-                : 'Proud to Serve the Agricultural Sector in the Kingdom' }}
+        <h3 class="text-2xl font-black text-neutral-900 mb-4">
+            {{ app()->getLocale() === 'ar' ? 'نفخر بخدمة القطاع الزراعي في المملكة' : 'Proud to Serve the Agricultural Sector in the Kingdom' }}
         </h3>
-        <p class="mx-auto mb-10" style="color: rgba(165,170,174,0.55); max-width: 38rem; font-size: 0.92rem; line-height: 1.75; font-weight: 500;">
-            {{ app()->getLocale() === 'ar'
-                ? 'نعمل بشغف والتزام لتقديم أفضل الحلول الزراعية التي تواكب رؤية المملكة 2030، مساهمين في تحقيق الأمن الغذائي والتنمية المستدامة.'
-                : 'We work with passion and commitment to provide the best agricultural solutions that align with the Kingdom\'s Vision 2030, contributing to food security and sustainable development.' }}
+        <p class="text-neutral-500 font-medium max-w-2xl mx-auto mb-10">
+            {{ app()->getLocale() === 'ar' ? 'نعمل بشغف والتزام لتقديم أفضل الحلول الزراعية التي تواكب رؤية المملكة 2030، مساهمين في تحقيق الأمن الغذائي والتنمية المستدامة.' : 'We work with passion and commitment to provide the best agricultural solutions that align with the Kingdom’s Vision 2030, contributing to food security and sustainable development.' }}
         </p>
 
-        <div class="flex flex-wrap justify-center items-center gap-10 sm:gap-16 lg:gap-20 mb-10">
-            <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030"
-                 style="height: 5rem; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8;">
-            <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made"
-                 style="height: 5rem; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8;">
-            <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified"
-                 style="height: 5rem; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8;">
-        </div>
-
-        {{-- Gold ornament bottom --}}
-        <div class="flex items-center justify-center gap-4">
-            <div class="gold-rule" style="width: 4rem;"></div>
-            <div class="w-2 h-2 rounded-full" style="background: #c8a95c;"></div>
-            <div class="gold-rule" style="width: 4rem;"></div>
+        <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-16 lg:gap-20 mb-6 sm:mb-12">
+            <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-20 sm:h-32 lg:h-40 w-auto object-contain drop-shadow-sm">
+            <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-20 sm:h-32 lg:h-40 w-auto object-contain drop-shadow-sm">
+            <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-20 sm:h-32 lg:h-40 w-auto object-contain drop-shadow-sm">
         </div>
     </div>
 </section>

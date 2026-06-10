@@ -154,7 +154,7 @@
         <!-- Product Info -->
         <div class="lg:col-span-5 flex flex-col">
             @if($product->category)
-            <span class="inline-flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-3 py-1 rounded-full w-fit">
+            <span class="inline-flex items-center text-xs lg:text-sm font-semibold text-primary-700 bg-primary-50 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full w-fit">
                 @if($product->category->parent)
                     {{ $product->category->parent->getTranslation('name', app()->getLocale()) }}
                     <span class="mx-1 text-primary-400">·</span>
@@ -163,19 +163,13 @@
             </span>
             @endif
 
-            <h1 class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-black text-neutral-900 leading-tight tracking-tight">
+            <h1 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight">
                 {{ $product->getTranslation('name', app()->getLocale()) }}
             </h1>
 
             @if($product->getTranslation('sub_title', app()->getLocale()))
-            <p class="mt-1 text-lg font-extrabold text-primary-600 tracking-wide">
+            <p class="mt-1 text-xl lg:text-2xl font-extrabold text-primary-600 tracking-wide">
                 {{ $product->getTranslation('sub_title', app()->getLocale()) }}
-            </p>
-            @endif
-
-            @if($product->getTranslation('short_description', app()->getLocale()))
-            <p class="mt-4 text-neutral-600 leading-relaxed text-lg">
-                {{ $product->getTranslation('short_description', app()->getLocale()) }}
             </p>
             @endif
 
@@ -240,9 +234,9 @@
     <div class="mb-10">
         <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
             {{-- Section header with accent stripe --}}
-            <div class="bg-[#a8abb4] px-6 sm:px-8 lg:px-10 py-5 flex items-center gap-3">
+            <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-3.5 flex items-center gap-3">
                
-                <h2 class="text-xl sm:text-2xl font-black text-white">
+                <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
                 </h2>
             </div>
@@ -253,15 +247,15 @@
                     <div class="overflow-x-auto -mx-2">
                         <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
-                                <tr class="bg-[#7d7d7f]">
-                                    <th class="border border-neutral-300 text-center py-4 px-4 font-bold text-white text-sm lg:text-base uppercase tracking-wider">
+                                <tr class="bg-[#8e8e90]">
+                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
-                                    <th class="border border-neutral-300 text-center py-4 px-4 font-bold text-white text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Application Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
-                                    <th class="border border-neutral-300 text-center py-4 px-4 font-bold text-white text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
                                     </th>
                                     @endif
@@ -269,15 +263,15 @@
                             </thead>
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
-                                <tr class="bg-[#f0eeef] hover:bg-[#e0dedf] transition-colors">
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936]">
+                                <tr class="bg-[#f9f8f9] hover:bg-[#efedee] transition-colors">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936] text-sm lg:text-lg">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-[#373936]">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-[#373936] text-sm lg:text-lg">
                                         {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
                                     </td>
                                     @if($product->application_rates_has_notes)
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs lg:text-sm leading-relaxed">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs sm:text-sm lg:text-base leading-relaxed">
                                         {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
                                     </td>
                                     @endif
@@ -287,7 +281,7 @@
                             @if($product->getTranslation('application_rates_footer', $locale))
                             <tfoot>
                                 <tr>
-                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#7d7d7f] text-white text-center py-3 lg:py-4 px-4 font-semibold text-sm lg:text-base">
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-3 lg:py-4 px-4 font-semibold text-sm lg:text-base">
                                         <div class="flex items-center justify-center gap-2">
                                             <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>

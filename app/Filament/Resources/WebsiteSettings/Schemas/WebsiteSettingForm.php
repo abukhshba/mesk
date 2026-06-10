@@ -58,6 +58,12 @@ class WebsiteSettingForm
                             ->label(__('app.google_maps_link'))
                             ->url()
                             ->columnSpanFull(),
+                        FileUpload::make('contact_info_pdf')
+                            ->label(__('app.contact_info_pdf'))
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->disk('public')
+                            ->directory('settings')
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make(__('app.social_media'))

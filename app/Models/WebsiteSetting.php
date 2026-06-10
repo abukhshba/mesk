@@ -21,6 +21,7 @@ class WebsiteSetting extends Model
         'whatsapp',
         'address',
         'google_maps_link',
+        'contact_info_pdf',
         'facebook',
         'instagram',
         'twitter',
