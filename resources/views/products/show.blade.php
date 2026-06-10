@@ -270,14 +270,14 @@
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
                                 <tr class="bg-[#f0eeef] hover:bg-[#e0dedf] transition-colors">
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-neutral-800">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936]">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-neutral-600">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-[#373936]">
                                         {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
                                     </td>
                                     @if($product->application_rates_has_notes)
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-neutral-500 text-xs lg:text-sm leading-relaxed">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs lg:text-sm leading-relaxed">
                                         {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
                                     </td>
                                     @endif
