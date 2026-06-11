@@ -32,16 +32,6 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_fertilizer_bag.png';
-                $imagePath = public_path('images/'.$imageName);
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('gallery');
-                }
             }
         }
 
@@ -59,20 +49,6 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_granules.png'; // Assuming granular image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('gallery');
-                }
             }
         }
 
@@ -90,20 +66,6 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_liquid_bottle.png'; // Assuming liquid image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('gallery');
-                }
             }
         }
 
@@ -121,23 +83,6 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_suspension_bucket.png'; // Assuming suspension image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_liquid_bottle.png');
-                }
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('gallery');
-                }
             }
         }
     }
@@ -163,7 +108,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'مسك - بريمير',
                 'name_en' => 'MISK - PREMIER',
-                'active_ingredient' => '20 - 20 - 20',
+                'active_ingredient' => 'NPK: 20 - 20 - 20',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على النيتروجين والفوسفور والبوتاسيوم',
@@ -184,7 +129,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'مسك - بريمير',
                 'name_en' => 'MISK - PREMIER',
-                'active_ingredient' => '40 - 0 - 4',
+                'active_ingredient' => 'NPK: 40 - 0 - 4',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على النيتروجين والبوتاسيوم',
@@ -389,7 +334,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'مايكروسبيشال',
                 'name_en' => 'Micro Special',
-                'active_ingredient' => 'Soluble Fertilizer',
+                'active_ingredient' => '',
                 'package_sizes_en' => '1 kg',
                 'package_sizes_ar' => '1 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي علي النيتروجين والبوتاسيوم',

@@ -25,6 +25,10 @@ class ProductsTable
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->searchable()
+                    ->sortable(),
+
                 SpatieMediaLibraryImageColumn::make('main_image')
                     ->collection('main_image')
                     ->label(__('app.image'))
@@ -77,6 +81,6 @@ class ProductsTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('sort_order');
+            ->defaultSort('id', 'asc');
     }
 }

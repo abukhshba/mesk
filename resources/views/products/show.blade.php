@@ -59,7 +59,7 @@
         <span class="text-neutral-900 font-medium">{{ $product->getTranslation('name', app()->getLocale()) }}</span>
     </nav>
 
-    
+
     @php
         $locale = app()->getLocale();
         $propertiesText = $product->getTranslation('properties', $locale);
@@ -83,8 +83,8 @@
         <!-- Gallery -->
         <div class="lg:col-span-7 flex flex-row gap-4 sm:gap-6 items-center">
             @php
-                $packageSizes = $locale === 'ar' 
-                    ? ($product->package_sizes_ar ?: $product->package_sizes_en) 
+                $packageSizes = $locale === 'ar'
+                    ? ($product->package_sizes_ar ?: $product->package_sizes_en)
                     : ($product->package_sizes_en ?: $product->package_sizes_ar);
             @endphp
             @if($packageSizes)
@@ -97,7 +97,7 @@
                     @php
                         $opacityPct = 40 + round(($index / max(1, $totalSizes - 1)) * 60);
                     @endphp
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[10px] sm:text-sm font-black text-white shadow-sm transition-transform duration-300 hover:scale-105" 
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[10px] sm:text-sm font-black text-white shadow-sm transition-transform duration-300 hover:scale-105"
                          style="background-color: rgba(19, 117, 71, {{ $opacityPct / 100 }}); font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                         {{ $size }}
                     </div>
@@ -107,7 +107,7 @@
 
             <div class="flex-1 min-w-0">
                 @php
-                    $gallery = $product->getMedia('gallery');
+                    $gallery = $product->getMedia('gallery') ?? asset('images/products/' . $product->id . '.png');
                     $allImages = collect();
                     foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
                 @endphp
@@ -142,10 +142,14 @@
                 @endif
 
                 @else
-                <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
-                    <svg class="w-24 h-24 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                    </svg>
+                <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-[4/3]">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide flex items-center justify-center">
+                            <img src="{{ asset('images/products/new/' .$product->id. '.png') }}"
+                                 alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
+                                 class="max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
                 </div>
                 @endif
             </div>
@@ -167,9 +171,9 @@
                 {{ $product->getTranslation('name', app()->getLocale()) }}
             </h1>
 
-            @if($product->getTranslation('sub_title', app()->getLocale()))
+            @if($product->active_ingredient)
             <p class="mt-1 text-xl lg:text-2xl font-extrabold text-primary-600 tracking-wide">
-                {{ $product->getTranslation('sub_title', app()->getLocale()) }}
+                {{ $product->active_ingredient }}
             </p>
             @endif
 
@@ -183,7 +187,7 @@
             </div>
             @endif
 
-            
+
             {{-- ─── SECTION 1: Properties & Benefits ─── --}}
             @if($hasProperties)
             <div class="my-3">
@@ -235,7 +239,7 @@
         <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
             {{-- Section header with accent stripe --}}
             <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-3.5 flex items-center gap-3">
-               
+
                 <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
                 </h2>
