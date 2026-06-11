@@ -203,17 +203,15 @@
 
         <!-- Overlapping Brand Features Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10">
-            <!-- Feature 1: Fast Delivery (Navy) -->
+            <!-- Feature 1: Expert Technical Support (Navy) -->
             <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <!-- Delivery Truck SVG -->
                     <svg class="w-8 h-8 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M13 16h4M17 16h2.586a1 1 0 00.707-.293l2.414-2.414a1 1 0 00.293-.707V11.5a1.5 1.5 0 00-1.5-1.5H17m0 6v-6" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                 </div>
                 <div class="text-left rtl:text-right">
-                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'توصيل سريع' : 'Fast Delivery' }}</p>
+                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'دعم فني متخصص' : 'Expert Technical Support' }}</p>
                 </div>
             </div>
 
@@ -230,16 +228,15 @@
                 </div>
             </div>
 
-            <!-- Feature 3: Secured Payment Methods (Yellow) -->
+            <!-- Feature 3: Certified Saudi Product (Yellow) -->
             <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <!-- Secured Card SVG -->
                     <svg class="w-8 h-8 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5-4v2M9 8h6M5 16h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                 </div>
                 <div class="text-left rtl:text-right">
-                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'طرق دفع آمنة' : 'Secured Payment Methods' }}</p>
+                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'منتج سعودي معتمد' : 'Certified Saudi Product' }}</p>
                 </div>
             </div>
         </div>
