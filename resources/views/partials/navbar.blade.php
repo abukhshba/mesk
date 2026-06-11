@@ -14,7 +14,7 @@
     <!-- Main Navigation Bar -->
     <div class="bg-white border-b border-neutral-100">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-            <div class="flex items-center justify-between h-32 sm:h-36 xl:h-36 transition-all duration-300 w-full relative" id="nav-container">
+            <div class="flex items-center justify-between h-28 sm:h-32 lg:h-36 xl:h-32 transition-all duration-300 w-full relative" id="nav-container">
                 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-full text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-all duration-300 z-10 order-1 xl:order-none">

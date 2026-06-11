@@ -587,7 +587,7 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'فوسفوجرين',
                 'name_en' => 'PhosphoGreen',
                 'active_ingredient' => 'Phosphogreen 85%',
-                'sub_title_ar' => 'فوسفوجرين 85%',
+                'sub_title_ar' => '%85 فوسفوجرين ',
                 'sub_title_en' => 'Phosphogreen 85%',
                 'package_sizes_en' => '1 L, 5 L, 20 L',
                 'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',

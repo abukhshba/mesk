@@ -78,7 +78,7 @@
     @endphp
 
     <!-- Product Top Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 sm:mb-16">
 
         <!-- Gallery -->
         <div class="lg:col-span-7 flex flex-row gap-4 sm:gap-6 items-center">
@@ -173,7 +173,7 @@
 
             @php $subTitle = $product->getTranslation('sub_title', $locale) ?: ($locale === 'ar' ? $product->sub_title_en : $product->sub_title_ar); @endphp
             @if($subTitle)
-            <p class="mt-1 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide" dir="ltr">
+            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="mt-1 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
                 {{ $subTitle }}
             </p>
             @endif
@@ -237,9 +237,9 @@
     {{-- ─── SECTION 2: Directions & Application Rates ─── --}}
     @if($hasApplicationRates)
     <div class="mb-10">
-        <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
+        <div class="bg-white rounded-lg border border-neutral-200/80 shadow-sm overflow-hidden">
             {{-- Section header with accent stripe --}}
-            <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-3.5 flex items-center gap-3">
+            <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-2 flex items-center gap-3">
 
                 <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
@@ -253,14 +253,14 @@
                         <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
                                 <tr class="bg-[#8e8e90]">
-                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
-                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Application Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
-                                    <th class="border border-neutral-300 text-center py-2.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
                                     </th>
                                     @endif
@@ -286,7 +286,7 @@
                             @if($product->getTranslation('application_rates_footer', $locale))
                             <tfoot>
                                 <tr>
-                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-3 lg:py-4 px-4 font-semibold text-sm lg:text-base">
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-2 lg:py-3 px-4 font-semibold text-sm lg:text-base">
                                         <div class="flex items-center justify-center gap-2">
                                             <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>
@@ -302,8 +302,10 @@
 
                 @else
                     {{-- ═══ TEXT MODE ═══ --}}
-                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
-                        {{ $product->getTranslation('application_rates_text', $locale) }}
+                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base space-y-1">
+                        @foreach(explode("\n", $product->getTranslation('application_rates_text', $locale)) as $line)
+                        <p style="unicode-bidi: plaintext;">{{ $line }}</p>
+                        @endforeach
                     </div>
                 @endif
             </div>

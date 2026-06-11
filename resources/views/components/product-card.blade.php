@@ -37,7 +37,7 @@
         </h3>
 
         @if($product->getTranslation('sub_title', app()->getLocale()))
-        <p class="mt-0.5 text-[10px] sm:text-xs font-semibold text-primary-600 line-clamp-1" dir="ltr">
+        <p class="mt-0.5 text-[10px] sm:text-xs font-semibold text-primary-600 line-clamp-1" style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};">
             {{ $product->getTranslation('sub_title', app()->getLocale()) }}
         </p>
         @endif
