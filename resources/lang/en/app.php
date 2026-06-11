@@ -111,6 +111,7 @@ return [
     'linkedin_url' => 'LinkedIn URL',
     'address' => 'Address',
     'google_maps_link' => 'Google Maps Link',
+    'contact_info_pdf' => 'Contact Info Pdf',
     'system' => 'System',
     'website_setting' => 'Website Setting',
     'website_settings' => 'Website Settings',

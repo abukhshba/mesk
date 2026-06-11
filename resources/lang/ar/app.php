@@ -111,6 +111,7 @@ return [
     'linkedin_url' => 'رابط لينكد إن',
     'address' => 'العنوان',
     'google_maps_link' => 'رابط خرائط جوجل',
+    'contact_info_pdf' => 'ملف بيانات الاتصال',
     'system' => 'النظام',
     'website_setting' => 'إعداد الموقع',
     'website_settings' => 'إعدادات الموقع',
