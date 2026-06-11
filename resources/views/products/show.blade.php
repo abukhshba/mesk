@@ -171,9 +171,10 @@
                 {{ $product->getTranslation('name', app()->getLocale()) }}
             </h1>
 
-            @if($product->active_ingredient)
-            <p class="mt-1 text-xl lg:text-2xl font-extrabold text-primary-600 tracking-wide">
-                {{ $product->active_ingredient }}
+            @php $subTitle = $product->getTranslation('sub_title', $locale) ?: ($locale === 'ar' ? $product->sub_title_en : $product->sub_title_ar); @endphp
+            @if($subTitle)
+            <p class="mt-1 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide" dir="ltr">
+                {{ $subTitle }}
             </p>
             @endif
 
@@ -190,7 +191,7 @@
 
             {{-- ─── SECTION 1: Properties & Benefits ─── --}}
             @if($hasProperties)
-            <div class="my-3">
+            <div class="my-4 mt-2 sm:mt-4">
                 <div class="relative bg-gradient-to-br from-primary-50 via-white to-accent-50/30 rounded-3xl overflow-hidden border border-primary-100/60">
                     {{-- Decorative corner shapes --}}
                     <div class="absolute top-0 {{ $locale === 'ar' ? 'left-0' : 'right-0' }} w-32 h-32 bg-primary-100/40 rounded-full -translate-y-1/2 {{ $locale === 'ar' ? '-translate-x-1/2' : 'translate-x-1/2' }}"></div>
