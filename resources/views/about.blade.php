@@ -4,16 +4,26 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="page-header py-4 sm:py-10 rounded-b-2xl sm:rounded-b-[2.5rem] shadow-sm mb-4 sm:mb-10">
-    <div class="page-header-grid"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex items-center gap-2 text-primary-600/60 text-xs font-bold uppercase tracking-wider mb-3">
-            <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
-        </nav>
-        <div class="accent-line mb-3"></div>
-        <h1 class="text-3xl sm:text-4xl font-black text-primary-950 leading-tight">{{ __('app.about') }}</h1>
-       
-    </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 mb-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1.5 sm:gap-2 text-lg flex-wrap">
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('home') }}" class="flex items-center gap-1.5 text-neutral-400 hover:text-primary-600 transition-colors duration-200 group">
+                    <svg class="w-4 h-4 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="hidden sm:inline">{{ __('app.home') }}</span>
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+            <li>
+                <span class="text-neutral-700 font-semibold">
+                    {{ __('app.about') }}
+                </span>
+            </li>
+        </ol>
+    </nav>
 </div>
 
 @if($about)
@@ -22,7 +32,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-neutral-900">{{ $about->getTranslation('title', app()->getLocale()) }}</h2>
+                <h1 class="mt-2 text-3xl sm:text-4xl font-bold text-neutral-900">{{ $about->getTranslation('title', app()->getLocale()) }}</h1>
                 <div class="mt-5 text-neutral-600 leading-relaxed prose max-w-none text-base sm:text-lg">
                     {!! $about->getTranslation('description', app()->getLocale()) !!}
                 </div>
@@ -32,11 +42,8 @@
                     <img src="{{ $about->getFirstMediaUrl('image') }}" alt="{{ $about->getTranslation('title', app()->getLocale()) }}"
                          class="w-full rounded-3xl shadow-2xl object-cover aspect-[4/3]">
                 @else
-                    <div class="w-full rounded-3xl bg-gradient-to-br from-primary-100 to-primary-200 aspect-[4/3] flex items-center justify-center">
-                        <svg class="w-32 h-32 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
-                        </svg>
-                    </div>
+                     <img src="{{ asset('images/herbicides.png') }}" alt="{{ $about->getTranslation('title', app()->getLocale()) }}"
+                         class="w-full rounded-3xl shadow-2xl object-cover aspect-[4/3]">
                 @endif
                 <div class="absolute -top-4 -{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}-4 w-24 h-24 bg-primary-600 rounded-2xl opacity-10 -z-10"></div>
             </div>

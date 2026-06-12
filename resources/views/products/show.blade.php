@@ -45,18 +45,44 @@
 <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
 
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm text-neutral-500 mb-8 flex-wrap">
-        <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
-        <span>/</span>
-        <a href="{{ route('products.index') }}" class="hover:text-primary-600 transition-colors">{{ __('app.products') }}</a>
-        @if($product->category)
-        <span>/</span>
-        <a href="{{ route('categories.subcategory', [$product->category->parent->slug, $product->category->slug]) }}" class="hover:text-primary-600 transition-colors">
-            {{ $product->category->getTranslation('name', app()->getLocale()) }}
-        </a>
-        @endif
-        <span>/</span>
-        <span class="text-neutral-900 font-medium">{{ $product->getTranslation('name', app()->getLocale()) }}</span>
+    <nav class="mb-6 sm:mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1.5 sm:gap-2 text-sm flex-wrap">
+            {{-- Home --}}
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('home') }}" class="flex items-center gap-1.5 text-neutral-400 hover:text-primary-600 transition-colors duration-200 group">
+                    <svg class="w-4 h-4 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="hidden sm:inline">{{ __('app.home') }}</span>
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+
+            {{-- Products --}}
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('products.index') }}" class="text-neutral-400 hover:text-primary-600 transition-colors duration-200">
+                    {{ __('app.products') }}
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+
+            {{-- Category --}}
+            @if($product->category)
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('categories.subcategory', [$product->category->parent->slug, $product->category->slug]) }}" class="text-neutral-400 hover:text-primary-600 transition-colors duration-200">
+                    {{ $product->category->getTranslation('name', app()->getLocale()) }}
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+            @endif
+
+            {{-- Current Product --}}
+            <li>
+                <span class="text-neutral-700 font-semibold">
+                    {{ $product->getTranslation('name', app()->getLocale()) }}
+                </span>
+            </li>
+        </ol>
     </nav>
 
 
@@ -92,13 +118,24 @@
                 @php
                     $sizesArray = array_filter(array_map('trim', explode(',', $packageSizes)));
                     $totalSizes = count($sizesArray);
+                    
+                    $baseColor = '19, 117, 71'; // Default Green
+                    if ($product->category) {
+                        $catSlug = $product->category->slug;
+                        if ($catSlug === 'granular-fertilizer') {
+                            $baseColor = '0, 110, 190'; // Navy Blue
+                        } elseif (in_array($catSlug, ['liquid-fertilizer', 'suspension-fertilizers'])) {
+                            $baseColor = '10, 190, 225'; // Cyan
+                        }
+                    }
                 @endphp
                 @foreach($sizesArray as $index => $size)
                     @php
-                        $opacityPct = 40 + round(($index / max(1, $totalSizes - 1)) * 60);
+                        $opacityPct = 100 - (($totalSizes - 1 - $index) * 25);
+                        $opacityPct = max(20, $opacityPct); // Ensure it doesn't go below 20%
                     @endphp
                     <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[10px] sm:text-sm font-black text-white shadow-sm transition-transform duration-300 hover:scale-105"
-                         style="background-color: rgba(19, 117, 71, {{ $opacityPct / 100 }}); font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                         style="background-color: rgba({{ $baseColor }}, {{ $opacityPct / 100 }}); font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                         {{ $size }}
                     </div>
                 @endforeach
@@ -159,10 +196,6 @@
         <div class="lg:col-span-5 flex flex-col">
             @if($product->category)
             <span class="inline-flex items-center text-xs lg:text-sm font-semibold text-primary-700 bg-primary-50 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full w-fit">
-                @if($product->category->parent)
-                    {{ $product->category->parent->getTranslation('name', app()->getLocale()) }}
-                    <span class="mx-1 text-primary-400">·</span>
-                @endif
                 {{ $product->category->getTranslation('name', app()->getLocale()) }}
             </span>
             @endif
@@ -199,7 +232,7 @@
 
                     <div class="relative z-10 p-3 sm:p-4 lg:p-6">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 rounded-xl bg-[#a8abb4] flex items-center justify-center shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-[#d7b43e] flex items-center justify-center shadow-sm">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                             </div>
                             <h2 class="text-xl sm:text-2xl font-black text-neutral-900">
@@ -286,7 +319,7 @@
                             @if($product->getTranslation('application_rates_footer', $locale))
                             <tfoot>
                                 <tr>
-                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-2 lg:py-3 px-4 font-semibold text-sm lg:text-base">
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-1.5 lg:py-2 px-4 font-semibold text-sm lg:text-base">
                                         <div class="flex items-center justify-center gap-2">
                                             <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>
@@ -302,7 +335,7 @@
 
                 @else
                     {{-- ═══ TEXT MODE ═══ --}}
-                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base space-y-1">
+                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base space-y-1 p-3">
                         @foreach(explode("\n", $product->getTranslation('application_rates_text', $locale)) as $line)
                         <p style="unicode-bidi: plaintext;">{{ $line }}</p>
                         @endforeach

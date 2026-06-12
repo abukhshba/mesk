@@ -13,9 +13,9 @@
             @if($category->hasMedia('image'))
                 <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
             @else
-                <div class="relative z-10 w-28 h-28 bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center rounded-full shadow-inner">
-                    <span class="text-neutral-400 text-3xl font-black">{{ mb_substr($category->getTranslation('name', app()->getLocale()), 0, 1) }}</span>
-                </div>
+            <img src="{{ asset('images/categories/'.$category->id.'.png')}}" 
+            alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
+        
             @endif
         </div>
 

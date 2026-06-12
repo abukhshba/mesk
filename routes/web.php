@@ -23,6 +23,7 @@ Route::get('/categories/{categorySlug}/sub/{subSlug}', [CategoryController::clas
 
 // Products
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/api/products/search', [ProductController::class, 'searchApi'])->name('api.products.search');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 // Contact
