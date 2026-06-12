@@ -107,7 +107,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 sm:mb-16">
 
         <!-- Gallery -->
-        <div class="lg:col-span-7 flex flex-row gap-4 sm:gap-6 items-center">
+        <div class="lg:col-span-7 flex flex-row gap-2 sm:gap-6 items-center">
             @php
                 $packageSizes = $locale === 'ar'
                     ? ($product->package_sizes_ar ?: $product->package_sizes_en)
@@ -206,7 +206,7 @@
 
             @php $subTitle = $product->getTranslation('sub_title', $locale) ?: ($locale === 'ar' ? $product->sub_title_en : $product->sub_title_ar); @endphp
             @if($subTitle)
-            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="mt-1 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
+            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="mt-2 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
                 {{ $subTitle }}
             </p>
             @endif
@@ -249,7 +249,7 @@
 
             <!-- WhatsApp CTA -->
             @if(!empty($settings->whatsapp))
-            <div class="mt-8">
+            <div class="mt-4 sm:mt-8">
                 <a href="https://wa.me/{{ $settings->whatsapp }}?text={{ urlencode(app()->getLocale() === 'ar' ? 'السلام عليكم، أود الاستفسار عن منتج: ' . $product->getTranslation('name', 'ar') : 'Hello, I would like to inquire about: ' . $product->getTranslation('name', 'en')) }}"
                    target="_blank"
                    class="flex items-center justify-center gap-3 w-full py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 text-lg">

@@ -75,7 +75,7 @@
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 max-w-6xl mx-auto -mt-4 sm:-mt-16 lg:-mt-20 px-4">
+        <div class="relative z-20 max-w-6xl mx-auto -mt-8.5 sm:-mt-16 lg:-mt-20 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-6">
                 <!-- Panel 1: Saudi Branches (Green) -->
                 <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -148,7 +148,7 @@
 
 {{-- SECTION 3: DYNAMIC ILLUSTRATED CATEGORIES --}}
 @if($categories->count())
-<section class="py-10 sm:py-12 bg-white">
+<section class="py-6 sm:py-12 bg-white">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- Section Header -->
         <div class="text-center mb-8 sm:mb-10">
@@ -159,21 +159,21 @@
         </div>
 
         <!-- Premium Grid of Dynamic Categories -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-10">
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8 mb-10">
             @foreach($categories as $category)
                 @php
                     $cardHref = ($categoriesDisplayMode === 'children' && $singleParent)
                         ? route('categories.subcategory', [$singleParent->slug, $category->slug])
                         : route('categories.show', $category->slug);
                 @endphp
-                <a href="{{ $cardHref }}" class="group relative block w-full bg-white rounded-[2rem] p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 overflow-hidden">
+                <a href="{{ $cardHref }}" class="group relative block w-full bg-white rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-100 transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
 
                     <!-- Decorative background gradient (hidden by default, fades in on hover) -->
                     <div class="absolute inset-0 bg-gradient-to-br from-[#137547]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                    <div class="relative z-10 flex flex-col items-center">
+                    <div class="relative z-10 flex flex-col items-center h-full">
                         <!-- Image Container -->
-                        <div class="w-full h-48 sm:h-60 mb-6 sm:mb-8 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                        <div class="w-full h-24 sm:h-60 mb-4 sm:mb-8 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
                             @if($category->hasMedia('image'))
                                 <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
                             @else
@@ -184,13 +184,13 @@
                         </div>
 
                         <!-- Text & Icon -->
-                        <div class="w-full flex items-center justify-between mt-auto">
-                            <span class="text-xl sm:text-2xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                        <div class="w-full flex items-center justify-center sm:justify-between mt-auto">
+                            <span class="text-xs sm:text-2xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300 text-center sm:text-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                                 {{ $category->getTranslation('name', app()->getLocale()) }}
                             </span>
 
-                            <!-- Arrow Icon Container -->
-                            <div class="w-10 h-10 shrink-0 rounded-full bg-neutral-50 flex items-center justify-center text-neutral-400 group-hover:bg-[#137547] group-hover:text-white transition-all duration-300 {{ app()->getLocale() === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1' }}">
+                            <!-- Arrow Icon Container (Hidden on mobile) -->
+                            <div class="hidden sm:flex w-10 h-10 shrink-0 rounded-full bg-neutral-50 items-center justify-center text-neutral-400 group-hover:bg-[#137547] group-hover:text-white transition-all duration-300 {{ app()->getLocale() === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                 </svg>
@@ -202,9 +202,9 @@
         </div>
 
         <!-- Overlapping Brand Features Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-6xl mx-auto mt-10">
             <!-- Feature 1: Expert Technical Support (Navy) -->
-            <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
+            <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
                     <svg class="w-8 h-8 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -216,7 +216,7 @@
             </div>
 
             <!-- Feature 2: Local with High Quality (Green) -->
-            <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
+            <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
                     <!-- Leaf / Badge check SVG -->
                     <svg class="w-8 h-8 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -229,7 +229,7 @@
             </div>
 
             <!-- Feature 3: Certified Saudi Product (Yellow) -->
-            <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex items-center gap-5 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
+            <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
                     <svg class="w-8 h-8 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -246,7 +246,7 @@
 
 {{-- SECTION 4: REAL DYNAMIC PRODUCTS --}}
 @if($featuredProducts->count())
-<section class="py-10 sm:py-12 bg-neutral-50 border-t border-neutral-100">
+<section class="py-6 sm:py-12 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
 
         <!-- Header -->
