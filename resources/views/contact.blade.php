@@ -113,16 +113,17 @@
                 </div>
                 @endif
 
-                @if(!empty($settings->contact_info_pdf))
+                @php
+                    $pdfUrl = !empty($settings->contact_info_pdf) ? asset('storage/' . $settings->contact_info_pdf) : asset('images/files/almisk.com.sa.pdf');
+                @endphp
                 <div class="mt-8 flex justify-center items-center flex-col bg-white/10 rounded-2xl p-6 shadow-inner">
-                    <a href="{{ asset('storage/' . $settings->contact_info_pdf) }}" target="_blank" class="block bg-white p-3 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
-                        {!! QrCode::format('svg')->size(160)->color(19, 117, 71)->margin(0)->generate(asset('storage/' . $settings->contact_info_pdf)) !!}
+                    <a href="{{ $pdfUrl }}" target="_blank" class="block bg-white p-3 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
+                        {!! QrCode::format('svg')->size(160)->color(19, 117, 71)->margin(0)->generate($pdfUrl) !!}
                     </a>
                     <p class="mt-4 text-sm font-bold tracking-widest text-white">
                         {{ app()->getLocale() === 'ar' ? 'امسح للحصول على معلومات التواصل' : 'Scan for contact info' }}
                     </p>
                 </div>
-                @endif
             </div>
         </div>
 
