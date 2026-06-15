@@ -70,7 +70,7 @@
         <!-- Hero Image Frame -->
         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[560px]">
             <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline preload="none" poster="{{ asset('images/hero2.jpg') }}">
-                <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
+                <source src="{{ asset('images/vidnew_1 2.mp4') }}" type="video/mp4">
             </video>
         </div>
 
@@ -178,9 +178,9 @@
                             @if($category->hasMedia('image'))
                                 <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
                             @else
-                                <img src="{{ asset('images/categories/'.$category->id.'.png')}}" 
+                                <img src="{{ asset('images/categories/'.$category->id.'.png')}}"
             alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
-        
+
                             @endif
                         </div>
 
