@@ -68,54 +68,55 @@
         </h1> -->
 
         <!-- Hero Image Frame -->
-        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[540px]">
-            <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline>
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[560px]">
+            <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline preload="none" poster="{{ asset('images/hero2.jpg') }}">
                 <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 max-w-6xl mx-auto -mt-8.5 sm:-mt-16 lg:-mt-20 px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-6">
-                <!-- Panel 1: Saudi Branches (Green) -->
-                <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
+        <div class="relative z-20 max-w-4xl mx-auto mt-6 sm:mt-2 px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4">
+                <!-- Panel 1: Agent (Green) -->
+                <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
                         <!-- Saudi Map / Leaf SVG -->
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '١٦ فرعاً' : '16 Branches' }}</p>
-                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'في المملكة العربية السعودية' : 'In the Kingdom of Saudi Arabia' }}</p>
+                        <p class="text-[11px] sm:text-xs lg:text-[14px] font-bold leading-snug">
+                            {{ app()->getLocale() === 'ar' ? 'المصنع وكيل لكبرى الشركات العالمية لتصنيع خامات الاسمدة فى العالم.' : 'The factory is an agent for major international companies manufacturing raw materials for fertilizers worldwide.' }}
+                        </p>
                     </div>
                 </div>
 
-                <!-- Panel 2: Worldwide (Navy) -->
-                <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
+                <!-- Panel 2: Products (Navy) -->
+                <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
                         <!-- Flask / Beaker SVG -->
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+ منتجاً' : $productsCount . '+ Products' }}</p>
-                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'مبتكر وفعال' : 'Innovative & effective' }}</p>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٨٠ منتجاً' : '+80 Products' }}</p>
+                        <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'مبتكر وفعال' : 'Innovative & effective' }}</p>
                     </div>
                 </div>
 
-                <!-- Panel 3: Clients (Yellow) -->
-                <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-3 sm:gap-6 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
+                <!-- Panel 3: Agents (Yellow) -->
+                <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
                         <!-- Users SVG -->
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-xl sm:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٤٤ ألف عميل' : '+44K Clients' }}</p>
-                        <p class="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'شركاء نجاحنا' : 'Our success partners' }}</p>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٦٠ وكيلاً' : '+60 Agents' }}</p>
+                        <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'داخل المملكة وحول العالم' : 'within the Kingdom and worldwide' }}</p>
                     </div>
                 </div>
             </div>
@@ -175,10 +176,10 @@
                         <!-- Image Container -->
                         <div class="w-full h-24 sm:h-60 mb-4 sm:mb-8 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
                             @if($category->hasMedia('image'))
-                                <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
+                                <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
                             @else
                                 <img src="{{ asset('images/categories/'.$category->id.'.png')}}" 
-            alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
+            alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
         
                             @endif
                         </div>
@@ -280,7 +281,7 @@
 
     <!-- Faint Background Logo (Watermark) -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <img src="{{ asset('images/water_mark-removebg-preview.svg') }}" alt="Watermark" class="w-full h-full object-cover" style="object-position: center 25%;">
+        <img src="{{ asset('images/water_mark-removebg-preview.svg') }}" alt="Watermark" loading="lazy" class="w-full h-full object-cover" style="object-position: center 25%;">
     </div>
 
     <!-- Soil Background & Logos Container -->
@@ -292,18 +293,18 @@
             <!-- The Vision Logos (Overlapping the soil) -->
             <div class="absolute bottom-[48%] sm:bottom-[54%] lg:bottom-[60%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-1.5 sm:gap-5 lg:gap-8">
-                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
-                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/Saudi_Vision_2030_logo.svg') }}" alt="Saudi Vision 2030" loading="lazy" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/iso-logo.png') }}" alt="ISO Certified" loading="lazy" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
+                    <img src="{{ asset('images/saudi-made.png') }}" alt="Saudi Made" loading="lazy" class="h-10 sm:h-26 lg:h-36 w-auto object-contain drop-shadow-md">
                 </div>
             </div>
 
             <!-- The Soil Image (Switches on Language) -->
             <div class="w-full">
                 @if(app()->getLocale() === 'ar')
-                    <img src="{{ asset('images/soil-right-removebg-preview.png') }}" alt="Soil" class="w-full h-auto block">
+                    <img src="{{ asset('images/soil-right-removebg-preview.png') }}" alt="Soil" loading="lazy" class="w-full h-auto block">
                 @else
-                    <img src="{{ asset('images/soil-left-removebg-preview.png') }}" alt="Soil" class="w-full h-auto block">
+                    <img src="{{ asset('images/soil-left-removebg-preview.png') }}" alt="Soil" loading="lazy" class="w-full h-auto block">
                 @endif
             </div>
 

@@ -11,10 +11,10 @@
         <!-- Image Container -->
         <div class="w-full h-36 sm:h-48 mb-4 sm:mb-6 relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
             @if($category->hasMedia('image'))
-                <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
+                <img src="{{ $category->getFirstMediaUrl('image') }}" alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
             @else
             <img src="{{ asset('images/categories/'.$category->id.'.png')}}" 
-            alt="{{ $category->getTranslation('name', app()->getLocale()) }}" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
+            alt="{{ $category->getTranslation('name', app()->getLocale()) }}" loading="lazy" class="relative z-10 w-full h-full object-contain transition-transform duration-500">
         
             @endif
         </div>

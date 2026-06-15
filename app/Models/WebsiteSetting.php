@@ -11,6 +11,8 @@ class WebsiteSetting extends Model
     /** @use HasFactory<WebsiteSettingFactory> */
     use HasFactory;
 
+    protected static ?self $cached = null;
+
     protected $fillable = [
         'company_name_ar',
         'company_name_en',
@@ -35,7 +37,7 @@ class WebsiteSetting extends Model
 
     public static function getSettings(): self
     {
-        return static::firstOrCreate([], [
+        return static::$cached ??= static::firstOrCreate([], [
             'company_name_ar' => 'شركة المسك للصناعة',
             'company_name_en' => 'ALMISK COMPANY FOR INDUSTRY',
         ]);

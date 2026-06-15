@@ -1,5 +1,5 @@
 @php
-    $footerCategories = \App\Models\Category::active()->parents()->orderBy('sort_order')->get();
+    $footerCategories = \App\Models\Category::active()->parents()->with(['subCategories' => fn($q) => $q->active()->orderBy('sort_order')])->orderBy('sort_order')->get();
     $categoriesCount = $footerCategories->count();
 @endphp
 <footer class="pt-4 sm:pt-10 pb-8 border-t border-white/10 text-slate-200" style="background-color: #5b656f;">
@@ -9,11 +9,11 @@
             <!-- Column 1: Brand & Socials -->
             <div class="flex flex-col items-center md:items-start text-center md:text-start space-y-3 sm:space-y-6 col-span-2 md:col-span-1">
                 <a href="{{ route('home') }}" class="flex justify-center md:justify-start items-center gap-3 group w-full">
-                    <img src="{{ asset('images/footer-logo-removebg-preview.png') }}" alt="AlMisk" class="h-52 md:h-56 lg:h-60 w-auto rounded-lg">
+                    <img src="{{ asset('images/footer-logo-removebg-preview.png') }}" alt="AlMisk" loading="lazy" class="h-52 md:h-56 lg:h-60 w-auto rounded-lg">
                 </a>
                 <p class="text-slate-300 text-sm leading-relaxed max-w-sm">
                     {{ app()->getLocale() === 'ar' 
-                        ? 'نقدم منتجات زراعية سعودية عالية الجودة كالمبيدات والأسمدة المبتكرة لدعم قطاع الزراعة وتحقيق التنمية المستدامة.' 
+                        ? 'نقدم منتجات زراعية سعودية عالية الجودة كالأسمدة المبتكرة لدعم قطاع الزراعة وتحقيق التنمية المستدامة.' 
                         : 'We provide premium Saudi-made agricultural products, including advanced pesticides and fertilizers, supporting sustainable agricultural growth.' }}
                 </p>
 
@@ -80,7 +80,7 @@
             <!-- Dynamic Category Columns -->
             @foreach($footerCategories as $parentCat)
                 @php
-                    $subs = $parentCat->subCategories()->active()->orderBy('sort_order')->get();
+                    $subs = $parentCat->subCategories;
                 @endphp
                 <div class="col-span-1 mt-0 sm:mt-10">
                     <h4 class="text-white font-bold text-base md:text-lg mb-6 border-b border-white/10 pb-3" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
@@ -113,7 +113,7 @@
                         <svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        <a href="tel:{{ $settings->phone }}" class="hover:text-white transition-colors font-semibold" dir="ltr">{{ $settings->phone }}</a>
+                        <a href="tel:{{ $settings->phone }}" class="hover:text-white transition-colors font-semibold" style="direction: ltr; unicode-bidi: isolate;">{{ $settings->phone }}</a>
                     </li>
                     @endif
 

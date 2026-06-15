@@ -65,7 +65,7 @@
                         </div>
                         <div>
                             <p class="text-primary-700 text-xs font-bold mb-1 uppercase tracking-widest">{{ __('app.call_us') }}</p>
-                            <a href="tel:{{ $settings->phone }}" class="text-lg font-semibold hover:text-[#d7b43e] transition-colors" dir="ltr">{{ $settings->phone }}</a>
+                            <a href="tel:{{ $settings->phone }}" class="text-lg font-semibold hover:text-[#d7b43e] transition-colors inline-block" style="direction: ltr; unicode-bidi: isolate;">{{ $settings->phone }}</a>
                         </div>
                     </div>
                     @endif
@@ -148,7 +148,7 @@
             <p class="text-neutral-500 mb-10 text-lg">
                 {{ app()->getLocale() === 'ar'
                     ? 'نسعد بتواصلكم معنا، سنرد خلال 24 ساعة عمل.'
-                    : "We'd love to hear from you. We'll get back within 24 business hours." }}
+                    : "We'd like to hear from you. We'll get back within 24 business hours." }}
             </p>
 
             <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">

@@ -1,5 +1,5 @@
 @php
-    $navCategories = \App\Models\Category::active()->parents()->orderBy('sort_order')->get();
+    $navCategories = \App\Models\Category::active()->parents()->with(['subCategories' => fn($q) => $q->active()->orderBy('sort_order')])->orderBy('sort_order')->get();
 @endphp
 
 <style>
@@ -50,7 +50,7 @@
                     <!-- Dynamic Database Categories -->
                     @foreach($navCategories as $parentCat)
                         @php
-                            $subs = $parentCat->subCategories()->active()->orderBy('sort_order')->get();
+                            $subs = $parentCat->subCategories;
                         @endphp
                         @if($subs->count())
                             <!-- Show Dropdown -->
