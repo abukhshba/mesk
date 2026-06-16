@@ -13,8 +13,8 @@
                 </a>
                 <p class="text-slate-300 text-sm leading-relaxed max-w-sm">
                     {{ app()->getLocale() === 'ar' 
-                        ? 'نقدم منتجات زراعية سعودية عالية الجودة كالأسمدة المبتكرة لدعم قطاع الزراعة وتحقيق التنمية المستدامة.' 
-                        : 'We provide premium Saudi-made agricultural products, including advanced pesticides and fertilizers, supporting sustainable agricultural growth.' }}
+                        ? 'نحن نقدم منتجات زراعية سعودية الصنع عالية الجودة، بما في ذلك الأسمدة، من أجل دعم النمو الزراعي المستدام.' 
+                        : 'We provide premium Saudi-made agricultural products, including fertilizers, in order to support sustainable agricultural growth.' }}
                 </p>
 
                 <!-- Social Icons -->
@@ -150,9 +150,9 @@
         <div class="border-t border-white/10 my-8"></div>
 
         <!-- Footer Bottom: copyright & payments -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-slate-300">
+        <div class="flex flex-col items-center justify-center gap-6 text-sm text-slate-300 text-center w-full">
             <!-- Left: Copyright and VAT -->
-            <div class="space-y-2 text-center md:text-left rtl:md:text-right">
+            <div class="space-y-2 text-center w-full">
                 <p class="font-semibold text-slate-200">
                     © {{ date('Y') }} {{ $settings->company_name ?? 'AlMisk' }}. {{ app()->getLocale() === 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved' }}.
                 </p>

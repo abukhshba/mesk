@@ -75,7 +75,7 @@
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 max-w-4xl mx-auto mt-6 sm:mt-2 px-4">
+        <div class="relative z-20 w-full md:max-w-[84%] mx-auto mt-6 sm:mt-4 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4">
                 <!-- Panel 1: Agent (Green) -->
                 <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -101,7 +101,7 @@
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٨٠ منتجاً' : '+80 Products' }}</p>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+ منتجاً' : '+' . $productsCount . ' Products' }}</p>
                         <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'مبتكر وفعال' : 'Innovative & effective' }}</p>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                         </svg>
                     </div>
                     <div class="text-left rtl:text-right">
-                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '+٦٠ وكيلاً' : '+60 Agents' }}</p>
+                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '٦٠+ وكيلاً' : '+60 Agents' }}</p>
                         <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'داخل المملكة وحول العالم' : 'within the Kingdom and worldwide' }}</p>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
 
 {{-- SECTION 2: PARALLAX DRONE SPRAYING BANNER --}}
 <style>
-    .section-parallax { min-height: 300px; }
+    .section-parallax { min-height: 240px; }
     @verbatim @media (min-width: 768px) { .section-parallax { min-height: 600px; } } @endverbatim
 </style>
 <section class="relative flex items-center justify-center overflow-hidden bg-neutral-900 section-parallax">
@@ -141,7 +141,7 @@
         <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-wide mb-4" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
             {{ app()->getLocale() === 'ar' ? 'عالم من الابتكار' : 'A world of innovation' }}
         </h2>
-        <p class="text-lg sm:text-xl md:text-2xl font-medium opacity-90 max-w-2xl mx-auto">
+        <p class="text-lg sm:text-xl md:text-2xl font-medium max-w-2xl mx-auto">
             {{ app()->getLocale() === 'ar' ? 'نعمل اليوم من أجل مستقبل الزراعة' : 'We work today for the future of agriculture' }}
         </p>
     </div>
@@ -186,7 +186,7 @@
 
                         <!-- Text & Icon -->
                         <div class="w-full flex items-center justify-center sm:justify-between mt-auto">
-                            <span class="text-xs sm:text-2xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300 text-center sm:text-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                            <span class="text-xs sm:text-[20px] font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300 text-center sm:text-{{ app()->getLocale() === 'ar' ? 'right' : 'left' }}" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                                 {{ $category->getTranslation('name', app()->getLocale()) }}
                             </span>
 
@@ -203,41 +203,41 @@
         </div>
 
         <!-- Overlapping Brand Features Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-6xl mx-auto mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 w-full md:max-w-[84%] mx-auto mt-10">
             <!-- Feature 1: Expert Technical Support (Navy) -->
-            <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <svg class="w-8 h-8 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                 </div>
                 <div class="text-left rtl:text-right">
-                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'دعم فني متخصص' : 'Expert Technical Support' }}</p>
+                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'دعم فني متخصص' : 'Expert Technical Support' }}</p>
                 </div>
             </div>
 
             <!-- Feature 2: Local with High Quality (Green) -->
-            <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
+            <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
                     <!-- Leaf / Badge check SVG -->
-                    <svg class="w-8 h-8 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                 </div>
                 <div class="text-left rtl:text-right">
-                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'إنتاج محلي بجودة عالية' : 'Local with High Quality' }}</p>
+                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'إنتاج محلي بجودة عالية' : 'Local with High Quality' }}</p>
                 </div>
             </div>
 
             <!-- Feature 3: Certified Saudi Product (Yellow) -->
-            <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center gap-4 sm:gap-6 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <svg class="w-8 h-8 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                 </div>
                 <div class="text-left rtl:text-right">
-                    <p class="text-xl sm:text-2xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? 'منتج سعودي معتمد' : 'Certified Saudi Product' }}</p>
+                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'منتج سعودي معتمد' : 'Certified Saudi Product' }}</p>
                 </div>
             </div>
         </div>

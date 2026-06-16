@@ -282,7 +282,7 @@
             <div class="pt-1">
                 @if($product->application_rates_type === 'table' && !empty($product->application_rates_rows))
                     {{-- ═══ TABLE MODE ═══ --}}
-                    <div class="overflow-x-auto -mx-2">
+                    <div class="overflow-x-auto">
                         <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
                                 <tr class="bg-[#8e8e90]">
@@ -290,7 +290,7 @@
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
                                     <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
-                                        {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Application Rate with Irrigation Water' }}
+                                        {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Usage Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
                                     <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">

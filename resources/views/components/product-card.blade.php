@@ -29,7 +29,7 @@
     <!-- Info -->
     <div class="p-3 sm:p-4">
         @if($product->category)
-        <span class="text-[10px] sm:text-xs font-medium text-primary-600 uppercase tracking-wide">
+        <span class="text-[9px] sm:text-[12px] font-medium text-primary-600 uppercase tracking-wide block leading-none">
             {{ $product->category->getTranslation('name', app()->getLocale()) }}
         </span>
         @endif

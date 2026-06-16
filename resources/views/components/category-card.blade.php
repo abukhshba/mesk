@@ -21,7 +21,7 @@
 
         <!-- Text & Icon -->
         <div class="w-full flex items-center justify-between mt-auto">
-            <span class="text-lg sm:text-xl font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+            <span class="text-lg sm:text-[20px] font-black text-neutral-900 group-hover:text-[#137547] transition-colors duration-300" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
                 {{ $category->getTranslation('name', app()->getLocale()) }}
             </span>
             
