@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /filament
+Disallow: /api
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+Sitemap: https://mesk.test/sitemap.xml

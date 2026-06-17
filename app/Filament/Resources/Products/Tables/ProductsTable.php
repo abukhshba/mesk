@@ -25,6 +25,10 @@ class ProductsTable
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->searchable()
+                    ->sortable(),
+
                 SpatieMediaLibraryImageColumn::make('main_image')
                     ->collection('main_image')
                     ->label(__('app.image'))
@@ -37,6 +41,9 @@ class ProductsTable
                     ->label(__('app.name_en'))
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('sub_title_ar')
+                    ->label(__('app.sub_title_ar'))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('category.name')
                     ->label(__('app.category'))
                     ->formatStateUsing(fn ($state) => is_array($state) ? ($state['ar'] ?? '') : $state)
@@ -74,6 +81,6 @@ class ProductsTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('sort_order');
+            ->defaultSort('id', 'asc');
     }
 }

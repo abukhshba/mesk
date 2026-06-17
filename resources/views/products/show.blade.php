@@ -1,164 +1,238 @@
 @extends('layouts.app')
 
-@section('title', $product->getTranslation('name', app()->getLocale()) . ' | ' . ($settings->company_name ?? ''))
-@section('description', Str::limit(strip_tags($product->getTranslation('short_description', app()->getLocale())), 160))
+@section('title', $product->getTranslation('name', app()->getLocale()) . ' | ' . ($settings->company_name ?? 'مسك للأسمدة') . ' - المسك للزراعة')
+@section('description', Str::limit(strip_tags($product->getTranslation('short_description', app()->getLocale()) ?: $product->getTranslation('name', app()->getLocale()) . ' - ' . ($settings->company_name ?? 'شركة مسك للأسمدة الزراعية') . ' - المملكة العربية السعودية'), 160))
+@section('keywords', $product->getTranslation('name', 'ar') . ', ' . $product->getTranslation('name', 'en') . ', مسك, شركة المسك, المسك للأسمدة, أسمدة زراعية, Mesk, Mesk Agricultural Fertilizers, Saudi Arabia fertilizers')
+@section('og_type', 'product')
+@section('og_title', $product->getTranslation('name', app()->getLocale()) . ' | ' . ($settings->company_name ?? 'مسك'))
+@section('og_description', Str::limit(strip_tags($product->getTranslation('short_description', app()->getLocale()) ?: $product->getTranslation('name', app()->getLocale())), 160))
+
+{{-- @section('schema')
+@php $productImage = $product->getFirstMediaUrl('gallery') ?: asset('images/og-default.png'); @endphp
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{ $product->getTranslation('name', app()->getLocale()) }}",
+    "description": "{{ Str::limit(strip_tags($product->getTranslation('short_description', app()->getLocale()) ?: $product->getTranslation('name', app()->getLocale())), 200) }}",
+    "image": "{{ $productImage }}",
+    "url": "{{ url()->current() }}",
+    "brand": {
+        "@type": "Brand",
+        "name": "{{ $settings->company_name ?? 'مسك للأسمدة الزراعية' }}",
+        "alternateName": ["مسك", "المسك", "Mesk Agri", "شركة المسك", "المسك للزراعة"]
+    },
+    "manufacturer": {
+        "@type": "Organization",
+        "name": "{{ $settings->company_name ?? 'شركة مسك للأسمدة الزراعية' }}",
+        "url": "{{ url('/') }}",
+        "areaServed": "SA"
+    },
+    "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "SAR",
+        "seller": {
+            "@type": "Organization",
+            "name": "{{ $settings->company_name ?? 'مسك للأسمدة الزراعية' }}"
+        }
+    }
+}
+</script>
+@endsection --}}
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
 
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm text-neutral-500 mb-8 flex-wrap">
-        <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">{{ __('app.home') }}</a>
-        <span>/</span>
-        <a href="{{ route('products.index') }}" class="hover:text-primary-600 transition-colors">{{ __('app.products') }}</a>
-        @if($product->category)
-        <span>/</span>
-        <a href="{{ route('categories.show', $product->category->slug) }}" class="hover:text-primary-600 transition-colors">
-            {{ $product->category->getTranslation('name', app()->getLocale()) }}
-        </a>
-        @endif
-        <span>/</span>
-        <span class="text-neutral-900 font-medium">{{ $product->getTranslation('name', app()->getLocale()) }}</span>
+    <nav class="mb-6 sm:mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1.5 sm:gap-2 text-sm flex-wrap">
+            {{-- Home --}}
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('home') }}" class="flex items-center gap-1.5 text-neutral-400 hover:text-primary-600 transition-colors duration-200 group">
+                    <svg class="w-4 h-4 shrink-0 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span class="hidden sm:inline">{{ __('app.home') }}</span>
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+
+            {{-- Products --}}
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('products.index') }}" class="text-neutral-400 hover:text-primary-600 transition-colors duration-200">
+                    {{ __('app.products') }}
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+
+            {{-- Category --}}
+            @if($product->category)
+            <li class="flex items-center gap-1.5 sm:gap-2">
+                <a href="{{ route('categories.subcategory', [$product->category->parent->slug, $product->category->slug]) }}" class="text-neutral-400 hover:text-primary-600 transition-colors duration-200">
+                    {{ $product->category->getTranslation('name', app()->getLocale()) }}
+                </a>
+                <svg class="w-3.5 h-3.5 text-neutral-300 shrink-0 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </li>
+            @endif
+
+            {{-- Current Product --}}
+            <li>
+                <span class="text-neutral-700 font-semibold">
+                    {{ $product->getTranslation('name', app()->getLocale()) }}
+                </span>
+            </li>
+        </ol>
     </nav>
 
-    
+
     @php
         $locale = app()->getLocale();
-        $hasProperties = $product->getTranslation('properties', $locale);
-        $hasDescription = $product->getTranslation('description', $locale);
+        $propertiesText = $product->getTranslation('properties', $locale);
+        $hasProperties = !empty($propertiesText) && !empty(trim(strip_tags($propertiesText)));
+
+        $descText = $product->getTranslation('description', $locale);
+        $hasDescription = !empty($descText) && !empty(trim(strip_tags($descText)));
+
+        $appRatesText = $product->getTranslation('application_rates_text', $locale);
         $hasApplicationRates = $product->application_rates_type === 'table'
             ? !empty($product->application_rates_rows)
-            : ($product->getTranslation('application_rates_text', $locale));
-        $hasUsageInstructions = $product->usage_instructions;
-        $hasSafetyPrecautions = $product->safety_precautions;
+            : (!empty($appRatesText) && !empty(trim(strip_tags($appRatesText))));
+
+        $hasUsageInstructions = !empty($product->usage_instructions) && !empty(trim(strip_tags($product->usage_instructions)));
+        $hasSafetyPrecautions = !empty($product->safety_precautions) && !empty(trim(strip_tags($product->safety_precautions)));
     @endphp
 
     <!-- Product Top Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 sm:mb-16">
 
         <!-- Gallery -->
-        <div>
+        <div class="lg:col-span-7 flex flex-row gap-2 sm:gap-6 items-center">
             @php
-                $mainImage = $product->getFirstMediaUrl('main_image');
-                $gallery = $product->getMedia('gallery');
-                $allImages = collect();
-                if ($mainImage) $allImages->push($mainImage);
-                foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
+                $packageSizes = $locale === 'ar'
+                    ? ($product->package_sizes_ar ?: $product->package_sizes_en)
+                    : ($product->package_sizes_en ?: $product->package_sizes_ar);
             @endphp
-
-
-            @if($allImages->count() > 0)
-            <!-- Main Swiper -->
-            <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-square">
-                <div class="swiper-wrapper">
-                    @foreach($allImages as $imgUrl)
-                    <div class="swiper-slide">
-                        <img src="{{ $imgUrl }}" alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
-                             class="w-full h-full object-cover">
-                    </div>
-                    @endforeach
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-
-            @if($allImages->count() > 1)
-            <!-- Thumbs Swiper -->
-            <div class="swiper product-thumb-swiper mt-3">
-                <div class="swiper-wrapper">
-                    @foreach($allImages as $imgUrl)
-                    <div class="swiper-slide cursor-pointer rounded-xl overflow-hidden aspect-square bg-neutral-100 border-2 border-transparent hover:border-primary-400 transition-colors">
-                        <img src="{{ $imgUrl }}" class="w-full h-full object-cover">
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-            @else
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center">
-                <svg class="w-24 h-24 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-                </svg>
-            </div>
-            @endif
-        </div>
-
-        <!-- Product Info -->
-        <div class="flex flex-col">
-            @if($product->category)
-            <span class="inline-flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-3 py-1 rounded-full w-fit">
-                @if($product->category->parent)
-                    {{ $product->category->parent->getTranslation('name', app()->getLocale()) }}
-                    <span class="mx-1 text-primary-400">·</span>
-                @endif
-                {{ $product->category->getTranslation('name', app()->getLocale()) }}
-            </span>
-            @endif
-
-            <h1 class="mt-3 text-3xl sm:text-4xl font-bold text-neutral-900 leading-tight">
-                {{ $product->getTranslation('name', app()->getLocale()) }}
-            </h1>
-
-            @if($product->getTranslation('short_description', app()->getLocale()))
-            <p class="mt-4 text-neutral-600 leading-relaxed text-lg">
-                {{ $product->getTranslation('short_description', app()->getLocale()) }}
-            </p>
-            @endif
-
-            <!-- Quick Specs -->
-            @if($product->active_ingredient || $product->package_sizes || $product->application_rate)
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {{-- @if($product->active_ingredient)
-                <div class="bg-neutral-50 rounded-xl p-4">
-                    <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.active_ingredient') }}</div>
-                    <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->active_ingredient }}</div>
-                </div>
-                @endif --}}
-                @if($product->application_rate)
-                <div class="bg-neutral-50 rounded-xl p-4">
-                    <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.application_rate') }}</div>
-                    <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->application_rate }}</div>
-                </div>
-                @endif
+            @if($packageSizes)
+            <div class="flex flex-col gap-2 sm:gap-3 shrink-0">
                 @php
-                    $packageSizes = $locale === 'ar' 
-                        ? ($product->package_sizes_ar ?: $product->package_sizes_en) 
-                        : ($product->package_sizes_en ?: $product->package_sizes_ar);
+                    $sizesArray = array_filter(array_map('trim', explode(',', $packageSizes)));
+                    $totalSizes = count($sizesArray);
+                    
+                    $baseColor = '19, 117, 71'; // Default Green
+                    if ($product->category) {
+                        $catSlug = $product->category->slug;
+                        if ($catSlug === 'granular-fertilizer') {
+                            $baseColor = '0, 110, 190'; // Navy Blue
+                        } elseif (in_array($catSlug, ['liquid-fertilizer', 'suspension-fertilizers'])) {
+                            $baseColor = '10, 190, 225'; // Cyan
+                        }
+                    }
                 @endphp
-                @if($packageSizes)
-                <div class="bg-neutral-50 rounded-xl p-4 sm:col-span-2 border border-neutral-100">
-                    <div class="text-xs text-neutral-400 font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                        {{ __('app.package_sizes') }}
+                @foreach($sizesArray as $index => $size)
+                    @php
+                        $opacityPct = 100 - (($totalSizes - 1 - $index) * 25);
+                        $opacityPct = max(20, $opacityPct); // Ensure it doesn't go below 20%
+                    @endphp
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[10px] sm:text-sm font-black text-white shadow-sm transition-transform duration-300 hover:scale-105"
+                         style="background-color: rgba({{ $baseColor }}, {{ $opacityPct / 100 }}); font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
+                        {{ $size }}
                     </div>
-                    <div class="flex flex-wrap gap-3">
-                        @foreach(array_map('trim', explode(',', $packageSizes)) as $size)
-                            @if(!empty($size))
-                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm sm:text-base hover:shadow-lg hover:shadow-green-500/40 transition-shadow duration-300">
-                                {{ $size }}
-                            </div>
-                            @endif
+                @endforeach
+            </div>
+            @endif
+
+            <div class="flex-1 min-w-0">
+                @php
+                    $gallery = $product->getMedia('gallery') ?? asset('images/products/' . $product->id . '.png');
+                    $allImages = collect();
+                    foreach ($gallery as $media) { $allImages->push($media->getUrl()); }
+                @endphp
+
+                @if($allImages->count() > 0)
+                <!-- Main Swiper -->
+                <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-[4/3]">
+                    <div class="swiper-wrapper">
+                        @foreach($allImages as $imgUrl)
+                        <div class="swiper-slide flex items-center justify-center">
+                            <img src="{{ $imgUrl }}" alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
+                                 class="max-w-full max-h-full object-contain">
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                @if($allImages->count() > 1)
+                <!-- Thumbs Swiper -->
+                <div class="swiper product-thumb-swiper mt-3">
+                    <div class="swiper-wrapper">
+                        @foreach($allImages as $imgUrl)
+                        <div class="swiper-slide cursor-pointer rounded-xl overflow-hidden aspect-square bg-neutral-50 border-2 border-transparent hover:border-primary-400 transition-colors flex items-center justify-center p-2">
+                            <img src="{{ $imgUrl }}" class="max-w-full max-h-full object-contain">
+                        </div>
                         @endforeach
                     </div>
                 </div>
                 @endif
+
+                @else
+                <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-[4/3]">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide flex items-center justify-center">
+                            <img src="{{ asset('images/products/new/' .$product->id. '.png') }}"
+                                 alt="{{ $product->getTranslation('name', app()->getLocale()) }}"
+                                 class="max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="lg:col-span-5 flex flex-col">
+            @if($product->category)
+            <span class="inline-flex items-center text-xs lg:text-sm font-semibold text-primary-700 bg-primary-50 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full w-fit">
+                {{ $product->category->getTranslation('name', app()->getLocale()) }}
+            </span>
+            @endif
+
+            <h1 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight">
+                {{ $product->getTranslation('name', app()->getLocale()) }}
+            </h1>
+
+            @php $subTitle = $product->getTranslation('sub_title', $locale) ?: ($locale === 'ar' ? $product->sub_title_en : $product->sub_title_ar); @endphp
+            @if($subTitle)
+            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="mt-2 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
+                {{ $subTitle }}
+            </p>
+            @endif
+
+            <!-- Quick Specs -->
+            @if($product->application_rate)
+            <div class="mt-6 grid grid-cols-1 gap-4">
+                <div class="bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+                    <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.application_rate') }}</div>
+                    <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->application_rate }}</div>
+                </div>
             </div>
             @endif
 
-            
+
             {{-- ─── SECTION 1: Properties & Benefits ─── --}}
             @if($hasProperties)
-            <div class="my-3">
+            <div class="my-4 mt-2 sm:mt-4">
                 <div class="relative bg-gradient-to-br from-primary-50 via-white to-accent-50/30 rounded-3xl overflow-hidden border border-primary-100/60">
                     {{-- Decorative corner shapes --}}
                     <div class="absolute top-0 {{ $locale === 'ar' ? 'left-0' : 'right-0' }} w-32 h-32 bg-primary-100/40 rounded-full -translate-y-1/2 {{ $locale === 'ar' ? '-translate-x-1/2' : 'translate-x-1/2' }}"></div>
                     <div class="absolute bottom-0 {{ $locale === 'ar' ? 'right-0' : 'left-0' }} w-20 h-20 bg-accent-100/30 rounded-full translate-y-1/2 {{ $locale === 'ar' ? 'translate-x-1/2' : '-translate-x-1/2' }}"></div>
 
-                    <div class="relative z-10 p-2 sm:p-4 lg:p-6">
+                    <div class="relative z-10 p-3 sm:p-4 lg:p-6">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-[#d7b43e] flex items-center justify-center shadow-sm">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                             </div>
                             <h2 class="text-xl sm:text-2xl font-black text-neutral-900">
@@ -166,7 +240,7 @@
                             </h2>
                         </div>
                         <div class="text-neutral-700 leading-relaxed prose max-w-none text-sm sm:text-base">
-                            {!! $hasProperties !!}
+                            {!! $propertiesText !!}
                         </div>
                     </div>
                 </div>
@@ -175,7 +249,7 @@
 
             <!-- WhatsApp CTA -->
             @if(!empty($settings->whatsapp))
-            <div class="mt-8">
+            <div class="mt-4 sm:mt-8">
                 <a href="https://wa.me/{{ $settings->whatsapp }}?text={{ urlencode(app()->getLocale() === 'ar' ? 'السلام عليكم، أود الاستفسار عن منتج: ' . $product->getTranslation('name', 'ar') : 'Hello, I would like to inquire about: ' . $product->getTranslation('name', 'en')) }}"
                    target="_blank"
                    class="flex items-center justify-center gap-3 w-full py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 text-lg">
@@ -196,32 +270,30 @@
     {{-- ─── SECTION 2: Directions & Application Rates ─── --}}
     @if($hasApplicationRates)
     <div class="mb-10">
-        <div class="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
+        <div class="bg-white rounded-lg border border-neutral-200/80 shadow-sm overflow-hidden">
             {{-- Section header with accent stripe --}}
-            <div class="bg-neutral-900 px-6 sm:px-8 lg:px-10 py-5 flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
-                </div>
-                <h2 class="text-xl sm:text-2xl font-black text-white">
+            <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-2 flex items-center gap-3">
+
+                <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
                 </h2>
             </div>
 
-            <div class="px-6 py-4 sm:px-8 sm:py-6 lg:px-10 lg:py-8">
+            <div class="pt-1">
                 @if($product->application_rates_type === 'table' && !empty($product->application_rates_rows))
                     {{-- ═══ TABLE MODE ═══ --}}
-                    <div class="overflow-x-auto -mx-2">
-                        <table class="w-full text-sm">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
-                                <tr class="border-b-2 border-primary-100">
-                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
+                                <tr class="bg-[#8e8e90]">
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
-                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
-                                        {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Application Rate with Irrigation Water' }}
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                        {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Usage Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
-                                    <th class="{{ $locale === 'ar' ? 'text-right' : 'text-left' }} py-3 px-4 font-bold text-primary-700 text-xs uppercase tracking-wider">
+                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
                                     </th>
                                     @endif
@@ -229,36 +301,44 @@
                             </thead>
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
-                                <tr class="{{ $i % 2 === 0 ? 'bg-neutral-50/70' : 'bg-white' }} hover:bg-primary-50/50 transition-colors">
-                                    <td class="py-3 px-4 font-semibold text-neutral-800">
+                                <tr class="bg-[#f9f8f9] hover:bg-[#efedee] transition-colors">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936] text-sm lg:text-lg">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>
-                                    <td class="py-3 px-4 text-neutral-600">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-[#373936] text-sm lg:text-lg">
                                         {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
                                     </td>
                                     @if($product->application_rates_has_notes)
-                                    <td class="py-3 px-4 text-neutral-500 text-xs leading-relaxed">
+                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs sm:text-sm lg:text-base leading-relaxed">
                                         {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
                                     </td>
                                     @endif
                                 </tr>
                                 @endforeach
                             </tbody>
+                            @if($product->getTranslation('application_rates_footer', $locale))
+                            <tfoot>
+                                <tr>
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-1.5 lg:py-2 px-4 font-semibold text-sm lg:text-base">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                            <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            @endif
                         </table>
                     </div>
 
-                    {{-- Footer note --}}
-                    @if($product->getTranslation('application_rates_footer', $locale))
-                    <div class="mt-6 flex items-start gap-2 bg-amber-50 border border-amber-200/60 rounded-xl px-4 py-3">
-                        <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <p class="text-amber-800 text-sm font-medium">{{ $product->getTranslation('application_rates_footer', $locale) }}</p>
-                    </div>
-                    @endif
+
 
                 @else
                     {{-- ═══ TEXT MODE ═══ --}}
-                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
-                        {{ $product->getTranslation('application_rates_text', $locale) }}
+                    <div class="text-neutral-700 leading-relaxed text-sm sm:text-base space-y-1 p-3">
+                        @foreach(explode("\n", $product->getTranslation('application_rates_text', $locale)) as $line)
+                        <p style="unicode-bidi: plaintext;">{{ $line }}</p>
+                        @endforeach
                     </div>
                 @endif
             </div>
@@ -320,7 +400,7 @@
     @if($relatedProducts->count())
     <div>
         <h2 class="text-2xl font-bold text-neutral-900 mb-8">{{ __('app.related_products') }}</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             @foreach($relatedProducts as $related)
                 <x-product-card :product="$related"/>
             @endforeach

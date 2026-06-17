@@ -16,32 +16,28 @@ class ProductSeeder extends Seeder
     {
         Product::query()->forceDelete();
 
-        $soluble = Category::where('slug', 'soluble-fertilizer')->first();
+        $soluble = Category::where('slug', 'soluble-fertilizer')
+            ->orWhere('slug', 'alasmd-althoab')
+            ->orWhere('name_en', 'Soluble Fertilizer')
+            ->first();
 
-        if (! $soluble) {
-            return;
-        }
+        if ($soluble) {
+            $products = $this->solubleProducts($soluble->id);
 
-        $products = $this->solubleProducts($soluble->id);
+            foreach ($products as $k => $data) {
+                $product = Product::create(array_merge($data, [
+                    'slug' => Str::slug($data['name_en']).'-'.$soluble->id.'-'.$k,
+                    'is_active' => true,
+                    'is_featured' => $k === 0,
+                    'sort_order' => $k,
+                ]));
 
-        foreach ($products as $k => $data) {
-            $product = Product::create(array_merge($data, [
-                'slug' => Str::slug($data['name_en']).'-'.$soluble->id.'-'.$k,
-                'is_active' => true,
-                'is_featured' => $k === 0,
-                'sort_order' => $k,
-            ]));
-
-            $imageName = 'product_fertilizer_bag.png';
-            $imagePath = public_path('images/'.$imageName);
-            if (file_exists($imagePath)) {
-                $product->addMedia($imagePath)
-                    ->preservingOriginal()
-                    ->toMediaCollection('main_image');
             }
         }
 
-        $granular = Category::where('slug', 'granular-fertilizer')->first();
+        $granular = Category::where('slug', 'granular-fertilizer')
+            ->orWhere('name_en', 'Granular Fertilizer')
+            ->first();
 
         if ($granular) {
             $granularProducts = $this->granularProducts($granular->id);
@@ -53,21 +49,12 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_granules.png'; // Assuming granular image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                }
             }
         }
 
-        $liquid = Category::where('slug', 'liquid-fertilizer')->first();
+        $liquid = Category::where('slug', 'liquid-fertilizer')
+            ->orWhere('name_en', 'Liquid Fertilizer')
+            ->first();
 
         if ($liquid) {
             $liquidProducts = $this->liquidProducts($liquid->id);
@@ -79,21 +66,12 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_liquid_bottle.png'; // Assuming liquid image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                }
             }
         }
 
-        $suspension = Category::where('slug', 'suspension-fertilizers')->first();
+        $suspension = Category::where('slug', 'suspension-fertilizers')
+            ->orWhere('name_en', 'Suspension Fertilizers')
+            ->first();
 
         if ($suspension) {
             $suspensionProducts = $this->suspensionProducts($suspension->id);
@@ -105,20 +83,6 @@ class ProductSeeder extends Seeder
                     'sort_order' => $k,
                 ]));
 
-                $imageName = 'product_suspension_bucket.png'; // Assuming suspension image name
-                $imagePath = public_path('images/'.$imageName);
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_liquid_bottle.png');
-                }
-                if (! file_exists($imagePath)) {
-                    $imagePath = public_path('images/product_fertilizer_bag.png');
-                }
-
-                if (file_exists($imagePath)) {
-                    $product->addMedia($imagePath)
-                        ->preservingOriginal()
-                        ->toMediaCollection('main_image');
-                }
             }
         }
     }
@@ -142,9 +106,11 @@ class ProductSeeder extends Seeder
             // ── 1. MISK - PREMIER 20-20-20 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - بريمير 20-20-20',
-                'name_en' => 'MISK - PREMIER 20-20-20',
-                'active_ingredient' => '20 - 20 - 20',
+                'name_ar' => 'مسك - بريمير',
+                'name_en' => 'MISK - PREMIER',
+                'active_ingredient' => 'NPK: 20 - 20 - 20',
+                'sub_title_ar' => 'NPK: 20 - 20 - 20',
+                'sub_title_en' => 'NPK: 20 - 20 - 20',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على النيتروجين والفوسفور والبوتاسيوم',
@@ -163,9 +129,11 @@ class ProductSeeder extends Seeder
             // ── 2. MISK - PREMIER 40-0-4 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - بريمير 40-0-4',
-                'name_en' => 'MISK - PREMIER 40-0-4',
-                'active_ingredient' => '40 - 0 - 4',
+                'name_ar' => 'مسك - بريمير',
+                'name_en' => 'MISK - PREMIER',
+                'active_ingredient' => 'NPK: 40 - 0 - 4',
+                'sub_title_ar' => 'NPK: 40 - 0 - 4',
+                'sub_title_en' => 'NPK: 40 - 0 - 4',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على النيتروجين والبوتاسيوم',
@@ -187,6 +155,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'نوب جرين',
                 'name_en' => 'Nop Green',
                 'active_ingredient' => 'NPK: 13 - 5 - 40',
+                'sub_title_ar' => 'NPK: 13 - 5 - 40',
+                'sub_title_en' => 'NPK: 13 - 5 - 40',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على البوتاسيوم والفوسفور والنيتروجين',
@@ -196,8 +166,8 @@ class ProductSeeder extends Seeder
                 'application_rates_type' => 'table',
                 'application_rates_has_notes' => true,
                 'application_rates_rows' => [
-                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three payments are given at the beginning of the emergence of the ears of grain.'],
-                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three payments are given per season after harvest.'],
+                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three irrigation cycles are required from the beginning of the ear of grain.'],
+                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three irrigation cycles are given per season after harvest.'],
                     ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف مرحلة تطور الثمار', 'notes_en' => 'Fruit development stage added.'],
                     ['crop_ar' => 'البطاطس', 'crop_en' => 'Potato', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'يعطى بعد تحضين البطاطس', 'notes_en' => 'It is given after the potatoes have been incubated.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تعطى مرة واحدة اسبوعيا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a week during the fruit development stage.'],
@@ -213,9 +183,11 @@ class ProductSeeder extends Seeder
             // ── 4. MISK 0-0-50+1% MgO+18% S ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-0-50+1% MgO+18% S',
-                'name_en' => 'MISK 0-0-50+1% MgO+18% S',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '0 - 0 - 50 + 1% MgO + 18% S',
+                'sub_title_ar' => '0 - 0 - 50 + 1% MgO + 18% S',
+                'sub_title_en' => '0 - 0 - 50 + 1% MgO + 18% S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على البوتاسيوم والكبريت والماغنيسيوم',
@@ -225,14 +197,13 @@ class ProductSeeder extends Seeder
                 'application_rates_type' => 'table',
                 'application_rates_has_notes' => true,
                 'application_rates_rows' => [
-                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three payments are given at the beginning of the emergence of the ears of grain.'],
-                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three payments are given per season after harvest.'],
+                    ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بداية ظهور السنابل', 'notes_en' => 'Three irrigation cycles are required from the beginning of the ear of grain.'],
+                    ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى ثلاث دفعات بالموسم بعد الحصاد', 'notes_en' => 'Three irrigation cycles are given per season after harvest.'],
                     ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف مرحلة تطور الثمار', 'notes_en' => 'Fruit development stage added.'],
                     ['crop_ar' => 'البطاطس', 'crop_en' => 'Potato', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'يعطى بعد تحضين البطاطس', 'notes_en' => 'It is given after the potatoes have been incubated.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تعطى مرة واحدة اسبوعيا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a week during the fruit development stage.'],
                     ['crop_ar' => 'أشجار الفاكهة', 'crop_en' => 'Fruit trees', 'rate_ar' => '6 - 8 لتر/هكتار', 'rate_en' => '6 – 8 liters/hectare', 'notes_ar' => 'تعطى مرة واحدة شهريا خلال مرحلة تطور الثمار', 'notes_en' => 'Give once a month during the fruit development stage.'],
-                    ['crop_ar' => 'النخيل', 'crop_en' => 'Palm', 'rate_ar' => '5 - 8 لتر/هكتار', 'rate_en' => '5 – 8 liters/hectare', 'notes_ar' => '', 'notes_en' => ''],
-                    ['crop_ar' => 'نباتات الزينة والمسطحات الخضراء', 'crop_en' => 'Ornamental plants and turfgrass', 'rate_ar' => '3 - 4 لتر/هكتار', 'rate_en' => '3 – 4 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Add as needed or once every two months.'],
+                    ['crop_ar' => 'النخيل', 'crop_en' => 'Palm', 'rate_ar' => '5 - 8 لتر/هكتار', 'rate_en' => '5 – 8 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Add as needed or once every two months.'],
                 ],
                 'application_rates_footer_ar' => 'للرش الورقي: 2-3 كجم / 1000 لتر ماء / هكتار',
                 'application_rates_footer_en' => 'For foliar spray: 2–3 kg / 1000 liters of water / hectare',
@@ -243,9 +214,11 @@ class ProductSeeder extends Seeder
             // ── 5. MISK 0-52-34+1% MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-52-34+1% MgO',
-                'name_en' => 'MISK 0-52-34+1% MgO',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '0 - 52 - 34 + 1% MgO',
+                'sub_title_ar' => '0 - 52 - 34 + 1% MgO',
+                'sub_title_en' => '0 - 52 - 34 + 1% MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي على الفوسفور والبوتاسيوم والماغنيسيوم',
@@ -257,7 +230,7 @@ class ProductSeeder extends Seeder
                 'application_rates_rows' => [
                     ['crop_ar' => 'القمح - الشعير', 'crop_en' => 'Wheat – Barley', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى بعد الزراعة بداية التفريع', 'notes_en' => 'Apply after planting at the beginning of tillering.'],
                     ['crop_ar' => 'محاصيل الأعلاف', 'crop_en' => 'Forage crops', 'rate_ar' => '4 - 6 لتر/هكتار', 'rate_en' => '4 – 6 liters/hectare', 'notes_ar' => 'يعطى بعد الحصاد بأسبوع', 'notes_en' => 'Apply one week after harvest.'],
-                    ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '6 - 7 لتر/هكتار', 'rate_en' => '6 – 7 liters/hectare', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
+                    ['crop_ar' => 'الخضروات المكشوفة', 'crop_en' => 'Open-field vegetables', 'rate_ar' => '5 - 7 لتر/هكتار', 'rate_en' => '5 – 7 liters/hectare', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
                     ['crop_ar' => 'زراعات البيوت المحمية', 'crop_en' => 'Greenhouse crops', 'rate_ar' => '1 - 2 كجم / 1000 م²', 'rate_en' => '1–2 kg / 1000 m²', 'notes_ar' => 'تضاف بعد الزراعة وقبل التزهار', 'notes_en' => 'Apply after planting and before flowering.'],
                     ['crop_ar' => 'أشجار الفاكهة والنخيل', 'crop_en' => 'Fruit trees and palm trees', 'rate_ar' => '6 - 8 لتر/هكتار', 'rate_en' => '6 – 8 liters/hectare', 'notes_ar' => 'تعطى دفعتين خلال التزهار والعقد', 'notes_en' => 'Apply in two doses during flowering and fruit set.'],
                     ['crop_ar' => 'نباتات الزينة والمسطحات الخضراء', 'crop_en' => 'Ornamental plants and turfgrass', 'rate_ar' => '3 - 4 لتر/هكتار', 'rate_en' => '3 – 4 liters/hectare', 'notes_ar' => 'تضاف عند الحاجة أو مرة كل شهرين', 'notes_en' => 'Apply as needed or once every two months.'],
@@ -271,9 +244,11 @@ class ProductSeeder extends Seeder
             // ── 6. MISK 12-60-0+1MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 12-60-0+1MgO',
-                'name_en' => 'MISK 12-60-0+1MgO',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '12 - 60 - 0 + 1MgO',
+                'sub_title_ar' => '12 - 60 - 0 + 1MgO',
+                'sub_title_en' => '12 - 60 - 0 + 1MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي علي نسب عالية من الفوسفور و النتروجين و الماغنيسيوم.',
@@ -299,9 +274,11 @@ class ProductSeeder extends Seeder
             // ── 7. MISK 21 N + 1MgO + 24 S ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 21 N + 1MgO + 24 S',
-                'name_en' => 'MISK 21 N + 1MgO + 24 S',
+                'name_ar' => 'مسك',
+                'name_en' => 'MISK',
                 'active_ingredient' => '21 N + 1MgO + 24 S',
+                'sub_title_ar' => '21 N + 1MgO + 24 S',
+                'sub_title_en' => '21 N + 1MgO + 24 S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي علي النتروجين و الماغنيسيوم و الكبريت',
@@ -327,9 +304,11 @@ class ProductSeeder extends Seeder
             // ── 8. Amino Green 50% ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'أمينو جرين 50%',
-                'name_en' => 'Amino Green 50%',
+                'name_ar' => 'أمينو جرين',
+                'name_en' => 'Amino Green',
                 'active_ingredient' => 'PLANT AMINO ACID 50% - NITROGEN 16%',
+                'sub_title_ar' => 'أحماض أمينية نباتية 50% - نيتروجين 16%',
+                'sub_title_en' => 'PLANT AMINO ACID 50% - NITROGEN 16%',
                 'package_sizes_en' => '1 kg, 10 kg, 20 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 20 كجم, 50 كجم',
                 'short_description_ar' => 'منشط حيوي للنبات، يحتوي على الاحماض الامينية النباتية الحرة اضافة الى النتروجين',
@@ -351,6 +330,8 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'هيومي جرين',
                 'name_en' => 'Humi Green',
                 'active_ingredient' => '65 Humic + 15 Fulvic + 10 K2O',
+                'sub_title_ar' => '65 Humic + 15 Fulvic + 10 K2O',
+                'sub_title_en' => '65 Humic + 15 Fulvic + 10 K2O',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد عضوي يحتوي على أحماض الهيوميك والفولفيك مستخرج من صخور الليونارديت الطبيعية',
@@ -371,9 +352,9 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'مايكروسبيشال',
                 'name_en' => 'Micro Special',
-                'active_ingredient' => 'Soluble Fertilizer',
-                'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
-                'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
+                'active_ingredient' => '',
+                'package_sizes_en' => '1 kg',
+                'package_sizes_ar' => '1 كجم',
                 'short_description_ar' => 'سماد ذواب يحتوي علي النيتروجين والبوتاسيوم',
                 'short_description_en' => 'Soluble fertilizer containing nitrogen and potassium',
                 'properties_ar' => 'سماد ذواب يحتوي علي النيتروجين والبوتاسيوم',
@@ -410,9 +391,11 @@ class ProductSeeder extends Seeder
             // ── 1. MISK - GREEN FARM 12-12-17 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 12-12-17',
-                'name_en' => 'MISK - GREEN FARM 12-12-17',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '12 - 12 - 17',
+                'sub_title_ar' => '12 - 12 - 17',
+                'sub_title_en' => '12 - 12 - 17',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد محبب يحتوي علي النيتروجين والفوسفور والبوتاسيوم',
@@ -431,9 +414,11 @@ class ProductSeeder extends Seeder
             // ── 2. MISK - GREEN FARM 18-18-5 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 18-18-5',
-                'name_en' => 'MISK - GREEN FARM 18-18-5',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '18 - 18 - 5',
+                'sub_title_ar' => '18 - 18 - 5',
+                'sub_title_en' => '18 - 18 - 5',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد محبب يحتوي علي النيتروجين والفوسفور والبوتاسيوم',
@@ -452,9 +437,11 @@ class ProductSeeder extends Seeder
             // ── 3. MISK - GREEN FARM 15-15-15+4%MgO ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك - جرين فارم 15-15-15+4%MgO',
-                'name_en' => 'MISK - GREEN FARM 15-15-15+4%MgO',
+                'name_ar' => 'مسك - جرين فارم',
+                'name_en' => 'MISK - GREEN FARM',
                 'active_ingredient' => '15 - 15 - 15 + 4% MgO',
+                'sub_title_ar' => '15 - 15 - 15 + 4% MgO',
+                'sub_title_en' => '15 - 15 - 15 + 4% MgO',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد محبب يحتوي علي النيتروجين والفوسفور والمغنيسيوم',
@@ -473,9 +460,11 @@ class ProductSeeder extends Seeder
             // ── 4. MISK 0-0-50+1%MgO+18%S (Granular) ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'مسك 0-0-50+1%MgO+18%S (محبب)',
-                'name_en' => 'MISK 0-0-50+1%MgO+18%S (Granular)',
+                'name_ar' => 'مسك (محبب)',
+                'name_en' => 'MISK (Granular)',
                 'active_ingredient' => '0 - 0 - 50 + 1% MgO + 18% S',
+                'sub_title_ar' => '0 - 0 - 50 + 1% MgO + 18% S',
+                'sub_title_en' => '0 - 0 - 50 + 1% MgO + 18% S',
                 'package_sizes_en' => '1 kg, 10 kg, 25 kg, 50 kg',
                 'package_sizes_ar' => '1 كجم, 10 كجم, 25 كجم, 50 كجم',
                 'short_description_ar' => 'سماد محبب يحتوي علي البوتاسيوم والكبريت والمغنيسيوم',
@@ -512,9 +501,11 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'تيرا سولت',
                 'name_en' => 'TERRA SALT',
-                'active_ingredient' => 'Anti-Salinity معالج ملوحة',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'active_ingredient' => '',
+                'sub_title_ar' => ' معالج ملوحة',
+                'sub_title_en' => 'Anti-Salinity',
+                'package_sizes_en' => '5 L, 17 L',
+                'package_sizes_ar' => '5 لتر, 17 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي علي النتروجين و الكالسيوم و الاحماض العضوية',
                 'short_description_en' => 'A liquid fertilizer containing nitrogen, calcium, and organic acids.',
                 'properties_ar' => 'سماد سائل يحتوي علي النتروجين و الكالسيوم و الاحماض العضوية ، يستخدم كمعالج ملوحة و لمعالجة نقص عنصر الكالسيوم. يزيد من سعة التبادل الكاتيوني لحبيبات التربة ، فيعمل على طرد الصوديوم من التربة و يعمل على تحسين قوام التربة',
@@ -541,9 +532,11 @@ class ProductSeeder extends Seeder
                 'category_id' => $categoryId,
                 'name_ar' => 'روت فارم',
                 'name_en' => 'ROOT FARM',
-                'active_ingredient' => 'Root stimulation منشط الجذور',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'active_ingredient' => '',
+                'sub_title_ar' => 'منشط الجذور',
+                'sub_title_en' => 'Root stimulation',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل لتنشيط الجذور يحتوي علي النتروجين و الفوسفور و البوتاسيوم و المغنيسيوم',
                 'short_description_en' => 'A liquid fertilizer for root stimulation containing nitrogen, phosphorus, potassium, and magnesium',
                 'properties_ar' => 'سماد سائل لتنشيط الجذور يحتوي علي النتروجين و الفوسفور و البوتاسيوم و المغنيسيوم و نسب بسيطة من العناصر الصغرى ( الحديد،الزنك، المنجنيز) المخلبة على ايديتا .',
@@ -571,8 +564,10 @@ class ProductSeeder extends Seeder
                 'name_ar' => 'أمينو',
                 'name_en' => 'Amino',
                 'active_ingredient' => 'Improves soil properties يحسن خواص التربة',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'sub_title_ar' => 'يحسن خواص التربة',
+                'sub_title_en' => 'Improves soil properties',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي علي الاحماض الامينية و النيتروجين و البوتاسيوم',
                 'short_description_en' => 'Liquid fertilizer containing amino acids, nitrogen, and potassium',
                 'properties_ar' => 'سماد سائل يحتوي علي الاحماض الامينية و النيتروجين و البوتاسيوم ويحتوي على حمض الهيوميك و الفولفيك المستخرجة من صخور الليونارديت الطبيعية. تساهم الاحماض الامينية في تحمل النبات للظروف البيئية القاسية مثل الإجهاد المائي (الجفاف)، والتغيرات المناخية، والملوثات.كما يساهم حمض الهيوميك و الفولفيك في تحسين خواص التربة الفيزيائية والكيميائية ، مما يساهم في زيادة تيسر العناصر الغذائية للنباتات وزيادة الإنتاجية',
@@ -589,11 +584,13 @@ class ProductSeeder extends Seeder
             // ── 4. PhosphoGreen 85% ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'فوسفوجرين 85%',
-                'name_en' => 'PhosphoGreen 85%',
+                'name_ar' => 'فوسفوجرين',
+                'name_en' => 'PhosphoGreen',
                 'active_ingredient' => 'Phosphogreen 85%',
-                'package_sizes_en' => '1 L, 10 L, 25 L',
-                'package_sizes_ar' => '1 لتر, 10 لتر, 25 لتر',
+                'sub_title_ar' => '%85 فوسفوجرين ',
+                'sub_title_en' => 'Phosphogreen 85%',
+                'package_sizes_en' => '1 L, 5 L, 20 L',
+                'package_sizes_ar' => '1 لتر, 5 لتر, 20 لتر',
                 'short_description_ar' => 'سماد سائل يحتوي على نسبة عالية من الفوسفور',
                 'short_description_en' => 'Liquid fertilizer with a high phosphorus content',
                 'properties_ar' => 'سماد سائل يحتوي على نسبة عالية من الفوسفور',
@@ -626,11 +623,13 @@ class ProductSeeder extends Seeder
             // ── 1. NUTRIVA 25-25-18 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'نوتريفا 25-25-18',
-                'name_en' => 'NUTRIVA 25-25-18',
+                'name_ar' => 'نوتريفا',
+                'name_en' => 'NUTRIVA',
                 'active_ingredient' => '25 - 25 - 18',
-                'package_sizes_en' => '25 L',
-                'package_sizes_ar' => '25 لتر',
+                'sub_title_ar' => '25 - 25 - 18',
+                'sub_title_en' => '25 - 25 - 18',
+                'package_sizes_en' => '20 kg',
+                'package_sizes_ar' => '20 كجم',
                 'short_description_ar' => 'سماد معلق يحتوي علي النيتروجين و الفوسفور و البوتاسيوم .',
                 'short_description_en' => 'A suspension fertilizer containing nitrogen, phosphorus, and potassium.',
                 'properties_ar' => 'سماد معلق يحتوي علي النيتروجين و الفوسفور و البوتاسيوم .',
@@ -655,11 +654,13 @@ class ProductSeeder extends Seeder
             // ── 2. NUTRIVA 0-52-34 ──
             [
                 'category_id' => $categoryId,
-                'name_ar' => 'نوتريفا 0-52-34',
-                'name_en' => 'NUTRIVA 0-52-34',
+                'name_ar' => 'نوتريفا',
+                'name_en' => 'NUTRIVA',
                 'active_ingredient' => '0 - 52 - 34',
-                'package_sizes_en' => '25 L',
-                'package_sizes_ar' => '25 لتر',
+                'sub_title_ar' => '0 - 52 - 34',
+                'sub_title_en' => '0 - 52 - 34',
+                'package_sizes_en' => '20 kg',
+                'package_sizes_ar' => '20 كجم',
                 'short_description_ar' => 'سماد معلق يحتوي علي الفوسفور و البوتاسيوم',
                 'short_description_en' => 'A suspension fertilizer containing phosphorus and potassium.',
                 'properties_ar' => 'سماد معلق يحتوي علي الفوسفور و البوتاسيوم',

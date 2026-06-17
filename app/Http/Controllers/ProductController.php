@@ -23,6 +23,39 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'categories', 'settings', 'search', 'categoryId'));
     }
 
+    public function searchApi(Request $request)
+    {
+        $q = $request->string('q')->toString();
+        if (empty($q)) {
+            return response()->json([]);
+        }
+
+        $products = Product::active()
+            ->where(function ($query) use ($q) {
+                $query->where('name_ar', 'like', "{$q}%")
+                      ->orWhere('name_en', 'like', "{$q}%")
+                      ->orWhere('name_ar', 'like', "% {$q}%")
+                      ->orWhere('name_en', 'like', "% {$q}%");
+            })
+            ->with(['media', 'category'])
+            ->limit(4)
+            ->get();
+
+        $results = $products->map(function ($product) {
+            $locale = app()->getLocale();
+            $subTitle = $product->getTranslation('sub_title', $locale);
+            return [
+                'id' => $product->id,
+                'name' => $product->getTranslation('name', $locale),
+                'url' => route('products.show', $product->slug),
+                'image' => $product->hasMedia('main_image') ? $product->getFirstMediaUrl('main_image') : asset('images/products/main/' . $product->id . '.png'),
+                'subtitle' => $subTitle,
+            ];
+        });
+
+        return response()->json($results);
+    }
+
     public function show(string $slug)
     {
         $product = Product::where('slug', $slug)->active()

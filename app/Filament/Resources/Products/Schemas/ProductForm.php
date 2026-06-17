@@ -21,28 +21,6 @@ class ProductForm
     {
         return $schema
             ->components([
-                Section::make(__('app.product_images'))
-                    ->icon(Heroicon::OutlinedPhoto)
-                    ->columns(2)
-                    ->columnSpanFull()
-                    ->schema([
-                        SpatieMediaLibraryFileUpload::make('main_image')
-                            ->label(__('app.main_image'))
-                            ->collection('main_image')
-                            ->image()
-                            ->imageResizeMode('cover')
-                            ->disk('public')
-                            ->visibility('public'),
-                        SpatieMediaLibraryFileUpload::make('gallery')
-                            ->label(__('app.gallery_images'))
-                            ->collection('gallery')
-                            ->image()
-                            ->multiple()
-                            ->reorderable()
-                            ->disk('public')
-                            ->visibility('public'),
-                    ]),
-
                 Section::make(__('app.product_info'))
                     ->icon(Heroicon::OutlinedLanguage)
                     ->columns(2)
@@ -51,11 +29,16 @@ class ProductForm
                         TextInput::make('name_ar')
                             ->label(__('app.name_ar'))
                             ->required()
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                            ->live(onBlur: true),
                         TextInput::make('name_en')
                             ->label(__('app.name_en'))
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state)))
                             ->required(),
+                        TextInput::make('sub_title_ar')
+                            ->label(__('app.sub_title_ar')),
+                        TextInput::make('sub_title_en')
+                            ->label(__('app.sub_title_en')),
                         TextInput::make('slug')
                             ->label(__('app.slug'))
                             ->required()
@@ -209,6 +192,28 @@ class ProductForm
                         Toggle::make('is_featured')->label(__('app.is_featured'))->default(false),
                         Toggle::make('is_active')->label(__('app.is_active'))->default(true),
                         TextInput::make('sort_order')->label(__('app.order'))->numeric()->default(0),
+                    ]),
+
+                Section::make(__('app.product_images'))
+                    ->icon(Heroicon::OutlinedPhoto)
+                    ->columns(2)
+                    ->columnSpanFull()
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('main_image')
+                            ->label(__('app.main_image'))
+                            ->collection('main_image')
+                            ->image()
+                            ->imageResizeMode('cover')
+                            ->disk('public')
+                            ->visibility('public'),
+                        SpatieMediaLibraryFileUpload::make('gallery')
+                            ->label(__('app.gallery_images'))
+                            ->collection('gallery')
+                            ->image()
+                            ->multiple()
+                            ->reorderable()
+                            ->disk('public')
+                            ->visibility('public'),
                     ]),
             ]);
     }

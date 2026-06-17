@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\WebsiteSetting;
 use App\Services\ProductService;
 
@@ -36,6 +37,22 @@ class HomeController extends Controller
         $about = AboutUs::first();
         $settings = WebsiteSetting::getSettings();
 
-        return view('home', compact('categories', 'categoriesDisplayMode', 'singleParent', 'featuredProducts', 'about', 'settings'));
+        $productsCount = Product::active()->count();
+        $productsCountAr = str_replace(
+            ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+            $productsCount
+        );
+
+        return view('home', compact(
+            'categories',
+            'categoriesDisplayMode',
+            'singleParent',
+            'featuredProducts',
+            'about',
+            'settings',
+            'productsCount',
+            'productsCountAr'
+        ));
     }
 }

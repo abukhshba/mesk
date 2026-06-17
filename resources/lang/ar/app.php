@@ -70,6 +70,8 @@ return [
     'product' => 'منتج',
     'name_ar' => 'الاسم (عربي)',
     'name_en' => 'الاسم (إنجليزي)',
+    'sub_title_ar' => 'العنوان الفرعي (عربي)',
+    'sub_title_en' => 'العنوان الفرعي (إنجليزي)',
     'description_ar' => 'الوصف (عربي)',
     'description_en' => 'الوصف (إنجليزي)',
     'short_description_ar' => 'الوصف القصير (عربي)',
@@ -108,6 +110,8 @@ return [
     'twitter_url' => 'رابط تويتر / إكس',
     'linkedin_url' => 'رابط لينكد إن',
     'address' => 'العنوان',
+    'google_maps_link' => 'رابط خرائط جوجل',
+    'contact_info_pdf' => 'ملف بيانات الاتصال',
     'system' => 'النظام',
     'website_setting' => 'إعداد الموقع',
     'website_settings' => 'إعدادات الموقع',
@@ -121,13 +125,13 @@ return [
     'vision_ar' => 'الرؤية (عربي)',
     'vision_en' => 'الرؤية (إنجليزي)',
     'about_us_image' => 'صورة من نحن',
-    
+
     // Categories
     'child_categories' => 'الأقسام الفرعية',
     'slug' => 'الرابط (Slug)',
     'category_details' => 'تفاصيل القسم',
     'category_image' => 'صورة القسم',
-    
+
     // Contact Messages
     'contact_message' => 'رسالة تواصل',
     'contact_messages' => 'رسائل التواصل',
@@ -135,7 +139,7 @@ return [
     'email_address' => 'البريد الإلكتروني',
     'message' => 'الرسالة',
     'is_read' => 'مقروءة',
-    
+
     // Products
     'product_images' => 'صور المنتج',
     'main_image' => 'الصورة الرئيسية',
@@ -165,7 +169,7 @@ return [
     'footer_note_en' => 'ملاحظة الفوتر (إنجليزي)',
     'specifications' => 'المواصفات',
     'application_rate_legacy' => 'معدل الاستخدام (القديم)',
-    
+
     // Others
     'brand' => 'العلامة التجارية',
     'social_media' => 'وسائل التواصل الاجتماعي',
