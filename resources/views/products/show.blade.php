@@ -275,7 +275,7 @@
             <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-2 flex items-center gap-3">
 
                 <h2 class="text-lg sm:text-xl font-black text-white">
-                    {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Application Rates' }}
+                    {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Usage Rates' }}
                 </h2>
             </div>
 
