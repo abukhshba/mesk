@@ -75,7 +75,7 @@
         </div>
 
         <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 w-full md:max-w-[84%] mx-auto mt-6 sm:mt-4 px-4">
+        <div class="relative z-20 w-full md:max-w-[84%] mx-auto mt-6 sm:mt-8 px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4">
                 <!-- Panel 1: Agent (Green) -->
                 <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
