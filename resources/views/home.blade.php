@@ -74,51 +74,74 @@
             </video>
         </div>
 
-        <!-- Overlapping Stats Cards Grid -->
-        <div class="relative z-20 w-full md:max-w-[84%] mx-auto mt-6 sm:mt-8 px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4">
-                <!-- Panel 1: Agent (Green) -->
-                <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
-                        <!-- Saudi Map / Leaf SVG -->
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
-                        </svg>
-                    </div>
-                    <div class="text-left rtl:text-right">
-                        <p class="text-[11px] sm:text-xs lg:text-[14px] font-bold leading-snug">
-                            {{ app()->getLocale() === 'ar' ? 'المصنع وكيل لكبرى الشركات العالمية لتصنيع خامات الاسمدة فى العالم.' : 'The factory is an agent for major international companies manufacturing raw materials for fertilizers worldwide.' }}
-                        </p>
-                    </div>
-                </div>
+        <!-- Overlapping Stats Cards — Infinite Marquee -->
+        <style>
+            @keyframes statsMarqueeLtr {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            @keyframes statsMarqueeRtl {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(50%); }
+            }
+            .stats-track-ltr { animation: statsMarqueeLtr 18s linear infinite; }
+            .stats-track-rtl { animation: statsMarqueeRtl 18s linear infinite; }
+        </style>
+        <div class="relative z-20 w-full mt-6 sm:mt-8 overflow-hidden">
+            <!-- Fade edges -->
+            <div class="absolute inset-y-0 left-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, white, transparent);"></div>
+            <div class="absolute inset-y-0 right-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, white, transparent);"></div>
 
-                <!-- Panel 2: Products (Navy) -->
-                <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
-                        <!-- Flask / Beaker SVG -->
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                    </div>
-                    <div class="text-left rtl:text-right">
-                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+ منتجاً' : '+' . $productsCount . ' Products' }}</p>
-                        <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'مبتكر وفعال' : 'Innovative & effective' }}</p>
-                    </div>
-                </div>
+            <div class="{{ app()->getLocale() === 'ar' ? 'stats-track-rtl' : 'stats-track-ltr' }} flex gap-3 sm:gap-4 w-max">
+                @php
+                    $statsCards = [
+                        [
+                            'bg' => '#137547',
+                            'icon_color' => '#137547',
+                            'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />',
+                            'title_ar' => null,
+                            'title_en' => null,
+                            'text_ar' => 'المصنع وكيل لكبرى الشركات العالمية لتصنيع خامات الاسمدة فى العالم.',
+                            'text_en' => 'Agent for major global fertilizer raw material manufacturers.',
+                        ],
+                        [
+                            'bg' => '#0b3c5d',
+                            'icon_color' => '#0b3c5d',
+                            'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />',
+                            'title_ar' => $productsCountAr . '+ منتجاً',
+                            'title_en' => '+' . $productsCount . ' Products',
+                            'text_ar' => 'مبتكر وفعال',
+                            'text_en' => 'Innovative & effective',
+                        ],
+                        [
+                            'bg' => '#F4B400',
+                            'icon_color' => '#F4B400',
+                            'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />',
+                            'title_ar' => '٦٠+ وكيلاً',
+                            'title_en' => '+60 Agents',
+                            'text_ar' => 'داخل المملكة وحول العالم',
+                            'text_en' => 'Within the Kingdom and worldwide',
+                        ],
+                    ];
+                    $locale = app()->getLocale();
+                    // Duplicate 4× for seamless infinite loop
+                    $allCards = array_merge($statsCards, $statsCards, $statsCards, $statsCards);
+                @endphp
 
-                <!-- Panel 3: Agents (Yellow) -->
-                <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-3 lg:py-3.5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center text-primary-600 shadow-md">
-                        <!-- Users SVG -->
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+                @foreach($allCards as $card)
+                <div class="shrink-0 w-52 sm:w-80 text-white rounded-xl sm:rounded-3xl py-2 px-3 sm:py-3 sm:px-5 lg:px-6 flex items-center justify-center gap-2 sm:gap-4 shadow-xl"
+                     style="background-color: {{ $card['bg'] }};">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6 lg:w-7 lg:h-7" fill="none" stroke="{{ $card['icon_color'] }}" stroke-width="2" viewBox="0 0 24 24">{!! $card['icon'] !!}</svg>
                     </div>
-                    <div class="text-left rtl:text-right">
-                        <p class="text-lg sm:text-2xl lg:text-3xl font-black leading-tight">{{ app()->getLocale() === 'ar' ? '٦٠+ وكيلاً' : '+60 Agents' }}</p>
-                        <p class="text-[10px] sm:text-[11px] lg:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{{ app()->getLocale() === 'ar' ? 'داخل المملكة وحول العالم' : 'within the Kingdom and worldwide' }}</p>
+                    <div class="text-center min-w-0">
+                        @if($card['title_' . $locale])
+                        <p class="text-sm sm:text-2xl lg:text-3xl font-black leading-tight">{{ $card['title_' . $locale] }}</p>
+                        @endif
+                        <p class="text-[9px] sm:text-[11px] lg:text-sm font-semibold {{ $card['title_' . $locale] ? 'opacity-90 mt-0.5 sm:mt-1' : 'leading-snug' }}">{{ $card['text_' . $locale] }}</p>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -126,24 +149,115 @@
 
 {{-- SECTION 2: PARALLAX DRONE SPRAYING BANNER --}}
 <style>
-    .section-parallax { min-height: 240px; }
-    @verbatim @media (min-width: 768px) { .section-parallax { min-height: 600px; } } @endverbatim
+@keyframes kenBurns {
+    0%   { transform: scale(1)    translateX(0);      }
+    50%  { transform: scale(1.08) translateX(-1%);    }
+    100% { transform: scale(1)    translateX(0);      }
+}
+@keyframes bannerReveal {
+    0%   { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+@keyframes lineExpand {
+    0%   { width: 0;    opacity: 0; }
+    100% { width: 80px; opacity: 1; }
+}
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0);    }
+    50%       { transform: translateY(-8px); }
+}
+@keyframes pulseRing {
+    0%   { transform: scale(1);    opacity: .6; }
+    100% { transform: scale(1.55); opacity: 0;  }
+}
+@keyframes diagonalSlide {
+    0%   { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(200%)  skewX(-15deg); }
+}
+.banner-bg    { animation: kenBurns 20s ease-in-out infinite; }
+.banner-line  { animation: lineExpand .8s .6s cubic-bezier(.22,.68,0,1.2) both; }
+.banner-h2    { animation: bannerReveal .8s .3s both; }
+.banner-p     { animation: bannerReveal .8s .55s both; }
+.banner-cta   { animation: bannerReveal .8s .75s both; }
+.badge-left   { animation: floatBadge 4s 0s   ease-in-out infinite, bannerReveal .7s .9s  both; }
+.badge-right  { animation: floatBadge 4s 1.5s ease-in-out infinite, bannerReveal .7s 1.1s both; }
+.pulse-ring   { animation: pulseRing 2s ease-out infinite; }
+.shine-sweep  { animation: diagonalSlide 5s 2s linear infinite; }
 </style>
-<section class="relative flex items-center justify-center overflow-hidden bg-neutral-900 section-parallax">
-    <!-- Background Image with Overlay -->
-    <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/img221.jpg') }}" alt="Drone Crop Spraying" class="w-full h-full object-cover brightness-80">
-        <div class="absolute inset-0 bg-emerald-950/20 mix-blend-overlay"></div>
+
+<section class="relative overflow-hidden bg-neutral-950" style="min-height: 220px; height: 45vh; max-height: 780px;">
+
+    {{-- Background with Ken Burns --}}
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="{{ asset('images/img221.jpg') }}" alt="Drone Crop Spraying"
+             class="banner-bg w-full h-full object-cover origin-center">
+        {{-- Dark gradient overlay --}}
+        <div class="absolute inset-0" style="background: linear-gradient(160deg, rgba(0,0,0,.55) 0%, rgba(3,30,15,.80) 100%);"></div>
+        {{-- Green bottom glow --}}
+        <div class="absolute bottom-0 left-0 right-0 h-40" style="background: linear-gradient(to top, rgba(19,117,71,.35), transparent);"></div>
+        {{-- Diagonal shine sweep --}}
+        <div class="shine-sweep absolute inset-0 w-24 sm:w-40 opacity-10" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);"></div>
     </div>
 
-    <!-- Centered Text -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center text-white">
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-wide mb-4" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-            {{ app()->getLocale() === 'ar' ? 'عالم من الابتكار' : 'A world of innovation' }}
+    {{-- Floating badge — left --}}
+    <div class="badge-left absolute top-1/4 {{ app()->getLocale() === 'ar' ? 'right-6 sm:right-16' : 'left-6 sm:left-16' }} z-20 hidden sm:block">
+        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-white shadow-xl">
+            <div class="pulse-ring absolute inset-0 rounded-2xl border-2 border-[#16a34a]"></div>
+            <p class="text-2xl font-black text-[#4ade80]">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+' : '+' . $productsCount }}</p>
+            <p class="text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'منتج زراعي' : 'Products' }}</p>
+        </div>
+    </div>
+
+    {{-- Floating badge — right --}}
+    <div class="badge-right absolute top-1/3 {{ app()->getLocale() === 'ar' ? 'left-6 sm:left-16' : 'right-6 sm:right-16' }} z-20 hidden sm:block">
+        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-white shadow-xl">
+            <div class="pulse-ring absolute inset-0 rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
+            <p class="text-2xl font-black text-[#fbbf24]">+60</p>
+            <p class="text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'وكيل معتمد' : 'Agents' }}</p>
+        </div>
+    </div>
+
+    {{-- Main content --}}
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+
+        {{-- Eyebrow --}}
+        <div class="banner-h2 mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#4ade80] inline-block"></span>
+            <span class="text-xs sm:text-sm font-semibold tracking-widest uppercase text-white/90">
+                {{ app()->getLocale() === 'ar' ? 'مسك للأسمدة الزراعية' : 'Mesk Agricultural Fertilizers' }}
+            </span>
+        </div>
+
+        {{-- Heading --}}
+        <h2 class="banner-h2 text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-tight mb-3"
+            style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;
+                   text-shadow: 0 2px 40px rgba(0,0,0,.4);">
+            {{ app()->getLocale() === 'ar' ? 'عالم من الابتكار' : 'A World of Innovation' }}
         </h2>
-        <p class="text-lg sm:text-xl md:text-2xl font-medium max-w-2xl mx-auto">
+
+        {{-- Animated line --}}
+        <div class="banner-line h-1 rounded-full mb-4" style="background: linear-gradient(90deg, #16a34a, #4ade80);"></div>
+
+        {{-- Subtext --}}
+        <p class="banner-p text-base sm:text-xl lg:text-2xl font-medium max-w-xl mx-auto text-white/85 leading-relaxed">
             {{ app()->getLocale() === 'ar' ? 'نعمل اليوم من أجل مستقبل الزراعة' : 'We work today for the future of agriculture' }}
         </p>
+
+        {{-- CTA --}}
+        <div class="banner-cta mt-6 sm:mt-8">
+            <a href="{{ route('products.index') }}"
+               class="inline-flex items-center gap-2.5 bg-[#16a34a] hover:bg-[#15803d] text-white font-bold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full shadow-lg shadow-green-900/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl text-sm sm:text-base">
+                {{ app()->getLocale() === 'ar' ? 'استكشف منتجاتنا' : 'Explore Our Products' }}
+                <svg class="w-4 h-4 {{ app()->getLocale() === 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
+    {{-- Bottom wave --}}
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-8 sm:h-14">
+            <path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="white"/>
+        </svg>
     </div>
 </section>
 
@@ -202,43 +316,50 @@
             @endforeach
         </div>
 
-        <!-- Overlapping Brand Features Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 w-full md:max-w-[84%] mx-auto mt-10">
-            <!-- Feature 1: Expert Technical Support (Navy) -->
-            <div class="bg-[#0b3c5d] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#0b3c5d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                </div>
-                <div class="text-left rtl:text-right">
-                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'دعم فني متخصص' : 'Expert Technical Support' }}</p>
-                </div>
-            </div>
+        <!-- Overlapping Brand Features Cards — Infinite Marquee -->
+        <div class="relative w-full mt-10 overflow-hidden">
+            <div class="absolute inset-y-0 left-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, white, transparent);"></div>
+            <div class="absolute inset-y-0 right-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, white, transparent);"></div>
 
-            <!-- Feature 2: Local with High Quality (Green) -->
-            <div class="bg-[#137547] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <!-- Leaf / Badge check SVG -->
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#137547]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <div class="text-left rtl:text-right">
-                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'إنتاج محلي بجودة عالية' : 'Local with High Quality' }}</p>
-                </div>
-            </div>
+            @php
+                $featuresCards = [
+                    [
+                        'bg' => '#0b3c5d',
+                        'icon_color' => '#0b3c5d',
+                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />',
+                        'text_ar' => 'دعم فني متخصص',
+                        'text_en' => 'Expert Technical Support',
+                    ],
+                    [
+                        'bg' => '#137547',
+                        'icon_color' => '#137547',
+                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
+                        'text_ar' => 'إنتاج محلي بجودة عالية',
+                        'text_en' => 'Local with High Quality',
+                    ],
+                    [
+                        'bg' => '#F4B400',
+                        'icon_color' => '#F4B400',
+                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />',
+                        'text_ar' => 'منتج سعودي معتمد',
+                        'text_en' => 'Certified Saudi Product',
+                    ],
+                ];
+                $allFeatCards = array_merge($featuresCards, $featuresCards, $featuresCards, $featuresCards);
+            @endphp
 
-            <!-- Feature 3: Certified Saudi Product (Yellow) -->
-            <div class="bg-[#F4B400] text-white rounded-2xl sm:rounded-3xl py-2.5 sm:py-4 lg:py-5 px-3 sm:px-5 lg:px-6 flex items-center gap-2 sm:gap-4 shadow-lg transition-all hover:-translate-y-0.5">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-[#F4B400]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
+            <div class="{{ app()->getLocale() === 'ar' ? 'stats-track-rtl' : 'stats-track-ltr' }} flex gap-3 sm:gap-4 w-max">
+                @foreach($allFeatCards as $card)
+                <div class="shrink-0 w-52 sm:w-80 text-white rounded-xl sm:rounded-3xl py-2 px-3 sm:py-4 sm:px-5 lg:px-6 flex items-center justify-center gap-2 sm:gap-4 shadow-lg"
+                     style="background-color: {{ $card['bg'] }};">
+                    <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
+                        <svg class="w-4 h-4 sm:w-6 sm:h-6 lg:w-7 lg:h-7" fill="none" stroke="{{ $card['icon_color'] }}" stroke-width="2" viewBox="0 0 24 24">{!! $card['icon'] !!}</svg>
+                    </div>
+                    <div class="text-center min-w-0">
+                        <p class="text-sm sm:text-lg lg:text-[23px] font-bold leading-tight">{{ $card['text_' . app()->getLocale()] }}</p>
+                    </div>
                 </div>
-                <div class="text-left rtl:text-right">
-                    <p class="text-md sm:text-lg lg:text-[23px] font-bold leading-tight">{{ app()->getLocale() === 'ar' ? 'منتج سعودي معتمد' : 'Certified Saudi Product' }}</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
