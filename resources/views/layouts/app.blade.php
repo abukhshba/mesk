@@ -132,21 +132,43 @@
         }
         #page-loader.hidden { opacity: 0; visibility: hidden; }
         #page-loader-inner {
-            display: flex; flex-direction: column; align-items: center; gap: 28px;
-            animation: loaderGrow 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
+            animation: loaderReveal 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
         }
-        @keyframes loaderGrow {
-            0%   { transform: scale(0.3); opacity: 0; }
-            100% { transform: scale(1.4); opacity: 1; }
+        @keyframes loaderReveal {
+            0%   { transform: translateY(15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
-        #loader-logo { width: 140px; }
-        #loader-dots { display: flex; gap: 8px; }
+        #loader-logo {
+            width: 175px;
+            animation: logoPulse 2s infinite ease-in-out;
+        }
+        @media (min-width: 768px) {
+            #loader-logo {
+                width: 190px;
+            }
+        }
+        @media (min-width: 1024px) {
+            #loader-logo {
+                width: 240px;
+            }
+        }
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        #loader-dots { display: flex; gap: 8px; margin-top: 8px; }
         #loader-dots span {
             width: 8px; height: 8px; border-radius: 50%;
             background: #16a34a;
+            animation: loaderBounce 1.2s infinite ease-in-out;
         }
-        #loader-dots span:nth-child(2) { background: #15803d; }
-        #loader-dots span:nth-child(3) { background: #14532d; }
+        #loader-dots span:nth-child(2) { background: #15803d; animation-delay: 0.2s; }
+        #loader-dots span:nth-child(3) { background: #14532d; animation-delay: 0.4s; }
+        @keyframes loaderBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
     </style>
 
     <!-- Navigation -->

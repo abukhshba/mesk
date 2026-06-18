@@ -73,7 +73,7 @@
                 <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
             <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-10 z-10">
-                <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="Mesk" class="h-14 sm:h-20 w-auto opacity-90 drop-shadow-lg">
+                <img src="{{ asset('images/whitelogo.png') }}" alt="Mesk" class="h-14 sm:h-20 md:h-28 w-auto opacity-90 drop-shadow-lg">
             </div>
         </div>
 
@@ -203,7 +203,7 @@
     </div>
 
     {{-- Floating badge — left --}}
-    <div class="badge-left absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'right-3 sm:right-16' : 'left-3 sm:left-16' }} z-20">
+    <div class="badge-left absolute top-3 sm:top-8 mx-2 {{ app()->getLocale() === 'ar' ? 'right-4 sm:right-16' : 'left-4 sm:left-16' }} z-20">
         <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
             <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#16a34a]"></div>
             <p class="text-base sm:text-2xl font-black text-[#4ade80]">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+' : '+' . $productsCount }}</p>
@@ -212,7 +212,7 @@
     </div>
 
     {{-- Floating badge — right --}}
-    <div class="badge-right absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'left-3 sm:left-16' : 'right-3 sm:right-16' }} z-20">
+    <div class="badge-right absolute top-3 sm:top-8 mx-2 {{ app()->getLocale() === 'ar' ? 'left-4 sm:left-16' : 'right-4 sm:right-16' }} z-20">
         <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
             <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
             <p class="text-base sm:text-2xl font-black text-[#fbbf24]">{{ app()->getLocale() === 'ar' ? '٦٠+' : '+60' }}</p>
@@ -257,8 +257,8 @@
     </div>
 
     {{-- Bottom wave --}}
-    <div class="absolute bottom-0 left-0 right-0 z-10">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-8 sm:h-14">
+    <div class="absolute bottom-[-4px] left-0 right-0 z-10">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 sm:h-20 lg:h-24">
             <path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="white"/>
         </svg>
     </div>
@@ -323,7 +323,7 @@
         @php
             $productImages = array_map(
                 fn($f) => pathinfo($f, PATHINFO_FILENAME),
-                glob(public_path('images/products/main/*.png'))
+                glob(public_path('images/products/scroller/*.png'))
             );
             sort($productImages);
         @endphp
@@ -343,7 +343,7 @@
                 <div class="{{ app()->getLocale() === 'ar' ? 'img-track-rtl' : 'img-track-ltr' }} flex gap-0 w-max">
                     @foreach(array_merge($productImages, $productImages) as $img)
                     <div class="flex-shrink-0 w-36 h-36 sm:w-52 sm:h-52 bg-white rounded-2xl overflow-hidden p-1">
-                        <img src="{{ asset('images/products/main/' . $img . '.png') }}" alt="product" loading="lazy" class="w-full h-full object-contain">
+                        <img src="{{ asset('images/products/scroller/' . $img . '.png') }}" alt="product" loading="lazy" class="w-full h-full object-contain">
                     </div>
                     @endforeach
                 </div>
