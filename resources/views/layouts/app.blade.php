@@ -104,6 +104,12 @@
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+    <style>
+        #nprogress .bar { background: #16a34a !important; height: 3px !important; }
+        #nprogress .peg { box-shadow: 0 0 10px #16a34a, 0 0 5px #16a34a !important; }
+        #nprogress .spinner-icon { border-top-color: #16a34a !important; border-left-color: #16a34a !important; }
+    </style>
 </head>
 <body class="bg-white text-neutral-900 antialiased">
 
@@ -122,6 +128,19 @@
 
     <!-- Swiper JS (deferred) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+    <!-- NProgress -->
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script>
+        NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.1 });
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest('a');
+            if (a && a.href && !a.target && !a.href.startsWith('#') && !a.href.startsWith('mailto:') && !a.href.startsWith('tel:') && !a.href.startsWith('https://wa.me') && a.origin === location.origin) {
+                NProgress.start();
+            }
+        });
+        window.addEventListener('pageshow', function() { NProgress.done(); });
+    </script>
 
     @stack('scripts')
 </body>
