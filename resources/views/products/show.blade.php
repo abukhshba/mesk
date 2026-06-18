@@ -53,10 +53,19 @@
 .fade-up-3 { animation-delay: .28s; }
 .fade-up-4 { animation-delay: .38s; }
 .fade-up-5 { animation-delay: .48s; }
+.fade-up-6 { animation-delay: .58s; }
+.fade-up-7 { animation-delay: .68s; }
+.fade-up-8 { animation-delay: .78s; }
+
 .product-img-wrap {
     background: linear-gradient(145deg, #f0fdf4 0%, #f8fafc 60%, #f0fdf4 100%);
     box-shadow: 0 4px 24px 0 rgba(19,117,71,.10), 0 1.5px 6px 0 rgba(0,0,0,.06);
     border: 1px solid rgba(19,117,71,.12);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+.product-img-wrap:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 32px 0 rgba(19,117,71,.15), 0 4px 12px 0 rgba(0,0,0,.08);
 }
 </style>
 @endpush
@@ -127,7 +136,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-8 sm:mb-16">
 
         <!-- Gallery -->
-        <div class="lg:col-span-7 flex flex-row gap-2 sm:gap-6 items-center">
+        <div class="fade-up lg:col-span-7 flex flex-row gap-2 sm:gap-6 items-center">
             @php
                 $packageSizes = $locale === 'ar'
                     ? ($product->package_sizes_ar ?: $product->package_sizes_en)
@@ -233,8 +242,8 @@
 
             <!-- Quick Specs -->
             @if($product->application_rate)
-            <div class="mt-6 grid grid-cols-1 gap-4">
-                <div class="bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+            <div class="fade-up fade-up-3 mt-6 grid grid-cols-1 gap-4">
+                <div class="bg-neutral-50 rounded-xl p-4 border border-neutral-100 transition-all duration-300 hover:shadow-md hover:border-primary-100">
                     <div class="text-xs text-neutral-400 font-medium uppercase tracking-wide">{{ __('app.application_rate') }}</div>
                     <div class="mt-1 font-semibold text-neutral-800 text-sm">{{ $product->application_rate }}</div>
                 </div>
@@ -245,7 +254,7 @@
             {{-- ─── SECTION 1: Properties & Benefits ─── --}}
             @if($hasProperties)
             <div class="fade-up fade-up-4 my-4 mt-2 sm:mt-4">
-                <div class="bg-primary-50/60 rounded-2xl border border-primary-100 overflow-hidden">
+                <div class="bg-primary-50/60 rounded-2xl border border-primary-100 overflow-hidden transition-all duration-300 hover:shadow-md hover:border-primary-200">
                     <div class="p-3 sm:p-4 lg:p-5">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-[#d7b43e] flex items-center justify-center shadow-sm">
@@ -285,11 +294,22 @@
 
     {{-- ─── SECTION 2: Directions & Application Rates ─── --}}
     @if($hasApplicationRates)
-    <div class="mb-10">
-        <div class="bg-white rounded-2xl border border-neutral-200/80 shadow-sm overflow-hidden">
+    @php
+        $sectionBaseColor = '19, 117, 71';
+        if ($product->category) {
+            $catSlug = $product->category->slug;
+            if ($catSlug === 'granular-fertilizer') {
+                $sectionBaseColor = '0, 110, 190';
+            } elseif (in_array($catSlug, ['liquid-fertilizer', 'suspension-fertilizers'])) {
+                $sectionBaseColor = '10, 190, 225';
+            }
+        }
+    @endphp
+    <div class="fade-up fade-up-6 mb-10">
+        <div class="bg-white rounded-2xl border border-neutral-200/80 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:border-neutral-300">
             {{-- Section header --}}
-            <div class="bg-primary-700 px-6 sm:px-8 lg:px-10 py-3 flex items-center gap-3">
-                <svg class="w-5 h-5 text-primary-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <div class="px-6 sm:px-8 lg:px-10 py-3 flex items-center gap-3" style="background-color: rgba({{ $sectionBaseColor }}, 1);">
+                <svg class="w-5 h-5 text-white/70 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                 <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Usage Rates' }}
                 </h2>
@@ -301,15 +321,15 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
-                                <tr class="bg-primary-600">
-                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                <tr style="background-color: rgba({{ $sectionBaseColor }}, 0.65);">
+                                    <th class="border border-white/20 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
-                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-white/20 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Usage Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
-                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-white/20 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
                                     </th>
                                     @endif
@@ -335,7 +355,7 @@
                             @if($product->getTranslation('application_rates_footer', $locale))
                             <tfoot>
                                 <tr>
-                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-primary-500/40 bg-primary-600 text-white text-center py-2 px-4 font-semibold text-sm lg:text-base">
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-white/20 text-white text-center py-2 px-4 font-semibold text-sm lg:text-base" style="background-color: rgba({{ $sectionBaseColor }}, 0.65);">
                                         <div class="flex items-center justify-center gap-2">
                                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>
@@ -364,11 +384,11 @@
 
     {{-- ─── SECTION 3: Product Details & Usage ─── --}}
     @if($hasDescription || $hasUsageInstructions || $hasSafetyPrecautions)
-    <div class="mb-10">
+    <div class="fade-up fade-up-7 mb-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {{-- Description Card --}}
             @if($hasDescription)
-            <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8">
+            <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-neutral-200">
                 <div class="flex items-center gap-3 mb-5">
                     <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center">
                         <svg class="w-4.5 h-4.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
@@ -384,7 +404,7 @@
             <div class="space-y-6">
                 {{-- Usage Instructions --}}
                 @if($hasUsageInstructions)
-                <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8">
+                <div class="bg-white rounded-3xl border border-neutral-100 shadow-sm p-6 sm:p-8 transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-neutral-200">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center">
                             <svg class="w-4.5 h-4.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
@@ -397,7 +417,7 @@
 
                 {{-- Safety Precautions --}}
                 @if($hasSafetyPrecautions)
-                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/60 p-6 sm:p-8">
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border border-amber-200/60 p-6 sm:p-8 transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-amber-300/60">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-9 h-9 rounded-lg bg-amber-200 flex items-center justify-center">
                             <svg class="w-4.5 h-4.5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
@@ -414,7 +434,7 @@
 
     <!-- Related Products -->
     @if($relatedProducts->count())
-    <div class="mt-4">
+    <div class="fade-up fade-up-8 mt-4">
         <div class="flex items-center gap-4 mb-6">
             <div class="h-px flex-1 bg-neutral-200"></div>
             <h2 class="text-xl sm:text-2xl font-black text-neutral-800 flex items-center gap-2">

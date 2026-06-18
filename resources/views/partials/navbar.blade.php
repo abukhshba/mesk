@@ -36,7 +36,7 @@
                 </a>
 
                 <!-- Desktop Menu -->
-                <nav class="hidden xl:flex items-center gap-6 xl:gap-8 mx-auto font-medium text-neutral-700 text-sm z-10 xl:order-2">
+                <nav class="hidden xl:flex items-center gap-6 xl:gap-8 mx-auto font-semibold text-neutral-700 text-lg z-10 xl:order-2">
                     <!-- Homepage -->
                     <a href="{{ route('home') }}" class="py-2 hover:text-primary-600 transition-colors {{ request()->routeIs('home') ? 'text-primary-600 font-bold' : '' }}">
                         {{ app()->getLocale() === 'ar' ? 'الرئيسية' : 'Home' }}

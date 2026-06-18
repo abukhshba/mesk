@@ -70,8 +70,11 @@
         <!-- Hero Image Frame -->
         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[560px]">
             <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline preload="none" poster="{{ asset('images/hero2.jpg') }}">
-                <source src="{{ asset('images/vidnew_1 2.mp4') }}" type="video/mp4">
+                <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
+            <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-10 z-10">
+                <img src="{{ asset('images/whitelogo.png') }}" alt="Mesk" class="h-14 sm:h-20 md:h-28 w-auto opacity-90 drop-shadow-lg">
+            </div>
         </div>
 
         <!-- Overlapping Stats Cards — Infinite Marquee -->
@@ -185,7 +188,7 @@
 .shine-sweep  { animation: diagonalSlide 5s 2s linear infinite; }
 </style>
 
-<section class="relative overflow-hidden bg-neutral-950" style="min-height: 220px; height: 50vh; max-height: 880px;">
+<section class="relative overflow-hidden bg-neutral-950" style="min-height: 420px; height: 55vh; max-height: 880px;">
 
     {{-- Background with Ken Burns --}}
     <div class="absolute inset-0 z-0 overflow-hidden">
@@ -200,7 +203,7 @@
     </div>
 
     {{-- Floating badge — left --}}
-    <div class="badge-left absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'right-3 sm:right-16' : 'left-3 sm:left-16' }} z-20">
+    <div class="badge-left absolute top-3 sm:top-8 mx-2 {{ app()->getLocale() === 'ar' ? 'right-4 sm:right-16' : 'left-4 sm:left-16' }} z-20">
         <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
             <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#16a34a]"></div>
             <p class="text-base sm:text-2xl font-black text-[#4ade80]">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+' : '+' . $productsCount }}</p>
@@ -209,7 +212,7 @@
     </div>
 
     {{-- Floating badge — right --}}
-    <div class="badge-right absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'left-3 sm:left-16' : 'right-3 sm:right-16' }} z-20">
+    <div class="badge-right absolute top-3 sm:top-8 mx-2 {{ app()->getLocale() === 'ar' ? 'left-4 sm:left-16' : 'right-4 sm:right-16' }} z-20">
         <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
             <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
             <p class="text-base sm:text-2xl font-black text-[#fbbf24]">{{ app()->getLocale() === 'ar' ? '٦٠+' : '+60' }}</p>
@@ -218,7 +221,7 @@
     </div>
 
     {{-- Main content --}}
-    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 py-16 sm:py-20">
 
         {{-- Eyebrow --}}
         <div class="banner-h2 mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mt-4">
@@ -254,8 +257,8 @@
     </div>
 
     {{-- Bottom wave --}}
-    <div class="absolute bottom-0 left-0 right-0 z-10">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-8 sm:h-14">
+    <div class="absolute bottom-[-4px] left-0 right-0 z-10">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 sm:h-20 lg:h-24">
             <path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="white"/>
         </svg>
     </div>
@@ -316,52 +319,38 @@
             @endforeach
         </div>
 
-        <!-- Overlapping Brand Features Cards — Infinite Marquee -->
-        <div class="relative w-full mt-10 overflow-hidden">
-            <div class="absolute inset-y-0 left-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, white, transparent);"></div>
-            <div class="absolute inset-y-0 right-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, white, transparent);"></div>
+        {{-- Product Images Marquee --}}
+        @php
+            $productImages = array_map(
+                fn($f) => pathinfo($f, PATHINFO_FILENAME),
+                glob(public_path('images/products/scroller/*.png'))
+            );
+            sort($productImages);
+        @endphp
+        @if(count($productImages))
+        <div class="py-8 sm:py-12">
+            <style>
+                @keyframes imgMarqueeLtr { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+                @keyframes imgMarqueeRtl { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+                .img-track-ltr { animation: imgMarqueeLtr 35s linear infinite; }
+                .img-track-rtl { animation: imgMarqueeRtl 35s linear infinite; }
+            </style>
 
-            @php
-                $featuresCards = [
-                    [
-                        'bg' => '#0b3c5d',
-                        'icon_color' => '#0b3c5d',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />',
-                        'text_ar' => 'دعم فني متخصص',
-                        'text_en' => 'Expert Technical Support',
-                    ],
-                    [
-                        'bg' => '#137547',
-                        'icon_color' => '#137547',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
-                        'text_ar' => 'إنتاج محلي بجودة عالية',
-                        'text_en' => 'Local with High Quality',
-                    ],
-                    [
-                        'bg' => '#F4B400',
-                        'icon_color' => '#F4B400',
-                        'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />',
-                        'text_ar' => 'منتج سعودي معتمد',
-                        'text_en' => 'Certified Saudi Product',
-                    ],
-                ];
-                $allFeatCards = array_merge($featuresCards, $featuresCards, $featuresCards, $featuresCards);
-            @endphp
-
-            <div class="{{ app()->getLocale() === 'ar' ? 'stats-track-rtl' : 'stats-track-ltr' }} flex gap-3 sm:gap-4 w-max">
-                @foreach($allFeatCards as $card)
-                <div class="shrink-0 w-52 sm:w-80 text-white rounded-xl sm:rounded-3xl py-2 px-3 sm:py-4 sm:px-5 lg:px-6 flex items-center justify-center gap-2 sm:gap-4 shadow-lg"
-                     style="background-color: {{ $card['bg'] }};">
-                    <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-14 lg:h-14 shrink-0 rounded-full bg-white flex items-center justify-center shadow-md">
-                        <svg class="w-4 h-4 sm:w-6 sm:h-6 lg:w-7 lg:h-7" fill="none" stroke="{{ $card['icon_color'] }}" stroke-width="2" viewBox="0 0 24 24">{!! $card['icon'] !!}</svg>
+            {{-- Single row --}}
+            <div class="relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, white, transparent);"></div>
+                <div class="absolute inset-y-0 right-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, white, transparent);"></div>
+                <div class="{{ app()->getLocale() === 'ar' ? 'img-track-rtl' : 'img-track-ltr' }} flex gap-0 w-max">
+                    @foreach(array_merge($productImages, $productImages) as $img)
+                    <div class="flex-shrink-0 w-36 h-36 sm:w-52 sm:h-52 bg-white rounded-2xl overflow-hidden p-1">
+                        <img src="{{ asset('images/products/scroller/' . $img . '.png') }}" alt="product" loading="lazy" class="w-full h-full object-contain">
                     </div>
-                    <div class="text-center min-w-0">
-                        <p class="text-sm sm:text-lg lg:text-[23px] font-bold leading-tight">{{ $card['text_' . app()->getLocale()] }}</p>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
+        @endif
+
     </div>
 </section>
 @endif
@@ -432,7 +421,7 @@
             <!-- Certification Text Over Soil -->
             <div class="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full z-30 pointer-events-none text-center px-4">
                 <p class="text-white/90 text-[7px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية.' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark.' }}
+                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية ' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark' }}
                 </p>
             </div>
 
