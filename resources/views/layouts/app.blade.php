@@ -131,27 +131,22 @@
             transition: opacity 0.45s ease, visibility 0.45s ease;
         }
         #page-loader.hidden { opacity: 0; visibility: hidden; }
-        #page-loader-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; }
-        #loader-logo {
-            width: 140px;
-            animation: loaderPulse 1.4s ease-in-out infinite;
+        #page-loader-inner {
+            display: flex; flex-direction: column; align-items: center; gap: 28px;
+            animation: loaderGrow 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
         }
-        @keyframes loaderPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.75; transform: scale(0.96); }
+        @keyframes loaderGrow {
+            0%   { transform: scale(0.3); opacity: 0; }
+            100% { transform: scale(1.4); opacity: 1; }
         }
+        #loader-logo { width: 140px; }
         #loader-dots { display: flex; gap: 8px; }
         #loader-dots span {
             width: 8px; height: 8px; border-radius: 50%;
             background: #16a34a;
-            animation: loaderDot 1.2s ease-in-out infinite;
         }
-        #loader-dots span:nth-child(2) { animation-delay: .2s; background: #15803d; }
-        #loader-dots span:nth-child(3) { animation-delay: .4s; background: #14532d; }
-        @keyframes loaderDot {
-            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-            40%            { transform: scale(1);   opacity: 1; }
-        }
+        #loader-dots span:nth-child(2) { background: #15803d; }
+        #loader-dots span:nth-child(3) { background: #14532d; }
     </style>
 
     <!-- Navigation -->

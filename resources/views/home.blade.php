@@ -70,8 +70,11 @@
         <!-- Hero Image Frame -->
         <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white w-full sm:max-w-6xl mx-auto z-10 h-auto sm:h-[560px]">
             <video class="w-full h-auto sm:h-full sm:object-cover block" autoplay loop muted playsinline preload="none" poster="{{ asset('images/hero2.jpg') }}">
-                <source src="{{ asset('images/vidnew_1 2.mp4') }}" type="video/mp4">
+                <source src="{{ asset('images/vidnew.mp4') }}" type="video/mp4">
             </video>
+            <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-10 z-10">
+                <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="Mesk" class="h-14 sm:h-20 w-auto opacity-90 drop-shadow-lg">
+            </div>
         </div>
 
         <!-- Overlapping Stats Cards — Infinite Marquee -->
@@ -185,7 +188,7 @@
 .shine-sweep  { animation: diagonalSlide 5s 2s linear infinite; }
 </style>
 
-<section class="relative overflow-hidden bg-neutral-950" style="min-height: 220px; height: 50vh; max-height: 880px;">
+<section class="relative overflow-hidden bg-neutral-950" style="min-height: 420px; height: 55vh; max-height: 880px;">
 
     {{-- Background with Ken Burns --}}
     <div class="absolute inset-0 z-0 overflow-hidden">
@@ -218,7 +221,7 @@
     </div>
 
     {{-- Main content --}}
-    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 py-16 sm:py-20">
 
         {{-- Eyebrow --}}
         <div class="banner-h2 mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mt-4">
@@ -315,6 +318,38 @@
                 </a>
             @endforeach
         </div>
+
+        {{-- Product Images Marquee --}}
+        @php
+            $productImages = array_map(
+                fn($f) => pathinfo($f, PATHINFO_FILENAME),
+                glob(public_path('images/products/main/*.png'))
+            );
+            sort($productImages);
+        @endphp
+        @if(count($productImages))
+        <div class="py-8 sm:py-12">
+            <style>
+                @keyframes imgMarqueeLtr { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+                @keyframes imgMarqueeRtl { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+                .img-track-ltr { animation: imgMarqueeLtr 35s linear infinite; }
+                .img-track-rtl { animation: imgMarqueeRtl 35s linear infinite; }
+            </style>
+
+            {{-- Single row --}}
+            <div class="relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, white, transparent);"></div>
+                <div class="absolute inset-y-0 right-0 w-16 sm:w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, white, transparent);"></div>
+                <div class="{{ app()->getLocale() === 'ar' ? 'img-track-rtl' : 'img-track-ltr' }} flex gap-0 w-max">
+                    @foreach(array_merge($productImages, $productImages) as $img)
+                    <div class="flex-shrink-0 w-36 h-36 sm:w-52 sm:h-52 bg-white rounded-2xl overflow-hidden p-1">
+                        <img src="{{ asset('images/products/main/' . $img . '.png') }}" alt="product" loading="lazy" class="w-full h-full object-contain">
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @endif
 
         <!-- Overlapping Brand Features Cards — Infinite Marquee -->
         <div class="relative w-full mt-10 overflow-hidden">
@@ -432,7 +467,7 @@
             <!-- Certification Text Over Soil -->
             <div class="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full z-30 pointer-events-none text-center px-4">
                 <p class="text-white/90 text-[7px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية.' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark.' }}
+                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية ' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark' }}
                 </p>
             </div>
 

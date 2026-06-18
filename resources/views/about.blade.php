@@ -90,7 +90,7 @@
 </section>
 
 <section class="relative w-full bg-[#ededed] overflow-hidden border-t border-b border-neutral-200">
-    
+
     <!-- Faint Background Logo (Watermark) -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img src="{{ asset('images/water_mark-removebg-preview.png') }}" alt="Watermark" class="w-full h-full object-cover" style="object-position: center 25%;">
@@ -98,10 +98,10 @@
 
     <!-- Soil Background & Logos Container -->
     <div class="relative w-full z-20 pt-[60px] sm:pt-[100px] lg:pt-[150px]">
-        
+
         <!-- Wrapper to tie Logos strictly to the Soil Image aspect ratio -->
         <div class="relative w-full">
-            
+
             <!-- The Vision Logos (Overlapping the soil) -->
             <div class="absolute bottom-[48%] sm:bottom-[54%] lg:bottom-[60%] left-0 w-full z-30 pointer-events-none -translate-y-[23px]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-end gap-1.5 sm:gap-5 lg:gap-8">
@@ -123,12 +123,12 @@
             <!-- Certification Text Over Soil -->
             <div class="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full z-30 pointer-events-none text-center px-4">
                 <p class="text-white/90 text-[7px] sm:text-base lg:text-lg font-medium drop-shadow-md tracking-wide" style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;">
-                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية.' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark.' }}
+                    {{ app()->getLocale() === 'ar' ? 'شركة سعودية حاصلة على شهادة ISO 9001:2015 وتحمل علامة صنع في السعودية' : 'A Saudi company certified to ISO 9001:2015 and proudly carrying the Saudi Made mark' }}
                 </p>
             </div>
 
         </div>
-        
+
     </div>
 </section>
 @endif
