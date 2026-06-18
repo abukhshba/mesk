@@ -185,7 +185,7 @@
 .shine-sweep  { animation: diagonalSlide 5s 2s linear infinite; }
 </style>
 
-<section class="relative overflow-hidden bg-neutral-950" style="min-height: 220px; height: 45vh; max-height: 780px;">
+<section class="relative overflow-hidden bg-neutral-950" style="min-height: 220px; height: 50vh; max-height: 880px;">
 
     {{-- Background with Ken Burns --}}
     <div class="absolute inset-0 z-0 overflow-hidden">
@@ -244,7 +244,7 @@
         </p>
 
         {{-- CTA --}}
-        <div class="banner-cta mt-6 sm:mt-8">
+        <div class="banner-cta my-6 sm:my-10 sm:mb-6">
             <a href="{{ route('products.index') }}"
                class="inline-flex items-center gap-2.5 bg-[#16a34a] hover:bg-[#15803d] text-white font-bold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full shadow-lg shadow-green-900/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl text-sm sm:text-base">
                 {{ app()->getLocale() === 'ar' ? 'استكشف منتجاتنا' : 'Explore Our Products' }}
