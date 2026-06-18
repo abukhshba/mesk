@@ -104,6 +104,7 @@
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
     <style>
         #nprogress .bar { background: #16a34a !important; height: 3px !important; }
@@ -112,6 +113,46 @@
     </style>
 </head>
 <body class="bg-white text-neutral-900 antialiased">
+
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div id="page-loader-inner">
+            <img src="{{ asset('images/main-logo-removebg-preview.png') }}" alt="Mesk" id="loader-logo">
+            <div id="loader-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+    <style>
+        #page-loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+        }
+        #page-loader.hidden { opacity: 0; visibility: hidden; }
+        #page-loader-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+        #loader-logo {
+            width: 140px;
+            animation: loaderPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes loaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.75; transform: scale(0.96); }
+        }
+        #loader-dots { display: flex; gap: 8px; }
+        #loader-dots span {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #16a34a;
+            animation: loaderDot 1.2s ease-in-out infinite;
+        }
+        #loader-dots span:nth-child(2) { animation-delay: .2s; background: #15803d; }
+        #loader-dots span:nth-child(3) { animation-delay: .4s; background: #14532d; }
+        @keyframes loaderDot {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40%            { transform: scale(1);   opacity: 1; }
+        }
+    </style>
 
     <!-- Navigation -->
     @include('partials.navbar')
@@ -128,6 +169,16 @@
 
     <!-- Swiper JS (deferred) -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+    <!-- Loader hide -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loader = document.getElementById('page-loader');
+                if (loader) loader.classList.add('hidden');
+            }, 1500);
+        });
+    </script>
 
     <!-- NProgress -->
     <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>

@@ -41,6 +41,26 @@
 </script>
 @endsection --}}
 
+@push('styles')
+<style>
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; animation: fadeUp 0.55s cubic-bezier(.22,.68,0,1.2) forwards; }
+.fade-up-1 { animation-delay: .08s; }
+.fade-up-2 { animation-delay: .18s; }
+.fade-up-3 { animation-delay: .28s; }
+.fade-up-4 { animation-delay: .38s; }
+.fade-up-5 { animation-delay: .48s; }
+.product-img-wrap {
+    background: linear-gradient(145deg, #f0fdf4 0%, #f8fafc 60%, #f0fdf4 100%);
+    box-shadow: 0 4px 24px 0 rgba(19,117,71,.10), 0 1.5px 6px 0 rgba(0,0,0,.06);
+    border: 1px solid rgba(19,117,71,.12);
+}
+</style>
+@endpush
+
 @section('content')
 <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
 
@@ -151,7 +171,7 @@
 
                 @if($allImages->count() > 0)
                 <!-- Main Swiper -->
-                <div class="swiper product-main-swiper rounded-2xl overflow-hidden bg-neutral-50 aspect-[4/3]">
+                <div class="swiper product-main-swiper rounded-2xl overflow-hidden product-img-wrap aspect-[4/3]">
                     <div class="swiper-wrapper">
                         @foreach($allImages as $imgUrl)
                         <div class="swiper-slide flex items-center justify-center">
@@ -195,18 +215,18 @@
         <!-- Product Info -->
         <div class="lg:col-span-5 flex flex-col">
             @if($product->category)
-            <span class="inline-flex items-center text-xs lg:text-sm font-semibold text-primary-700 bg-primary-50 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full w-fit">
+            <span class="fade-up fade-up-1 inline-flex items-center text-xs lg:text-sm font-semibold text-primary-700 bg-primary-50 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full w-fit">
                 {{ $product->category->getTranslation('name', app()->getLocale()) }}
             </span>
             @endif
 
-            <h1 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight">
+            <h1 class="fade-up fade-up-2 mt-3 text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 leading-tight tracking-tight">
                 {{ $product->getTranslation('name', app()->getLocale()) }}
             </h1>
 
             @php $subTitle = $product->getTranslation('sub_title', $locale) ?: ($locale === 'ar' ? $product->sub_title_en : $product->sub_title_ar); @endphp
             @if($subTitle)
-            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="mt-2 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
+            <p style="direction: ltr; unicode-bidi: isolate; text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};" class="fade-up fade-up-3 mt-2 text-lg lg:text-2xl font-extrabold text-primary-600 tracking-wide">
                 {{ $subTitle }}
             </p>
             @endif
@@ -224,14 +244,10 @@
 
             {{-- ─── SECTION 1: Properties & Benefits ─── --}}
             @if($hasProperties)
-            <div class="my-4 mt-2 sm:mt-4">
-                <div class="relative bg-gradient-to-br from-primary-50 via-white to-accent-50/30 rounded-3xl overflow-hidden border border-primary-100/60">
-                    {{-- Decorative corner shapes --}}
-                    <div class="absolute top-0 {{ $locale === 'ar' ? 'left-0' : 'right-0' }} w-32 h-32 bg-primary-100/40 rounded-full -translate-y-1/2 {{ $locale === 'ar' ? '-translate-x-1/2' : 'translate-x-1/2' }}"></div>
-                    <div class="absolute bottom-0 {{ $locale === 'ar' ? 'right-0' : 'left-0' }} w-20 h-20 bg-accent-100/30 rounded-full translate-y-1/2 {{ $locale === 'ar' ? 'translate-x-1/2' : '-translate-x-1/2' }}"></div>
-
-                    <div class="relative z-10 p-3 sm:p-4 lg:p-6">
-                        <div class="flex items-center gap-3 mb-6">
+            <div class="fade-up fade-up-4 my-4 mt-2 sm:mt-4">
+                <div class="bg-primary-50/60 rounded-2xl border border-primary-100 overflow-hidden">
+                    <div class="p-3 sm:p-4 lg:p-5">
+                        <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-[#d7b43e] flex items-center justify-center shadow-sm">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                             </div>
@@ -249,7 +265,7 @@
 
             <!-- WhatsApp CTA -->
             @if(!empty($settings->whatsapp))
-            <div class="mt-4 sm:mt-8">
+            <div class="fade-up fade-up-5 mt-4 sm:mt-8">
                 <a href="https://wa.me/{{ $settings->whatsapp }}?text={{ urlencode(app()->getLocale() === 'ar' ? 'السلام عليكم، أود الاستفسار عن منتج: ' . $product->getTranslation('name', 'ar') : 'Hello, I would like to inquire about: ' . $product->getTranslation('name', 'en')) }}"
                    target="_blank"
                    class="flex items-center justify-center gap-3 w-full py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 text-lg">
@@ -270,10 +286,10 @@
     {{-- ─── SECTION 2: Directions & Application Rates ─── --}}
     @if($hasApplicationRates)
     <div class="mb-10">
-        <div class="bg-white rounded-lg border border-neutral-200/80 shadow-sm overflow-hidden">
-            {{-- Section header with accent stripe --}}
-            <div class="bg-[#b5b8c0] px-6 sm:px-8 lg:px-10 py-2 flex items-center gap-3">
-
+        <div class="bg-white rounded-2xl border border-neutral-200/80 shadow-sm overflow-hidden">
+            {{-- Section header --}}
+            <div class="bg-primary-700 px-6 sm:px-8 lg:px-10 py-3 flex items-center gap-3">
+                <svg class="w-5 h-5 text-primary-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                 <h2 class="text-lg sm:text-xl font-black text-white">
                     {{ $locale === 'ar' ? 'طرق ومعدلات الاستخدام' : 'Directions & Usage Rates' }}
                 </h2>
@@ -285,15 +301,15 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm lg:text-base border-collapse text-center">
                             <thead>
-                                <tr class="bg-[#8e8e90]">
-                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                <tr class="bg-primary-600">
+                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'المحاصيل' : 'Crops' }}
                                     </th>
-                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'معدل الاستخدام مع مياه الري' : 'Usage Rate with Irrigation Water' }}
                                     </th>
                                     @if($product->application_rates_has_notes)
-                                    <th class="border border-neutral-300 text-center py-1.5 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+                                    <th class="border border-primary-500/40 text-center py-2 px-4 font-bold text-white text-xs sm:text-sm lg:text-base uppercase tracking-wider">
                                         {{ $locale === 'ar' ? 'ملاحظات' : 'Notes' }}
                                     </th>
                                     @endif
@@ -301,15 +317,15 @@
                             </thead>
                             <tbody>
                                 @foreach($product->application_rates_rows as $i => $row)
-                                <tr class="bg-[#f9f8f9] hover:bg-[#efedee] transition-colors">
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936] text-sm lg:text-lg">
+                                <tr class="{{ $i % 2 === 0 ? 'bg-white' : 'bg-primary-50/40' }} hover:bg-primary-50 transition-colors">
+                                    <td class="border border-neutral-200 text-center py-3 lg:py-4 px-2 sm:px-4 font-semibold text-[#373936] text-sm lg:text-base">
                                         {{ $row['crop_' . $locale] ?? $row['crop_ar'] ?? '' }}
                                     </td>
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-3 text-[#373936] text-sm lg:text-lg">
+                                    <td class="border border-neutral-200 text-center py-3 lg:py-4 px-3 text-[#373936] text-sm lg:text-base">
                                         {{ $row['rate_' . $locale] ?? $row['rate_ar'] ?? '' }}
                                     </td>
                                     @if($product->application_rates_has_notes)
-                                    <td class="border border-neutral-300 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs sm:text-sm lg:text-base leading-relaxed">
+                                    <td class="border border-neutral-200 text-center py-3 lg:py-4 px-2 sm:px-4 text-[#373936] text-xs sm:text-sm lg:text-sm leading-relaxed">
                                         {{ $row['notes_' . $locale] ?? $row['notes_ar'] ?? '' }}
                                     </td>
                                     @endif
@@ -319,9 +335,9 @@
                             @if($product->getTranslation('application_rates_footer', $locale))
                             <tfoot>
                                 <tr>
-                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-neutral-300 bg-[#8e8e90] text-white text-center py-1.5 lg:py-2 px-4 font-semibold text-sm lg:text-base">
+                                    <td colspan="{{ $product->application_rates_has_notes ? 3 : 2 }}" class="border border-primary-500/40 bg-primary-600 text-white text-center py-2 px-4 font-semibold text-sm lg:text-base">
                                         <div class="flex items-center justify-center gap-2">
-                                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                             <span>{{ $product->getTranslation('application_rates_footer', $locale) }}</span>
                                         </div>
                                     </td>
@@ -398,8 +414,15 @@
 
     <!-- Related Products -->
     @if($relatedProducts->count())
-    <div>
-        <h2 class="text-2xl font-bold text-neutral-900 mb-8">{{ __('app.related_products') }}</h2>
+    <div class="mt-4">
+        <div class="flex items-center gap-4 mb-6">
+            <div class="h-px flex-1 bg-neutral-200"></div>
+            <h2 class="text-xl sm:text-2xl font-black text-neutral-800 flex items-center gap-2">
+                <span class="inline-block w-2 h-6 rounded-full bg-primary-500"></span>
+                {{ __('app.related_products') }}
+            </h2>
+            <div class="h-px flex-1 bg-neutral-200"></div>
+        </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             @foreach($relatedProducts as $related)
                 <x-product-card :product="$related"/>
