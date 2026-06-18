@@ -200,20 +200,20 @@
     </div>
 
     {{-- Floating badge — left --}}
-    <div class="badge-left absolute top-1/4 {{ app()->getLocale() === 'ar' ? 'right-6 sm:right-16' : 'left-6 sm:left-16' }} z-20 hidden sm:block">
-        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-white shadow-xl">
-            <div class="pulse-ring absolute inset-0 rounded-2xl border-2 border-[#16a34a]"></div>
-            <p class="text-2xl font-black text-[#4ade80]">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+' : '+' . $productsCount }}</p>
-            <p class="text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'منتج زراعي' : 'Products' }}</p>
+    <div class="badge-left absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'right-3 sm:right-16' : 'left-3 sm:left-16' }} z-20">
+        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
+            <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#16a34a]"></div>
+            <p class="text-base sm:text-2xl font-black text-[#4ade80]">{{ app()->getLocale() === 'ar' ? $productsCountAr . '+' : '+' . $productsCount }}</p>
+            <p class="text-[10px] sm:text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'منتج زراعي' : 'Products' }}</p>
         </div>
     </div>
 
     {{-- Floating badge — right --}}
-    <div class="badge-right absolute top-1/3 {{ app()->getLocale() === 'ar' ? 'left-6 sm:left-16' : 'right-6 sm:right-16' }} z-20 hidden sm:block">
-        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-white shadow-xl">
-            <div class="pulse-ring absolute inset-0 rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
-            <p class="text-2xl font-black text-[#fbbf24]">+60</p>
-            <p class="text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'وكيل معتمد' : 'Agents' }}</p>
+    <div class="badge-right absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'left-3 sm:left-16' : 'right-3 sm:right-16' }} z-20">
+        <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
+            <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
+            <p class="text-base sm:text-2xl font-black text-[#fbbf24]">+60</p>
+            <p class="text-[10px] sm:text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'وكيل معتمد' : 'Agents' }}</p>
         </div>
     </div>
 
@@ -221,15 +221,15 @@
     <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
 
         {{-- Eyebrow --}}
-        <div class="banner-h2 mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5">
+        <div class="banner-h2 mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mt-4">
             <span class="w-2 h-2 rounded-full bg-[#4ade80] inline-block"></span>
-            <span class="text-xs sm:text-sm font-semibold tracking-widest uppercase text-white/90">
+            <span class="{{ app()->getLocale() === 'ar' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-sm' }} font-semibold tracking-widest uppercase text-white">
                 {{ app()->getLocale() === 'ar' ? 'مسك للأسمدة الزراعية' : 'Mesk Agricultural Fertilizers' }}
             </span>
         </div>
 
         {{-- Heading --}}
-        <h2 class="banner-h2 text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-tight mb-3"
+        <h2 class="banner-h2 {{ app()->getLocale() === 'ar' ? 'text-4xl sm:text-5xl lg:text-7xl' : 'text-2xl sm:text-5xl lg:text-7xl' }} font-black tracking-tight leading-tight mb-3"
             style="font-family: {{ app()->getLocale() === 'ar' ? 'Cairo' : 'Inter' }}, sans-serif;
                    text-shadow: 0 2px 40px rgba(0,0,0,.4);">
             {{ app()->getLocale() === 'ar' ? 'عالم من الابتكار' : 'A World of Innovation' }}
@@ -239,7 +239,7 @@
         <div class="banner-line h-1 rounded-full mb-4" style="background: linear-gradient(90deg, #16a34a, #4ade80);"></div>
 
         {{-- Subtext --}}
-        <p class="banner-p text-base sm:text-xl lg:text-2xl font-medium max-w-xl mx-auto text-white/85 leading-relaxed">
+        <p class="banner-p text-[13px] sm:text-xl lg:text-2xl font-medium max-w-xl mx-auto text-white leading-relaxed">
             {{ app()->getLocale() === 'ar' ? 'نعمل اليوم من أجل مستقبل الزراعة' : 'We work today for the future of agriculture' }}
         </p>
 
