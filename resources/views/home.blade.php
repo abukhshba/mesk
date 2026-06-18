@@ -212,7 +212,7 @@
     <div class="badge-right absolute top-2 sm:top-8 {{ app()->getLocale() === 'ar' ? 'left-3 sm:left-16' : 'right-3 sm:right-16' }} z-20">
         <div class="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-2.5 py-2 sm:px-4 sm:py-3 text-white shadow-xl">
             <div class="pulse-ring absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-[#F4B400]" style="animation-delay:.5s"></div>
-            <p class="text-base sm:text-2xl font-black text-[#fbbf24]">+60</p>
+            <p class="text-base sm:text-2xl font-black text-[#fbbf24]">{{ app()->getLocale() === 'ar' ? '٦٠+' : '+60' }}</p>
             <p class="text-[10px] sm:text-xs font-semibold opacity-80 mt-0.5">{{ app()->getLocale() === 'ar' ? 'وكيل معتمد' : 'Agents' }}</p>
         </div>
     </div>
